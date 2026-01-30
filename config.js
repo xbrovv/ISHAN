@@ -7,7 +7,7 @@
 module.exports = {
 
   // 🔐 WhatsApp Session ID (MEGA or base64)
-  SESSION_ID: process.env.SESSION_ID || "78RnjDSK#fwgewvE5wHyFUzUmqQs5XLmoL-cQbQ-yHgoUPgIzujI",
+  SESSION_ID: process.env.SESSION_ID || "mpR2AIbT#pUK22gqgFYgQyPgBJdxpH7Z9jC-zQlZOdbK5ZkK2ip8",
 
 
   // ===============================
@@ -65,13 +65,13 @@ ALIVE_MSG: `
 *┃* ✒️ *\`Prefix\`* : {PREFIX}
 *┃* 🧬 *\`Version\`* : {VERSION}
 *┃* 🎈 *\`Platform\`* : Linux
-*┃* 📡 *\`Host\`* : {SPARK-X}
+*┃* 📡 *\`Host\`* : {HOST}
 *┃* 📟 *\`Uptime\`* : {UPTIME}
 *┃* 📂 *\`Memory\`* : {RAM}
 *╰─────────────●●►*
 
 *╭─「 ᴅᴇᴘʟᴏʏ ᴠɪᴅᴇᴏꜱ & ᴏᴛʜᴇʀ ɪɴꜰᴏ 」*
-{ISHAN}
+{EXTRA}
 *╰──────────●●►*
 
 > ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏
