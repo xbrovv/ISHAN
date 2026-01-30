@@ -25,7 +25,7 @@ module.exports = {
   // (DEFAULT: OFF)
   // ===============================
   AUTO_STATUS_SEEN: true,
-  AUTO_STATUS_REACT: false,
+  AUTO_STATUS_REACT: true,
   AUTO_STATUS_FORWARD: false,
 
 
@@ -51,29 +51,29 @@ module.exports = {
 
 
   // Alive Message Template
-  // Used in alive.js plugin
-  ALIVE_MSG: `
-𝗜𝗦𝗛𝗔𝗡 𝗦𝗣𝗔𝗥𝗞-𝕏 🚀
-◄✦✦━━━━━━━━━━━━━━━━━━━━━━✦✦►
-🟢 BOT STATUS : ONLINE & ACTIVE ✨
+// Used in alive.js plugin
+ALIVE_MSG: `
+👋 𝐇𝐈, {USER} 𝐈❜𝐀𝐌 𝐀𝐋𝐈𝐕𝐄 𝐍𝐎𝐖 👾
 
-⚡ Fast • Stable • Powerful
-🔌 Advanced Plugin-Based WhatsApp Bot
-🚀 Built for performance, reliability & automation
+*╭─「  ᴅᴀᴛᴇ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ  」*
+*┃* 📅 *\`Date\`* : {DATE}
+*┃* ⏰ *\`Time\`* : {TIME}
+*╰─────────────●●►*
 
-◄✦✦━━━━━━━━━━━━━━━━━━━━━━✦✦►
-🧬 LIVE SYSTEM STATS
+*╭─「  ꜱᴛᴀᴛᴜꜱ ᴅᴇᴛᴀɪʟꜱ  」*
+*┃* 👤 *\`User\`* : {USER}
+*┃* ✒️ *\`Prefix\`* : {PREFIX}
+*┃* 🧬 *\`Version\`* : {VERSION}
+*┃* 🎈 *\`Platform\`* : Linux
+*┃* 📡 *\`Host\`* : {SPARK-X}
+*┃* 📟 *\`Uptime\`* : {UPTIME}
+*┃* 📂 *\`Memory\`* : {RAM}
+*╰─────────────●●►*
 
-🕒 Time      : {TIME}
-⏱️ Uptime    : {UPTIME}
-📟 RAM Usage : {RAM}
+*╭─「 ᴅᴇᴘʟᴏʏ ᴠɪᴅᴇᴏꜱ & ᴏᴛʜᴇʀ ɪɴꜰᴏ 」*
+{ISHAN}
+*╰──────────●●►*
 
-◄✦✦━━━━━━━━━━━━━━━━━━━━━━✦✦►
-🛡️ Security  : Session Verified
-📡 Connection: WhatsApp Multi-Device
-⚙️ Mode      : {MODE}
-
-◄✦✦━━━━━━━━━━━━━━━━━━━━━━✦✦►
 > ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏
 `
 };
