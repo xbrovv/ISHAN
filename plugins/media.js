@@ -1,7 +1,6 @@
 const config = require('../config');
 const { cmd } = require('../command');
-const DY_SCRAP = require('@dark-yasiya/scrap');
-const dy_scrap = new DY_SCRAP();
+const { mp3 } = require('sadaslk-dlcore');
 
 function replaceYouTubeID(url) {
     const regex = /(?:youtube\.com\/(?:.*v=|.*\/)|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/;
