@@ -62,7 +62,6 @@ cmd({
 │ 🤖 Mode : ${config.MODE || "public"}
 │ 🔰 Prefix : ${config.PREFIX || "."}
 │ 🧠 RAM : ${usedRAM} MB / ${totalRAM} MB
-│ 💻 Platform : ${platform}
 │ ⏳ Uptime : ${upH}h ${upM}m ${upS}s
 │ ⏰ Time : ${new Date().toLocaleTimeString()}
 │ 📅 Date : ${new Date().toISOString().split("T")[0]}
