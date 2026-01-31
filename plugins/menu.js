@@ -1,4 +1,6 @@
 const { cmd, commands } = require("../command");
+const os = require("os");
+const config = require("../config");
 
 const pendingMenu = {};
 const numberEmojis = ["0️⃣","1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣"];
@@ -11,9 +13,16 @@ const FOOTER = `
 ◄✦✦━━━━━━━━━━━━━━━━━━━━━━✦✦►
 `;
 
+function formatBytes(bytes) {
+  const sizes = ["Bytes", "KB", "MB", "GB"];
+  if (bytes === 0) return "0 Byte";
+  const i = Math.floor(Math.log(bytes) / Math.log(1024));
+  return Math.round(bytes / Math.pow(1024, i), 2) + " " + sizes[i];
+}
+
 cmd({
   pattern: "menu",
-  react: "🟢",
+  react: "📜",
   desc: "Get Bot Menu",
   category: "main",
   filename: __filename
@@ -29,6 +38,12 @@ cmd({
 
   const categories = Object.keys(commandMap);
 
+  // 📊 SYSTEM INFO
+  const usedRam = process.memoryUsage().heapUsed;
+  const totalRam = os.totalmem();
+  const cpuModel = os.cpus()[0].model;
+  const cpuUsage = os.loadavg()[0].toFixed(2);
+
   let text = `
 👋 Hello, ${pushname}
 
@@ -37,12 +52,11 @@ cmd({
 ╭─「 STATUS DETAILS 」
 │ 👤 Owner : Ishan
 │ ☎ Owner Number : 94761638379
-│ 🤖 Mode : ${config.MODE || "public"}
-│ 🔰 Prefix : ${config.PREFIX || "."}
-│ 🧠 RAM : ${usedRAM} MB / ${totalRAM} MB
-│ ⚙ CPU : ${cpuModel}
-│ 💻 Platform : ${platform}
-│ ⏳ Uptime : ${upH}h ${upM}m ${upS}s
+│ ⚙ Mode : ${config.MODE || "public"}
+│ 🔑 Prefix : ${config.PREFIX || "."}
+│ 🧠 RAM Usage : ${formatBytes(usedRam)} / ${formatBytes(totalRam)}
+│ 🖥 CPU : ${cpuModel}
+│ 📊 CPU Load : ${cpuUsage}
 │ ⏰ Time : ${new Date().toLocaleTimeString()}
 │ 📅 Date : ${new Date().toISOString().split("T")[0]}
 │ 📂 Categories : ${categories.length}
@@ -89,11 +103,10 @@ cmd({
 `;
 
   cmds.forEach(c => {
-    const name = `.${c.pattern}`;
     text += `
 ╭──────────────────────
 ✈ Command : ${c.pattern}
-✈ Use : ${name} ${c.use || "<Query>"}
+✈ Use : ${config.PREFIX || "."}${c.pattern} ${c.use || "<Query>"}
 ╰──────────────────────
 `;
   });
