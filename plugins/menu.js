@@ -1,127 +1,89 @@
+// plugins/menu.js
 const { cmd, commands } = require("../command");
+const config = require("../config");
 
-const pendingMenu = {};
-const numberEmojis = ["0️⃣","1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣"];
+cmd(
+  {
+    pattern: "menu",
+    alias: ["help", "commands"],
+    react: "📜",
+    desc: "Show all bot commands by category",
+    category: "main",
+    filename: __filename,
+  },
+  async (ishan, mek, m, { from, pushname, sender }) => {
+    try {
+      const user = pushname || sender.split("@")[0];
 
-const HEADER_IMG = "https://files.catbox.moe/h1xuqv.jpg";
+      // Group commands by category
+      const categorized = {};
+      for (const c of commands) {
+        if (!c.pattern || c.dontAddCommandList) continue;
+        const cat = c.category || "other";
+        if (!categorized[cat]) categorized[cat] = [];
+        categorized[cat].push(c.pattern);
+      }
 
-const FOOTER = `
-◄✦✦━━━━━━━━━━━━━━━━━━━━━━✦✦►
-> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏
-◄✦✦━━━━━━━━━━━━━━━━━━━━━━✦✦►
+      // Header
+      let menuText = `
+╭━━━〔 🤖 SUHO-MD V2 〕━━━╮
+┃ 👤 User   : ${user}
+┃ 👑 Owner  : 𝙇𝙊𝙍𝘿 𝙎𝙐𝙉𝙂
+┃ ⚙ Prefix : ${config.PREFIX}
+┃ 📦 Mode   : ${config.MODE}
+╰━━━━━━━━━━━━━━━━━━━━╯
 `;
 
-cmd({
-  pattern: "menu",
-  react: "📑",
-  desc: "Show premium command menu",
-  category: "main",
-  filename: __filename
-}, async (ishan, mek, m, { from, sender }) => {
+      // Category Emojis
+      const emojis = {
+        main: "⚙️",
+        download: "📥",
+        group: "👥",
+        fun: "🎉",
+        owner: "👑",
+        ai: "🤖",
+        anime: "🌸",
+        convert: "🎨",
+        reaction: "💫",
+        economy: "💰",
+        search: "🔎",
+        utility: "🛠️",
+        other: "🧩",
+      };
 
-  await ishan.sendMessage(from, { react: { text: "📑", key: mek.key } });
+      // Build menu
+      for (const [cat, list] of Object.entries(categorized)) {
+        const emoji = emojis[cat] || "✦";
+        const title = cat.toUpperCase();
 
-  const commandMap = {};
+        menuText += `
+╭─ ${emoji} *${title}*
+`;
 
-  for (const command of commands) {
-    if (command.dontAddCommandList) continue;
-    const category = (command.category || "misc").toUpperCase();
-    if (!commandMap[category]) commandMap[category] = [];
-    commandMap[category].push(command);
+        list.forEach(cmdName => {
+          menuText += `│ ▸ ${config.PREFIX}${cmdName}\n`;
+        });
+
+        menuText += `╰───────────────\n`;
+      }
+
+      menuText += `
+⚡ Powered by *SPARK*
+`;
+
+      // Send menu with image
+      await ishan.sendMessage(
+        from,
+        {
+          image: { url: "https://files.catbox.moe/h1xuqv.jpg" },
+          caption: menuText.trim(),
+        },
+        { quoted: mek }
+      );
+
+    } catch (e) {
+      console.error("Menu Error:", e);
+      await ishan.sendMessage(from, { text: "❌ Failed to load menu." }, { quoted: mek });
+    }
   }
-
-  const categories = Object.keys(commandMap);
-
-  let menuText = `
-𝗜𝗦𝗛𝗔𝗡 𝗦𝗣𝗔𝗥𝗞-𝕏 🚀
-◄✦✦━━━━━━━━━━━━━━━━━━━━━━✦✦►
-✨ 𝗣𝗿𝗲𝗺𝗶𝘂𝗺 𝗠𝗲𝗻𝘂
-⚡ Fast • Stable • Powerful
-◄✦✦━━━━━━━━━━━━━━━━━━━━━━✦✦►
-
-📂 𝗖𝗮𝘁𝗲𝗴𝗼𝗿𝗶𝗲𝘀
-`;
-
-  categories.forEach((cat, i) => {
-    const emojiIndex = (i + 1).toString().split("").map(n => numberEmojis[n]).join("");
-    menuText += `
-╭──────────────────────╮
-│ ${emojiIndex}  ${cat}
-│ Commands : ${commandMap[cat].length}
-╰──────────────────────╯
-`;
-  });
-
-  menuText += `
- ◄◆◆━━━━━━━━━━━━━━━━━━━━━━◆◆►
-📝 𝗛𝗼𝘄 𝘁𝗼 𝗨𝘀𝗲
-Reply with category number
-Example: 1 or 2 or 3
-
-💡 Tip:
-Use commands carefully for best performance.
-${FOOTER}
-`;
-
-  await ishan.sendMessage(from, {
-    image: { url: HEADER_IMG },
-    caption: menuText.trim()
-  }, { quoted: mek });
-
-  pendingMenu[sender] = { step: "category", commandMap, categories };
-});
-
-cmd({
-  filter: (text, { sender }) =>
-    pendingMenu[sender] &&
-    pendingMenu[sender].step === "category" &&
-    /^[1-9][0-9]*$/.test(text.trim())
-}, async (ishan, mek, m, { from, body, sender }) => {
-
-  await ishan.sendMessage(from, { react: { text: "✅", key: mek.key } });
-
-  const { commandMap, categories } = pendingMenu[sender];
-  const index = parseInt(body.trim()) - 1;
-
-  if (index < 0 || index >= categories.length) {
-    return ishan.sendMessage(from, { text: "❌ Invalid category number!" }, { quoted: mek });
-  }
-
-  const selectedCategory = categories[index];
-  const cmdsInCategory = commandMap[selectedCategory];
-
-  let cmdText = `
-📂 ${selectedCategory} COMMANDS
-◄✦✦━━━━━━━━━━━━━━━━━━━━━━✦✦►
-`;
-
-  cmdsInCategory.forEach((c, i) => {
-    const emojiIndex = (i + 1).toString().split("").map(n => numberEmojis[n]).join("");
-    const patterns = [c.pattern, ...(c.alias || [])]
-      .filter(Boolean)
-      .map(p => `.${p}`)
-      .join(", ");
-
-    cmdText += `
-╭──────────────────────╮
-│ ${emojiIndex}  ${patterns}
-│ ${c.desc || "No description"}
-╰──────────────────────╯
-`;
-  });
-
-  cmdText += `
- ◄◆◆━━━━━━━━━━━━━━━━━━━━━━◆◆►
-Total Commands : ${cmdsInCategory.length}
-
-Type .menu to go back
-${FOOTER}
-`;
-
-  await ishan.sendMessage(from, {
-    image: { url: HEADER_IMG },
-    caption: cmdText.trim()
-  }, { quoted: mek });
-
-  delete pendingMenu[sender];
-});
+);
