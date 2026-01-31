@@ -95,6 +95,9 @@ cmd({
     return ishan.sendMessage(from, { text: "❌ Invalid Number" }, { quoted: mek });
   }
 
+  // ✅ Add react to the original selection message
+  await ishan.sendMessage(from, { react: { text: "✅", key: mek.key } });
+
   const category = data.categories[index];
   const cmds = data.commandMap[category];
 
@@ -120,3 +123,4 @@ cmd({
 
   delete pendingMenu[sender];
 });
+    
