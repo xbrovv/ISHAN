@@ -1,3 +1,5 @@
+const { cmd, commands } = require("../command");
+
 const pendingMenu = {};
 const numberEmojis = ["0️⃣","1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣"];
 
@@ -11,19 +13,11 @@ const FOOTER = `
 
 cmd({
   pattern: "menu",
-  react: "📜",
+  react: "🟢",
   desc: "Get Bot Menu",
   category: "main",
   filename: __filename
 }, async (ishan, mek, m, { from, sender, pushname }) => {
-
-  // RAM Info
-  const usedRam = (process.memoryUsage().rss / 1024 / 1024).toFixed(2);
-  const totalRam = (os.totalmem() / 1024 / 1024).toFixed(2);
-
-  // Mode & Prefix
-  const MODE = process.env.MODE || "PUBLIC";
-  const PREFIX = process.env.PREFIX || ".";
 
   const commandMap = {};
   for (const cmd of commands) {
@@ -43,9 +37,12 @@ cmd({
 ╭─「 STATUS DETAILS 」
 │ 👤 Owner : Ishan
 │ ☎ Owner Number : 94761638379
-│ 🚀 Mode : ${MODE}
-│ 🧩 Prefix : ${PREFIX}
-│ 💾 RAM Usage : ${usedRam}MB / ${totalRam}MB
+│ 🤖 Mode : ${config.MODE || "public"}
+│ 🔰 Prefix : ${config.PREFIX || "."}
+│ 🧠 RAM : ${usedRAM} MB / ${totalRAM} MB
+│ ⚙ CPU : ${cpuModel}
+│ 💻 Platform : ${platform}
+│ ⏳ Uptime : ${upH}h ${upM}m ${upS}s
 │ ⏰ Time : ${new Date().toLocaleTimeString()}
 │ 📅 Date : ${new Date().toISOString().split("T")[0]}
 │ 📂 Categories : ${categories.length}
@@ -109,4 +106,4 @@ cmd({
   }, { quoted: mek });
 
   delete pendingMenu[sender];
-});  
+});
