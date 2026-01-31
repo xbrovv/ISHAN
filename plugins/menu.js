@@ -1,89 +1,217 @@
-// plugins/menu.js
-const { cmd, commands } = require("../command");
-const config = require("../config");
-
-cmd(
-  {
+const {readEnv} = require('../config')
+const {cmd , commands} = require('../command')
+const os = require("os")
+const {runtime} = require('../lib/functions')
+cmd({
     pattern: "menu",
-    alias: ["help", "commands"],
+    alias: ["list"],
+    desc: "bot's commands",
     react: "📜",
-    desc: "Show all bot commands by category",
-    category: "main",
-    filename: __filename,
-  },
-  async (ishan, mek, m, { from, pushname, sender }) => {
+    category: "main"
+},
+async (ishan, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
     try {
-      const user = pushname || sender.split("@")[0];
+        let desc = `*👋 Hello ${pushname}*
 
-      // Group commands by category
-      const categorized = {};
-      for (const c of commands) {
-        if (!c.pattern || c.dontAddCommandList) continue;
-        const cat = c.category || "other";
-        if (!categorized[cat]) categorized[cat] = [];
-        categorized[cat].push(c.pattern);
-      }
+*╭─「 ${config.BOT_NAME} 」*
+*│◈ ʀᴜɴᴛɪᴍᴇ : ${runtime(process.uptime())}*
+*│◈ ʀᴀᴍ ᴜꜱᴀɢᴇ : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB*
+*│◈ ᴘʟᴀᴛꜰᴏʀᴍ : ${os.hostname()}*
+*│◈ ᴠᴇʀꜱɪᴏɴ : 3.0.0*
+*╰──────────●●►*
 
-      // Header
-      let menuText = `
-╭━━━〔 🤖 SUHO-MD V2 〕━━━╮
-┃ 👤 User   : ${user}
-┃ 👑 Owner  : 𝙇𝙊𝙍𝘿 𝙎𝙐𝙉𝙂
-┃ ⚙ Prefix : ${config.PREFIX}
-┃ 📦 Mode   : ${config.MODE}
-╰━━━━━━━━━━━━━━━━━━━━╯
-`;
+*╭╼╼╼╼╼╼╼╼╼╼*
+*├ 1 • MAIN*
+*├ 2 • SEARCH*
+*├ 3 • DOWNLOAD*
+*├ 4 • GROUP*
+*├ 5 • OWNER*
+*├ 6 • FUN*
+*╰╼╼╼╼╼╼╼╼╼╼*
 
-      // Category Emojis
-      const emojis = {
-        main: "⚙️",
-        download: "📥",
-        group: "👥",
-        fun: "🎉",
-        owner: "👑",
-        ai: "🤖",
-        anime: "🌸",
-        convert: "🎨",
-        reaction: "💫",
-        economy: "💰",
-        search: "🔎",
-        utility: "🛠️",
-        other: "🧩",
-      };
+_*🌟 Reply with the Number you want to select*_
 
-      // Build menu
-      for (const [cat, list] of Object.entries(categorized)) {
-        const emoji = emojis[cat] || "✦";
-        const title = cat.toUpperCase();
+> *𝙋𝙊𝙒𝙀𝙍𝙀𝘿 𝘽𝙔 your Botname*`;
 
-        menuText += `
-╭─ ${emoji} *${title}*
-`;
+        const vv = await ishan.sendMessage(from, { image: { url: config.MENU_IMG}, caption: desc }, { quoted: mek });
 
-        list.forEach(cmdName => {
-          menuText += `│ ▸ ${config.PREFIX}${cmdName}\n`;
+        ishan.ev.on('messages.upsert', async (msgUpdate) => {
+            const msg = msgUpdate.messages[0];
+            if (!msg.message || !msg.message.extendedTextMessage) return;
+
+            const selectedOption = msg.message.extendedTextMessage.text.trim();
+
+            if (msg.message.extendedTextMessage.contextInfo && msg.message.extendedTextMessage.contextInfo.stanzaId === vv.key.id) {
+                switch (selectedOption) {
+                    case '1':
+                    reply(`
+                    
+
+╔════════════════════════╗  
+║ 🔧 **𝗠𝗔𝗜𝗡 𝗖𝗢𝗠𝗠𝗔𝗡𝗗 𝗟𝗜𝗦𝗧** 🔧 ║  
+╚════════════════════════╝  
+
+╭─━─〔 ⚡ **Commands** ⚡ 〕━━╮  
+┃ ◈ **alive**
+┃ ◈ **menu**  
+┃ ◈ **menu2**  
+┃ ◈ **system**  
+┃ ◈ **ping**  
+┃ ◈ **runtime**
+┃ ◈ **jid**
+╰─━─━─━─━─━─━─━─━─╯  
+
+📊 **Total Commands in MAIN:** 7  
+ 
+> 💡 **𝙋𝙊𝙒𝙀𝙍𝙀𝘿 𝘽𝙔 Your Botname**  
+
+`);
+
+                        break;
+                    case '2':               
+                        reply(`
+
+╔════════════════════════╗  
+║ 🔍 **𝗦𝗘𝗔𝗥𝗖𝗛 𝗖𝗢𝗠𝗠𝗔𝗡𝗗 𝗟𝗜𝗦𝗧** 🔍 ║  
+╚════════════════════════╝  
+
+╭─━〔 ⚡ **Commands** ⚡ 〕━──━╮  
+┃ ◈ **yts**  
+┃ ◈ **image** 
+╰─━─━─━━─━─━─━─━─━─╯  
+
+📊 **Total Commands in SEARCH:** 2
+
+> 💡 **𝙋𝙊𝙒𝙀𝙍𝙀𝘿 𝘽𝙔 your Botname**
+`);
+                        break;
+                    case '3':               
+                        reply(`
+╔════════════════════════╗  
+║ 📥 **𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗 𝗖𝗢𝗠𝗠𝗔𝗡𝗗 𝗟𝗜𝗦𝗧** 📥 ║  
+╚════════════════════════╝  
+
+╭─━━〔 ⚡ **Commands** ⚡ 〕━─━━╮  
+┃ ◈ **apk**  
+┃ ◈ **twitter**  
+┃ ◈ **gdrive**  
+┃ ◈ **mediafire**  
+┃ ◈ **fb**  
+┃ ◈ **play**
+┃ ◈ **play2**  
+┃ ◈ **video**   
+┃ ◈ **video2**  
+┃ ◈ **yta**  
+┃ ◈ **tiktok**
+┃ ◈ **ytmp3**
+╰─━─━─━─━─━─━─━─━─━─╯  
+
+📊 **Total Commands in DOWNLOAD:** 12
+ 
+> 💡 **𝙋𝙊𝙒𝙀𝙍𝙀𝘿 𝘽𝙔 your Botname**  
+
+`);
+                    
+                        break;
+                    case '4':               
+                        reply(`
+╔════════════════════════╗  
+║ 👥 **𝗚𝗥𝗢𝗨𝗣 𝗖𝗢𝗠𝗠𝗔𝗡𝗗 𝗟𝗜𝗦𝗧** 👥 ║  
+╚════════════════════════╝  
+
+╭─━──━〔 ⚡ **Commands** ⚡ 〕━─━╮  
+┃ ◈ **mute**  
+┃ ◈ **unmute**  
+┃ ◈ **promote**  
+┃ ◈ **demote**  
+┃ ◈ **del**  
+┃ ◈ **add**  
+┃ ◈ **admins**  
+┃ ◈ **groupdesc**  
+┃ ◈ **groupinfo**  
+┃ ◈ **gname**  
+┃ ◈ **setsubject**  
+┃ ◈ **tagall**  
+┃ ◈ **hidetag**  
+┃ ◈ **unlock**  
+┃ ◈ **lock**
+┃ ◈ **gname**  
+┃ ◈ **join**  
+┃ ◈ **leave**  
+┃ ◈ **invite**  
+┃ ◈ **tagadmin**  
+╰─━─━─━─━─━─━─━─━─━━─╯  
+
+📊 **Total Commands in GROUP:** 20  
+
+
+> 💡 **𝙋𝙊𝙒𝙀𝙍𝙀𝘿 𝘽𝙔 Your Botname**  
+`);
+                    break;
+                    case '5':               
+                        reply(`
+╔════════════════════════╗  
+║ 👨‍💻 **𝗢𝗪𝗡𝗘𝗥 𝗖𝗢𝗠𝗠𝗔𝗡𝗗 𝗟𝗜𝗦𝗧** 👨‍💻 ║  
+╚════════════════════════╝  
+
+╭─━〔 🍿 **Commands** 🍿 〕━──━╮ 
+┃ ◈ **shutdown**  
+┃ ◈ **alive**  
+┃ ◈ **ping**  
+┃ ◈ **clearchats**  
+┃ ◈ **block**
+┃ ◈ **unblock**
+┃ ◈ **repo**
+┃ ◈ **owner**
+┃ ◈ **owner2**
+╰─━━─━─━──━─━─━━─━─╯  
+
+📊 **Total Commands in Owner:** 9
+
+ 
+> 💡 **𝙋𝙊𝙒𝙀𝙍𝙀𝘿 𝘽𝙔 your Botname**  
+
+`);
+                    break;
+                    case '6':               
+                        reply(`
+╔════════════════════════╗  
+║ 👨‍💻 **𝐓𝐎𝐎𝐋𝐒 𝗖𝗢𝗠𝗠𝗔𝗡𝗗 𝗟𝗜𝗦𝗧** 👨‍💻 ║  
+╚════════════════════════╝  
+
+╭─━〔 🍿 **Commands** 🍿 〕━──━╮ 
+┃ ◈ **joke**  
+┃ ◈ **flirt**  
+┃ ◈ **truth**  
+┃ ◈ **dare**  
+┃ ◈ **fact**
+┃ ◈ **pickupline**
+┃ ◈ **character**
+┃ ◈ **repeat**
+┃ ◈ **spam**
+┃ ◈ **readmore**
+╰─━━─━─━──━─━─━━─━─╯  
+
+📊 **Total Commands in Owner:** 10
+
+ 
+> 💡 **𝙋𝙊𝙒𝙀𝙍𝙀𝘿 𝘽𝙔 your Botname**  
+
+`);
+                       
+                        
+                    break;
+                    default:
+                    
+                        reply("Invalid option. Please select a valid option🔴");
+                }
+
+            }
         });
 
-        menuText += `╰───────────────\n`;
-      }
-
-      menuText += `
-⚡ Powered by *SPARK*
-`;
-
-      // Send menu with image
-      await ishan.sendMessage(
-        from,
-        {
-          image: { url: "https://files.catbox.moe/h1xuqv.jpg" },
-          caption: menuText.trim(),
-        },
-        { quoted: mek }
-      );
-
     } catch (e) {
-      console.error("Menu Error:", e);
-      await ishan.sendMessage(from, { text: "❌ Failed to load menu." }, { quoted: mek });
+        console.error(e);
+        await ishan.sendMessage(from, { react: { text: '❌', key: mek.key } })
+        reply('An error occurred while processing your request.');
     }
-  }
-);
+});
