@@ -48,10 +48,10 @@ cmd({
 🧿 *WELCOME TO ISHAN-SPARK-X MD* 🧿
 
 ╭─「 STATUS DETAILS 」
-│ 🧑‍💻 Owner : Ishan
+│ 🧑‍💻 Owner : Ishan 
+│ 📌 Prefix : ${config.PREFIX || "."}
 │ 📞 Owner Number : 94761638379
 │ ⚙ Mode : ${config.MODE || "public"}
-│ 📌 Prefix : ${config.PREFIX || "."}
 │ 💾 RAM Usage : ${formatBytes(usedRam)} / ${formatBytes(totalRam)}
 │ 💻 CPU Load : ${cpuUsage}
 │ ⏰ Time : ${new Date().toLocaleTimeString()}
@@ -104,10 +104,11 @@ cmd({
 
   cmds.forEach(c => {
     text += `
-╭──────────────────────
-✈ Command : ${c.pattern}
-✈ Use : ${config.PREFIX || "."}${c.pattern} ${c.use || "<Query>"}
-╰──────────────────────
+╭──────────●●►
+│ヤ Command : ${c.pattern}
+ Use : ${config.PREFIX || "."}${c.pattern} ${c.use || "<Query>"}
+│ヤ 
+╰──────────●●►
 `;
   });
 
