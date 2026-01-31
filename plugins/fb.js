@@ -1,43 +1,120 @@
-const { cmd } = require("../command");
-const fetch = require("node-fetch");
+const { cmd, commands } = require("../command");
+const getFbVideoInfo = require("@xaviabot/fb-downloader");
+
+const FOOTER = "\n\n> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏";
 
 cmd(
   {
     pattern: "fb",
+    alias: ["facebook"],
     react: "📘",
-    desc: "Download Facebook video",
+    desc: "Download Facebook Video",
     category: "download",
     filename: __filename,
   },
-  async (ishan, mek, m, { from, args, reply }) => {
-    const url = args[0];
-    if (!url || !url.includes("facebook.com"))
-      return reply("❌ *Please provide a valid Facebook video link.*");
-
+  async (
+    ishan,
+    mek,
+    m,
+    {
+      from,
+      quoted,
+      body,
+      isCmd,
+      command,
+      args,
+      q,
+      isGroup,
+      sender,
+      senderNumber,
+      botNumber2,
+      botNumber,
+      pushname,
+      isMe,
+      isOwner,
+      groupMetadata,
+      groupName,
+      participants,
+      groupAdmins,
+      isBotAdmins,
+      isAdmins,
+      reply,
+    }
+  ) => {
     try {
-      reply("🔎 Fetching Facebook video...");
+      // ❌ No URL
+      if (!q) {
+        return reply(
+          "📘 *Facebook video download කිරීමට valid link එකක් දාන්න!*\n" +
+          "✨ *Example:* `fb https://www.facebook.com/...`" +
+          FOOTER
+        );
+      }
 
-      const api = `https://api.radiaa.repl.co/api/fb?url=${encodeURIComponent(url)}`;
-      const response = await ishan(api);
-      if (!response.ok) throw new Error("API request failed");
+      const fbRegex = /(https?:\/\/)?(www\.)?(facebook|fb)\.com\/.+/;
+      if (!fbRegex.test(q)) {
+        return reply(
+          "❌ *Invalid Facebook URL!*\n" +
+          "👉 *කරුණාකර හරි link එකක් check කරලා නැවත try කරන්න*" +
+          FOOTER
+        );
+      }
 
-      const data = await response.json();
-      const { hd, sd, title } = data.result;
-      if (!hd && !sd) return reply("❌ Video not found or not public.");
+      // ⏳ Downloading message
+      await reply(
+        "⬇️ *Facebook video download වෙමින් පවතිනවා…*\n" +
+        "⏳ *කරුණාකර ටිකක් රැඳී සිටින්න*" +
+        FOOTER
+      );
 
-      const videoUrl = hd || sd;
+      const result = await getFbVideoInfo(q);
+      if (!result || (!result.sd && !result.hd)) {
+        return reply(
+          "😕 *Video download කරන්න බැරි වුණා!*\n" +
+          "🔁 *කරුණාකර ටික වෙලාවකට පස්සේ නැවත try කරන්න*" +
+          FOOTER
+        );
+      }
+
+      const { title, sd, hd } = result;
+      const bestQualityUrl = hd || sd;
+      const qualityText = hd ? "HD" : "SD";
+
+      const desc =
+`🚀 *ISHAN SPARK-X — FB Video Downloader*
+─────────────────────────
+🎬 *Title:* ${title || "Unknown"}
+🎥 *Quality:* ${qualityText}
+🔗 *Source:* Facebook
+${FOOTER}
+`;
 
       await ishan.sendMessage(
         from,
         {
-          video: { url: videoUrl },
-          caption: `📘 *${title || "Facebook Video"}*\n\n_*𝑵𝑶𝑽𝑨𝑪𝑶𝑹𝑬✟ 𝙁𝘽 𝘿𝙊𝙒𝙉𝙇𝙊𝘿𝙀𝙍*_`,
+          image: {
+            url: "https://files.catbox.moe/h1xuqv.jpg",
+          },
+          caption: desc,
+        },
+        { quoted: mek }
+      );
+
+      await ishan.sendMessage(
+        from,
+        {
+          video: { url: bestQualityUrl },
+          caption: `📥 *Downloaded in ${qualityText} quality*` + FOOTER,
         },
         { quoted: mek }
       );
     } catch (e) {
       console.error(e);
-      reply(`❌ *Failed to download:* ${e.message}`);
+      reply(
+        "❌ *Facebook video download කිරීමේදී දෝෂයක් ඇතිවුණා!*\n" +
+        "🔁 *කරුණාකර ටික වෙලාවකට පස්සේ නැවත try කරන්න*" +
+        FOOTER
+      );
     }
   }
 );
