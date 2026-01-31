@@ -8,9 +8,7 @@ const numberEmojis = ["0️⃣","1️⃣","2️⃣","3️⃣","4️⃣","5️⃣
 const HEADER_IMG = "https://files.catbox.moe/h1xuqv.jpg";
 
 const FOOTER = `
-◄✦✦━━━━━━━━━━━━━━━━━━━━━━✦✦►
-© 2025 ISHAN MD
-◄✦✦━━━━━━━━━━━━━━━━━━━━━━✦✦►
+© 2026 ISHAN-X MD
 `;
 
 function formatBytes(bytes) {
@@ -22,7 +20,7 @@ function formatBytes(bytes) {
 
 cmd({
   pattern: "menu",
-  react: "📜",
+  react: "👑",
   desc: "Get Bot Menu",
   category: "main",
   filename: __filename
@@ -50,13 +48,12 @@ cmd({
 🧿 *WELCOME TO ISHAN-SPARK-X MD* 🧿
 
 ╭─「 STATUS DETAILS 」
-│ 👤 Owner : Ishan
-│ ☎ Owner Number : 94761638379
+│ 🧑‍💻 Owner : Ishan
+│ 📞 Owner Number : 94761638379
 │ ⚙ Mode : ${config.MODE || "public"}
-│ 🔑 Prefix : ${config.PREFIX || "."}
-│ 🧠 RAM Usage : ${formatBytes(usedRam)} / ${formatBytes(totalRam)}
-│ 🖥 CPU : ${cpuModel}
-│ 📊 CPU Load : ${cpuUsage}
+│ 📌 Prefix : ${config.PREFIX || "."}
+│ 💾 RAM Usage : ${formatBytes(usedRam)} / ${formatBytes(totalRam)}
+│ 💻 CPU Load : ${cpuUsage}
 │ ⏰ Time : ${new Date().toLocaleTimeString()}
 │ 📅 Date : ${new Date().toISOString().split("T")[0]}
 │ 📂 Categories : ${categories.length}
