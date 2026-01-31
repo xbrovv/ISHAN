@@ -65,7 +65,6 @@ cmd({
 │ 💻 CPU Load : ${cpuUsage}
 │ ⏰ Time : ${new Date().toLocaleTimeString()}
 │ 📅 Date : ${new Date().toISOString().split("T")[0]}
-│ 📂 Categories : ${categories.length}
 ╰───────────────
 
 *Reply Below Number 🔢*
