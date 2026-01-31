@@ -62,7 +62,6 @@ cmd({
 │ 📞 Owner Number : 94761638379
 │ ⚙ Mode : ${config.MODE || "public"}
 │ 💾 RAM Usage : ${formatBytes(usedRam)} / ${formatBytes(totalRam)}
-│ 💻 CPU Load : ${cpuUsage}
 │ ⏰ Time : ${new Date().toLocaleTimeString()}
 │ 📅 Date : ${new Date().toISOString().split("T")[0]}
 ╰───────────────
