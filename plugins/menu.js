@@ -106,8 +106,7 @@ cmd({
     text += `
 ╭──────────●●►
 │ヤ Command : ${c.pattern}
- Use : ${config.PREFIX || "."}${c.pattern} ${c.use || "<Query>"}
-│ヤ 
+│ヤ Use : ${config.PREFIX || "."}${c.pattern} ${c.use || "<Query>"}
 ╰──────────●●►
 `;
   });
