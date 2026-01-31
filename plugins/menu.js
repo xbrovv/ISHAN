@@ -3,7 +3,7 @@ const os = require("os");
 const config = require("../config");
 
 const pendingMenu = {};
-const numberEmojis = ["0️⃣","❶","❷","❸","❹","❺","❻","❼","❽","❾"];
+const numberEmojis = ["0️⃣","1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣"];
 
 const HEADER_IMG = "https://files.catbox.moe/h1xuqv.jpg";
 
@@ -26,21 +26,30 @@ cmd({
   filename: __filename
 }, async (ishan, mek, m, { from, sender, pushname }) => {
 
-  const commandMap = {};
-  for (const cmd of commands) {
-    if (cmd.dontAddCommandList) continue;
-    const cat = (cmd.category || "other").toUpperCase();
-    if (!commandMap[cat]) commandMap[cat] = [];
-    commandMap[cat].push(cmd);
+  // CATEGORY MAP
+  const commandMap = {
+    OWNER: [],
+    AI: [],
+    SEARCH: [],
+    DOWNLOAD: [],
+    MAIN: [],
+    CONVERT: [],
+    OTHER: [],
+    LOGO: [],
+    GROUP: []
+  };
+
+  for (const c of commands) {
+    if (c.dontAddCommandList) continue;
+    const cat = (c.category || "other").toUpperCase();
+    if (commandMap[cat]) commandMap[cat].push(c);
   }
 
   const categories = Object.keys(commandMap);
 
-  // 📊 SYSTEM INFO
+  // SYSTEM INFO
   const usedRam = process.memoryUsage().heapUsed;
   const totalRam = os.totalmem();
-  const cpuModel = os.cpus()[0].model;
-  const cpuUsage = os.loadavg()[0].toFixed(2);
 
   let text = `
 👋 Hello, ${pushname}
@@ -48,32 +57,39 @@ cmd({
 🧿 *WELCOME TO ISHAN-SPARK-X MD* 🧿
 
 ╭─「 STATUS DETAILS 」
-│ 🧑‍💻 Owner : Ishan 
+│ 🧑‍💻 Owner : Ishan
 │ 📌 Prefix : ${config.PREFIX || "."}
-│ 📞 Owner Number : 94761638379
 │ ⚙ Mode : ${config.MODE || "public"}
-│ 💾 RAM Usage : ${formatBytes(usedRam)} / ${formatBytes(totalRam)}
-│ 💻 CPU Load : ${cpuUsage}
+│ 💾 RAM : ${formatBytes(usedRam)} / ${formatBytes(totalRam)}
 │ ⏰ Time : ${new Date().toLocaleTimeString()}
 │ 📅 Date : ${new Date().toISOString().split("T")[0]}
-│ 📂 Categories : ${categories.length}
 ╰───────────────
 
-📩 *Reply Below Number*
+*Reply Below Number 🔢*
+
+│ ◦ *1* \`\`\`OWNER MENU\`\`\`
+│ ◦ *2* \`\`\`AI MENU\`\`\`
+│ ◦ *3* \`\`\`SEARCH MENU\`\`\`
+│ ◦ *4* \`\`\`DOWNLOAD MENU\`\`\`
+│ ◦ *5* \`\`\`MAIN MENU\`\`\`
+│ ◦ *6* \`\`\`CONVERT MENU\`\`\`
+│ ◦ *7* \`\`\`OTHER MENU\`\`\`
+│ ◦ *8* \`\`\`LOGO MENU\`\`\`
+│ ◦ *9* \`\`\`GROUP MENU\`\`\`
+
+${FOOTER}
 `;
-
-  categories.forEach((cat, i) => {
-    text += `\n${i + 1}️⃣ ${cat} MENU`;
-  });
-
-  text += `\n\n${FOOTER}`;
 
   await ishan.sendMessage(from, {
     image: { url: HEADER_IMG },
     caption: text
   }, { quoted: mek });
 
-  pendingMenu[sender] = { step: "category", categories, commandMap };
+  pendingMenu[sender] = {
+    step: "category",
+    categories,
+    commandMap
+  };
 });
 
 
@@ -82,34 +98,40 @@ cmd({
   filter: (text, { sender }) =>
     pendingMenu[sender] &&
     pendingMenu[sender].step === "category" &&
-    /^[1-9][0-9]*$/.test(text.trim())
+    /^[1-9]$/.test(text.trim())
 }, async (ishan, mek, m, { from, body, sender }) => {
 
   const data = pendingMenu[sender];
   const index = Number(body.trim()) - 1;
 
-  if (!data.categories[index]) {
+  const category = data.categories[index];
+  if (!category) {
     return ishan.sendMessage(from, { text: "❌ Invalid Number" }, { quoted: mek });
   }
 
-  // ✅ Add react to the original selection message
-  await ishan.sendMessage(from, { react: { text: "✅", key: mek.key } });
+  // ✅ react
+  await ishan.sendMessage(from, {
+    react: { text: "✅", key: mek.key }
+  });
 
-  const category = data.categories[index];
   const cmds = data.commandMap[category];
 
   let text = `
-🎀 ＝ ${category} COMMAND LIST ＝ 🎀
+🎀 ＝ ${category} MENU ＝ 🎀
 `;
 
-  cmds.forEach(c => {
-    text += `
+  if (!cmds.length) {
+    text += `\n❌ No commands found\n`;
+  } else {
+    cmds.forEach(c => {
+      text += `
 ╭──────────●●►
-│ヤ Command : ${c.pattern}
-│ヤ Use : ${config.PREFIX || "."}${c.pattern} ${c.use || "<Query>"}
+│ ヤ Command : ${c.pattern}
+│ ヤ Use : ${config.PREFIX || "."}${c.pattern} ${c.use || ""}
 ╰──────────●●►
 `;
-  });
+    });
+  }
 
   text += `\n${FOOTER}`;
 
@@ -120,4 +142,3 @@ cmd({
 
   delete pendingMenu[sender];
 });
-    
