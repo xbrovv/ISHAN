@@ -3,7 +3,7 @@ const os = require("os");
 const config = require("../config");
 
 const pendingMenu = {};
-const numberEmojis = ["0️⃣","1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣"];
+const numberEmojis = ["0️⃣","❶","❷","❸","❹","❺","❻","❼","❽","❾"];
 
 const HEADER_IMG = "https://files.catbox.moe/h1xuqv.jpg";
 
