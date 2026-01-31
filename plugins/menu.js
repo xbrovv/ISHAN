@@ -57,13 +57,17 @@ cmd({
 🧿 *WELCOME TO ISHAN-SPARK-X MD* 🧿
 
 ╭─「 STATUS DETAILS 」
-│ 🧑‍💻 Owner : Ishan 
-│ 📌 Prefix : ${config.PREFIX || "."}
-│ 📞 Owner Number : 94761638379
-│ ⚙ Mode : ${config.MODE || "public"}
-│ 💾 RAM Usage : ${formatBytes(usedRam)} / ${formatBytes(totalRam)}
+│ 👤 Owner : Ishan
+│ ☎ Owner Number : 94761638379
+│ 🤖 Mode : ${config.MODE || "public"}
+│ 🔰 Prefix : ${config.PREFIX || "."}
+│ 🧠 RAM : ${usedRAM} MB / ${totalRAM} MB
+│ ⚙ CPU : ${cpuModel}
+│ 💻 Platform : ${platform}
+│ ⏳ Uptime : ${upH}h ${upM}m ${upS}s
 │ ⏰ Time : ${new Date().toLocaleTimeString()}
 │ 📅 Date : ${new Date().toISOString().split("T")[0]}
+│ 📂 Categories : ${categories.length}
 ╰───────────────
 
 *Reply Below Number 🔢*
