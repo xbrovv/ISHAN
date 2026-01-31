@@ -3,20 +3,13 @@ const os = require("os");
 const config = require("../config");
 
 const pendingMenu = {};
-const numberEmojis = ["0️⃣","1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣"];
+const numberEmojis = ["0️⃣","❶","❷","❸","❹","❺","❻","❼","❽","❾"];
 
 const HEADER_IMG = "https://files.catbox.moe/h1xuqv.jpg";
 
 const FOOTER = `
 © 2026 ISHAN-X MD
 `;
-
-function formatBytes(bytes) {
-  const sizes = ["Bytes", "KB", "MB", "GB"];
-  if (bytes === 0) return "0 Byte";
-  const i = Math.floor(Math.log(bytes) / Math.log(1024));
-  return Math.round(bytes / Math.pow(1024, i), 2) + " " + sizes[i];
-}
 
 cmd({
   pattern: "menu",
@@ -47,9 +40,17 @@ cmd({
 
   const categories = Object.keys(commandMap);
 
-  // SYSTEM INFO
-  const usedRam = process.memoryUsage().heapUsed;
-  const totalRam = os.totalmem();
+  // ───── SYSTEM INFO ─────
+  const usedRAM = Math.round(process.memoryUsage().rss / 1024 / 1024);
+  const totalRAM = Math.round(os.totalmem() / 1024 / 1024);
+
+  const cpuModel = os.cpus()[0].model;
+  const platform = os.platform();
+
+  const uptime = process.uptime();
+  const upH = Math.floor(uptime / 3600);
+  const upM = Math.floor((uptime % 3600) / 60);
+  const upS = Math.floor(uptime % 60);
 
   let text = `
 👋 Hello, ${pushname}
@@ -62,6 +63,8 @@ cmd({
 │ 🤖 Mode : ${config.MODE || "public"}
 │ 🔰 Prefix : ${config.PREFIX || "."}
 │ 🧠 RAM : ${usedRAM} MB / ${totalRAM} MB
+│ ⚙ CPU : ${cpuModel}
+│ 💻 Platform : ${platform}
 │ ⏳ Uptime : ${upH}h ${upM}m ${upS}s
 │ ⏰ Time : ${new Date().toLocaleTimeString()}
 │ 📅 Date : ${new Date().toISOString().split("T")[0]}
