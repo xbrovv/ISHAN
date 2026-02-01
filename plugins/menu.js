@@ -75,15 +75,15 @@ cmd({
 ╭──────────●●►
 │📖 *LIST MENU*
 │   ───────
-│ _❶_  *OWNER*
-│ _❷_  *MAIN*
+│ _❶_ 🧑‍💻 *OWNER*
+│ _❷_ 🛡️ *MAIN*
 │ _❸_ 🎞️ *MOVIE*
-│ _❹_  *DOWNLOAD*
-│ _❺_  *SEARCH*
-│ _❻_  *AI*
-│ _❼_  *GROUP*
-│ _❽_  *MATHTOOL*
-│ _❾_  *LOGO*   
+│ _❹_ 📥 *DOWNLOAD*
+│ _❺_ 🔍 *SEARCH*
+│ _❻_ ✨ *AI*
+│ _❼_ 🎭 *GROUP*
+│ _❽_ 🛠️ *MATHTOOL*
+│ _❾_ 🎨 *LOGO*   
 ╰───────────●●►
 
 ${FOOTER}
