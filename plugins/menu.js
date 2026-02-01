@@ -3,7 +3,7 @@ const os = require("os");
 const config = require("../config");
 
 const pendingMenu = {};
-const numberEmojis = ["0️⃣","❶","❷","❸","❹","❺","❻","❼","❽","❾"];
+const numberEmojis = ["0️⃣","❶","❷","❸","❹","❺","❻","❼","❽","❾","❿"];
 
 const HEADER_IMG = "https://files.catbox.moe/h1xuqv.jpg";
 
@@ -22,14 +22,15 @@ cmd({
   // CATEGORY MAP
   const commandMap = {
     OWNER: [],
-    AI: [],
-    SEARCH: [],
-    DOWNLOAD: [],
     MAIN: [],
+    DOWNLOAD: [],
+    SEARCH: [],
+    AI: [],
     CONVERT: [],
-    OTHER: [],
-    LOGO: [],
-    GROUP: []
+    MATHTOOL: [],
+    GROUP: [],
+    lOGO: [],
+    MOVIE: []
   };
 
   for (const c of commands) {
@@ -58,25 +59,35 @@ cmd({
 🧿 *WELCOME TO ISHAN-SPARK-X MD* 🧿
 
 ╭─「 STATUS DETAILS 」
-│ 👤 Owner        : Ishan        │ 🤖 Mode     : ${config.MODE || "public"}
-│ ☎ Owner No     : 94761638379   │ 🔰 Prefix   : ${config.PREFIX || "."}
-│ 🧠 RAM          : ${usedRAM}MB │ ⚙ CPU       : ${cpuModel}
-│ 💻 Platform     : ${platform}  │ ⏳ Uptime   : ${upH}h ${upM}m ${upS}s
-│ ⏰ Time         : ${new Date().toLocaleTimeString()} │ 📅 Date : ${new Date().toISOString().split("T")[0]}
-│ 📂 Categories  : ${categories.length}
-╰──────────────────
+│ 👤 Owner : Ishan
+│ ☎ Owner Number : 94761638379
+│ 🤖 Mode : ${config.MODE || "public"}
+│ 🔰 Prefix : ${config.PREFIX || "."}
+│ 🧠 RAM : ${usedRAM} MB / ${totalRAM} MB
+│ ⚙ CPU : ${cpuModel}
+│ 💻 Platform : ${platform}
+│ ⏳ Uptime : ${upH}h ${upM}m ${upS}s
+│ ⏰ Time : ${new Date().toLocaleTimeString()}
+│ 📅 Date : ${new Date().toISOString().split("T")[0]}
+│ 📂 Categories : ${categories.length}
+╰───────────────
 
 *Reply Below Number 🔢*
 
-│ ◦ *1* \`\`\`OWNER MENU\`\`\`
-│ ◦ *2* \`\`\`AI MENU\`\`\`
-│ ◦ *3* \`\`\`SEARCH MENU\`\`\`
-│ ◦ *4* \`\`\`DOWNLOAD MENU\`\`\`
-│ ◦ *5* \`\`\`MAIN MENU\`\`\`
-│ ◦ *6* \`\`\`CONVERT MENU\`\`\`
-│ ◦ *7* \`\`\`OTHER MENU\`\`\`
-│ ◦ *8* \`\`\`LOGO MENU\`\`\`
-│ ◦ *9* \`\`\`GROUP MENU\`\`\`
+╭──────────●●►
+│⛵ *LIST MENU*
+│   ───────
+│ _❶_  *OWNER*
+│ _❷_  *MAIN*
+│ _❸_  *DOWNLOAD*
+│ _❹_  *SEARCH*
+│ _❺_  *AI*
+│ _❻_  *CONVERT*
+│ _❼_  *MATHTOOL*
+│ _❽_  *GROUP*
+│ _❾_  *lOGO*
+│ _❿_  *MOVIE*   
+╰───────────●●►
 
 ${FOOTER}
 `;
