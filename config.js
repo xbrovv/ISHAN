@@ -53,7 +53,7 @@ module.exports = {
   // Alive Message Template
 // Used in alive.js plugin
 ALIVE_MSG: `
-👋 𝐇𝐈, ${pushname} 𝐈❜𝐀𝐌 𝐀𝐋𝐈𝐕𝐄 𝐍𝐎𝐖 👾
+👋 𝐇𝐈, {pushname} 𝐈❜𝐀𝐌 𝐀𝐋𝐈𝐕𝐄 𝐍𝐎𝐖 👾
 
 *╭─「  ᴅᴀᴛᴇ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ  」*
 *┃* 📅 *\`Date\`* : {DATE}
