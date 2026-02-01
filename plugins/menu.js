@@ -29,8 +29,8 @@ cmd({
     CONVERT: [],
     MATHTOOL: [],
     GROUP: [],
-    lOGO: [],
-    MOVIE: []
+    MOVIE: [],
+    lOGO: []
   };
 
   for (const c of commands) {
@@ -60,14 +60,13 @@ cmd({
 
 ╭─「 STATUS DETAILS 」
 │ 👤 Owner : Ishan
-│ ☎ Owner Number : 94761638379
-│ 🤖 Mode : ${config.MODE || "public"}
 │ 🔰 Prefix : ${config.PREFIX || "."}
-│ 🧠 RAM : ${usedRAM} MB / ${totalRAM} MB
-│ ⚙ CPU : ${cpuModel}
+│ 🤖 Mode : ${config.MODE || "public"}
 │ 💻 Platform : ${platform}
+│ ☎ Owner Number : 94761638379
+│ 🧠 RAM : ${usedRAM} MB / ${totalRAM} MB
 │ ⏳ Uptime : ${upH}h ${upM}m ${upS}s
-│ ⏰ Time : ${new Date().toLocaleTimeString()}
+│ 📊 CPU Load : ${cpuUsage}
 │ 📅 Date : ${new Date().toISOString().split("T")[0]}
 │ 📂 Categories : ${categories.length}
 ╰───────────────
@@ -85,8 +84,8 @@ cmd({
 │ _❻_  *CONVERT*
 │ _❼_  *MATHTOOL*
 │ _❽_  *GROUP*
-│ _❾_  *lOGO*
-│ _❿_  *MOVIE*   
+│ _❾_  *MOVIE*
+│ _❿_  *lOGO*   
 ╰───────────●●►
 
 ${FOOTER}
