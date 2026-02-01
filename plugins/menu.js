@@ -55,7 +55,7 @@ cmd({
   let text = `
 👋 Hello, ${pushname}
 
-🧿 *WELCOME TO ISHAN-SPARK-X MD* 🧿
+🫟 *WΞLCΩMΞ TΩ ISHAN-X MD* 🫟
 
 ╭─「 *STATUS DETAILS* 」────◆◆►
 │ 🧑‍💻 Owner : Ishan
