@@ -53,14 +53,6 @@ cmd(
 
       // Extra dynamic panel
       aliveText += `
-
- ◄◆◆━━━━━━━━━━━━━━━━━━━━━━◆◆►
-🤖 BOT DETAILS
-
-📞 Number   : ${botNumber}
-🖥️ Platform : ${platform}
-⚙️ Mode     : ${mode}
-🔧 Prefix   : ${config.PREFIX}
  ◄◆◆━━━━━━━━━━━━━━━━━━━━━━◆◆►
 `;
 
