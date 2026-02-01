@@ -29,7 +29,7 @@ cmd({
     AI: [],
     GROUP: [],
     MATHTOOL: [],
-    lOGO: []
+    LOGO: []
   };
 
   for (const c of commands) {
@@ -83,7 +83,7 @@ cmd({
 │ _❻_  *AI*
 │ _❼_  *GROUP*
 │ _❽_  *MATHTOOL*
-│ _❾_  *lOGO*   
+│ _❾_  *LOGO*   
 ╰───────────●●►
 
 ${FOOTER}
