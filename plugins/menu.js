@@ -66,7 +66,7 @@ cmd({
 │ ☎ Owner Number : 94761638379
 │ 🧠 RAM : ${usedRAM} MB / ${totalRAM} MB
 │ ⏳ Uptime : ${upH}h ${upM}m ${upS}s
-│ 📊 CPU Load : ${cpuUsage}
+│ ⏰ Time : ${new Date().toLocaleTimeString()}
 │ 📅 Date : ${new Date().toISOString().split("T")[0]}
 │ 📂 Categories : ${categories.length}
 ╰───────────────
