@@ -77,7 +77,7 @@ cmd({
 │   ───────
 │ _❶_  *OWNER*
 │ _❷_  *MAIN*
-│ _❸_  *MOVIE*
+│ _❸_  *MOVIE* [🎞️]
 │ _❹_  *DOWNLOAD*
 │ _❺_  *SEARCH*
 │ _❻_  *AI*
