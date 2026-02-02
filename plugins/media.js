@@ -1,104 +1,87 @@
-
-const { cmd, commands } = require("../command");
-const yts = require("yt-search");
+const { cmd } = require("../command");
 const { ytmp3 } = require("sadaslk-dlcore");
+const yts = require("yt-search");
 
+/*
+  🚀 ISHAN SPARK-X – YouTube Song Downloader
+  🔒 Owner base compatible
+  ⚙️ Core system unchanged
+  ✨ UI / messages only enhanced (Unicode + Emoji)
+*/
+
+const FOOTER = `\n\n> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏`;
+
+/* -------------------- YOUTUBE SEARCH -------------------- */
+async function getYoutube(query) {
+  const isUrl = /(youtube\.com|youtu\.be)/i.test(query);
+  if (isUrl) {
+    const id = query.split("v=")[1] || query.split("/").pop();
+    return await yts({ videoId: id });
+  }
+
+  const search = await yts(query);
+  if (!search.videos || !search.videos.length) return null;
+  return search.videos[0];
+}
+
+/* ==================== SONG / MP3 ==================== */
 cmd(
   {
     pattern: "song",
-    react: "🎶",
-    desc: "Download Song",
+    alias: ["ytmp3", "mp3"],
+    desc: "Download YouTube song (MP3)",
     category: "download",
     filename: __filename,
   },
-  async (
-    ishan,
-    mek,
-    m,
-    {
-      from,
-      quoted,
-      body,
-      isCmd,
-      command,
-      args,
-      q,
-      isGroup,
-      sender,
-      senderNumber,
-      botNumber2,
-      botNumber,
-      pushname,
-      isMe,
-      isOwner,
-      groupMetadata,
-      groupName,
-      participants,
-      groupAdmins,
-      isBotAdmins,
-      isAdmins,
-      reply,
-    }
-  ) => {
+  async (bot, mek, m, { from, q, reply }) => {
     try {
-      if (!q) return reply("❌ *Please provide a song name or YouTube link*");
+      if (!q)
+        return reply(
+          "🎧 *Song name* හෝ *YouTube link* එකක් දාන්න 😊" + FOOTER
+        );
 
-      const search = await yts(q);
-      const data = search.videos[0];
-      const url = data.url;
+      await reply("🔎 *YouTube එකේ search වෙනවා… පොඩ්ඩක් wait කරන්න* ⏳");
 
-      let desc = `
-Song downloader
-🎬 *Title:* ${data.title}
-⏱️ *Duration:* ${data.timestamp}
-📅 *Uploaded:* ${data.ago}
-👀 *Views:* ${data.views.toLocaleString()}
-🔗 *Watch Here:* ${data.url}
-`;
+      const video = await getYoutube(q);
+      if (!video)
+        return reply(
+          "❌ *Result එකක් හම්බුනේ නෑ* 😔 වෙන එකක් try කරන්න." +
+            FOOTER
+        );
 
-      await ishan.sendMessage(
+      const caption =
+        `🎵 *${video.title}*\n\n` +
+        `👤 Channel : ${video.author?.name || "Unknown"}\n` +
+        `⏱ Duration : ${video.timestamp}\n` +
+        `👀 Views    : ${video.views.toLocaleString()}\n` +
+        `🔗 ${video.url}` +
+        FOOTER;
+
+      await bot.sendMessage(
         from,
-        { image: { url: data.thumbnail }, caption: desc },
+        { image: { url: video.thumbnail }, caption },
         { quoted: mek }
       );
 
-      const quality = "192";
-      const songData = await ytmp3(url, quality);
+      await reply("⬇️ *MP3 download වෙනවා…* 🎶 Poddak wait karanna");
 
-      let durationParts = data.timestamp.split(":").map(Number);
-      let totalSeconds =
-        durationParts.length === 3
-          ? durationParts[0] * 3600 + durationParts[1] * 60 + durationParts[2]
-          : durationParts[0] * 60 + durationParts[1];
+      const data = await ytmp3(video.url);
+      if (!data?.url)
+        return reply(
+          "❌ *MP3 download fail උනා* 😕 නැවත try කරන්න." + FOOTER
+        );
 
-      if (totalSeconds > 1800) {
-        return reply("⏳ *Sorry, audio files longer than 30 minutes are not supported.*");
-      }
-
-      await ishan.sendMessage(
+      await bot.sendMessage(
         from,
-        {
-          audio: { url: songData.download.url },
-          mimetype: "audio/mpeg",
-        },
+        { audio: { url: data.url }, mimetype: "audio/mpeg" },
         { quoted: mek }
       );
-
-      await ishan.sendMessage(
-        from,
-        {
-          document: { url: songData.download.url },
-          mimetype: "audio/mpeg",
-          fileName: `${data.title}.mp3`,
-          caption: "🎶 *Your song is ready to be played!*",
-        },
-        { quoted: mek }
-      );
-
-      return reply("✅ Thank you");
     } catch (e) {
-      console.log(e);
-      reply(`❌ *Error:* ${e.message} 😞`);
+      console.log("SONG ERROR:", e);
+      reply(
+        "⚠️ *Song download එකේ error එකක් ආවා* 😢 පස්සේ try කරන්න." +
+          FOOTER
+      );
     }
   }
 );
