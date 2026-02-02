@@ -57,24 +57,24 @@ cmd({
 
 🫟 *WΞLCΩMΞ TΩ ISHAN-X MD* 🫟
 
-╭─「 *STATUS DETAILS* 」────◆◆►
-│ 🧑‍💻 Owner : Ishan
-│ 📌 Prefix : ${config.PREFIX || "."}
-│ 🎲 Mode : ${config.MODE || "public"}
-│ 💻 Platform : ${platform}
-│ 📞 Owner Number : 94761638379
-│ 💾 RAM : ${usedRAM} MB / ${totalRAM} MB
-│ ⏱️ Uptime : ${upH}h ${upM}m ${upS}s
-│ ⏰ Time : ${new Date().toLocaleTimeString()}
-│ 📅 Date : ${new Date().toISOString().split("T")[0]}
-│ 📂 Categories : ${categories.length}
-╰───────────────◆◆►
+*╭─「 STATUS DETAILS 」────◆◆►*
+┃➤ 🧑‍💻 Owner : Ishan
+┃➤ 📌 Prefix : ${config.PREFIX || "."}
+┃➤ 🎲 Mode : ${config.MODE || "public"}
+┃➤ 💻 Platform : ${platform}
+┃➤ 📞 Owner Number : 94761638379
+┃➤ 💾 RAM : ${usedRAM} MB / ${totalRAM} MB
+┃➤ ⏱️ Uptime : ${upH}h ${upM}m ${upS}s
+┃➤ ⏰ Time : ${new Date().toLocaleTimeString()}
+┃➤ 📅 Date : ${new Date().toISOString().split("T")[0]}
+┃➤ 📂 Categories : ${categories.length}
+*╰───────────────◆◆►*
 
 *Reply Below Number 🔢*
 
-╭──────────●●►
+*╭──────────●●►*
 ┃📖 *LIST MENU*
-┃   ───────
+┃➤   ───────
 ┃➤ _❶_ 🧑‍💻 *OWNER*
 ┃➤ _❷_ 🛡️ *MAIN*
 ┃➤ _❸_ 🎞️ *MOVIE*
@@ -84,7 +84,7 @@ cmd({
 ┃➤ _❼_ 🎭 *GROUP*
 ┃➤ _❽_ 🛠️ *MATHTOOL*
 ┃➤ _❾_ 🎨 *LOGO*   
-╰───────────●●►
+*╰───────────●●►*
 
 ${FOOTER}
 `;
