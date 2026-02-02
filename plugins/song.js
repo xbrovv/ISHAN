@@ -21,30 +21,30 @@ async function getYoutube(query) {
 /* ==================== SONG / MP3 ==================== */
 cmd({
   pattern: "song",
-  alias: ["ytmp3", "mp3"],
+  alias: ["Play", "mp3","Audio"],
   desc: "Download YouTube song (MP3)",
   category: "download",
   filename: __filename,
 }, async (bot, mek, m, { from, q, reply }) => {
   try {
-    if (!q) return reply("🎧 *Song name* හෝ *YouTube link* එකක් දාන්න 😊" + FOOTER);
+    if (!q) return reply("🎧 *song name or link send*" + FOOTER);
 
-    await reply("🔎 *YouTube එකේ search වෙනවා… පොඩ්ඩක් wait කරන්න* ⏳");
+    await reply("🔎 *𝚂𝙴𝙰𝚁𝙲𝙷𝙸𝙽𝙶  𝚈𝙾𝚄𝚁 𝚂𝙾𝙽𝙶*");
 
     const video = await getYoutube(q);
     if (!video)
-      return reply("❌ *Result එකක් හම්බුනේ නෑ* 😔 වෙන එකක් try කරන්න." + FOOTER);
+      return reply("❌ *No result Please try again*" + FOOTER);
 
     // Show video info with only "1. Audio" instruction
     const caption =
   `*┎━━━━━━━━━━━━━━━━❖*\n` +
-  `*┃➤ 🎵 Title    :* ${video.title}\n` +
-  `*┃➤ 👤 Channel  :* ${video.author?.name || "Unknown"}\n` +
+  `*┃➤ 🎧 Title    :* ${video.title}\n` +
+  `*┃➤ 💃 Channel  :* ${video.author?.name || "Unknown"}\n` +
   `*┃➤ ⏱ Duration :* ${video.timestamp}\n` +
   `*┃➤ 👀 Views    :* ${video.views.toLocaleString()}\n` +
   `*┃➤ 🔗 Link     :* ${video.url}\n` +
   `*┗━━━━━━━━━━━━━━━━❖*\n\n\n` +   // 👈 මෙතන හිස් තැන
-  `❤️‍🩹 *Reply 1 to download Audio* 🎵` +
+  `🔮 𝗥𝗘𝗣𝗟𝗬 ❶ 𝗧𝗢 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗 𝗔𝗨𝗗𝗜𝗢 🎧` +
   FOOTER;
 
     const sentMsg = await bot.sendMessage(
@@ -53,7 +53,7 @@ cmd({
       { quoted: mek }
     );
 
-    await bot.sendMessage(from, { react: { text: "🎶", key: sentMsg.key } });
+    await bot.sendMessage(from, { react: { text: "🎧", key: sentMsg.key } });
 
     const messageID = sentMsg.key.id;
 
@@ -77,9 +77,9 @@ cmd({
 
         if (userReply !== "1") return; // only process if "1" is replied
 
-        const processMsg = await bot.sendMessage(from, { text: "⏳ Processing..." }, { quoted: mek });
+        const processMsg = await bot.sendMessage(from, { text: "*𝙻𝙾𝙰𝙳𝙸𝙽𝙶...*" }, { quoted: mek });
         const data = await ytmp3(video.url);
-        if (!data?.url) return reply("❌ MP3 download fail උනා 😕 නැවත try කරන්න." + FOOTER);
+        if (!data?.url) return reply("❌ *Song download failed, please try again*" + FOOTER);
 
         // Send Audio
         await bot.sendMessage(
@@ -88,7 +88,7 @@ cmd({
           { quoted: mek }
         );
 
-        await bot.sendMessage(from, { text: "✅ Media Upload Successful ✅", edit: processMsg.key });
+        await bot.sendMessage(from, { text: "𝗖𝗢𝗠𝗣𝗟𝗘𝗧𝗘𝗗 ✅", edit: processMsg.key });
 
         // Remove listener after first valid reply
         bot.ev.off("messages.upsert", listener);
@@ -104,6 +104,6 @@ cmd({
 
   } catch (e) {
     console.log("SONG ERROR:", e);
-    reply("⚠️ *Song download එකේ error එකක් ආවා* 😢 පස්සේ try කරන්න." + FOOTER);
+    reply("⚠️ *Song download failed, please try again*" + FOOTER);
   }
 });
