@@ -1,11 +1,17 @@
-
 const { cmd } = require("../command");
 const { ytmp3 } = require("sadaslk-dlcore");
 const yts = require("yt-search");
 
+/*
+  🚀 ISHAN SPARK-X – YouTube Song Downloader
+  🔒 Owner base compatible
+  ⚙️ Core system unchanged
+  ✨ UI / messages enhanced
+*/
+
 const FOOTER = `\n\n> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏`;
 
-// YouTube search function
+/* -------------------- YOUTUBE SEARCH -------------------- */
 async function getYoutube(query) {
   const isUrl = /(youtube\.com|youtu\.be)/i.test(query);
   if (isUrl) {
@@ -18,16 +24,16 @@ async function getYoutube(query) {
   return search.videos?.[0] || null;
 }
 
-// ==================== SONG / MP3 with Button ====================
+/* ==================== SONG / MP3 ==================== */
 cmd(
   {
     pattern: "song",
     alias: ["ytmp3", "mp3", "play"],
-    desc: "Download YouTube song as MP3 (Button style)",
+    desc: "Download YouTube song as MP3",
     category: "download",
     filename: __filename,
   },
-  async (bot, mek, m, { from, q, reply, conn }) => {
+  async (bot, mek, m, { from, q, reply }) => {
     try {
       if (!q) return reply("🎧 *Song name* හෝ *YouTube link* එකක් දාන්න 😊" + FOOTER);
 
@@ -36,7 +42,7 @@ cmd(
       const video = await getYoutube(q);
       if (!video) return reply("❌ *No results found!* 😔 Try something else." + FOOTER);
 
-      const info =
+      const caption =
         `🎵 *${video.title}*\n\n` +
         `👤 Channel: ${video.author?.name || "Unknown"}\n` +
         `⏱ Duration: ${video.timestamp}\n` +
@@ -44,45 +50,26 @@ cmd(
         `🔗 ${video.url}` +
         FOOTER;
 
-      // Buttons
-      const buttons = [
-        { buttonId: `download_audio_${video.url}`, buttonText: { displayText: "Download Audio 🎵" }, type: 1 }
-      ];
+      // Send video thumbnail + info
+      await bot.sendMessage(from, { image: { url: video.thumbnail }, caption }, { quoted: mek });
 
+      // Processing message
+      await reply("⬇️ *Downloading MP3…* 🎶 Please wait");
+
+      const data = await ytmp3(video.url);
+      if (!data?.url) return reply("❌ *MP3 download failed!* 😕 Try again." + FOOTER);
+
+      // Send audio
       await bot.sendMessage(
         from,
-        { image: { url: video.thumbnail }, caption: info, buttons, headerType: 4 },
+        { audio: { url: data.url }, mimetype: "audio/mpeg" },
         { quoted: mek }
       );
+
+      await reply("✅ *MP3 Download Successful!* 🎶" + FOOTER);
     } catch (e) {
       console.error("SONG ERROR:", e);
-      reply("⚠️ *Error occurred!* 😢 Try again later." + FOOTER);
+      reply("⚠️ *An error occurred while downloading the song!* 😢 Try again later." + FOOTER);
     }
   }
 );
-
-// ==================== BUTTON CLICK HANDLER ====================
-conn.ev.on("messages.upsert", async (update) => {
-  const msg = update?.messages?.[0];
-  if (!msg?.message?.buttonsResponseMessage) return;
-
-  const { selectedButtonId } = msg.message.buttonsResponseMessage;
-  if (!selectedButtonId.startsWith("download_audio_")) return;
-
-  const videoUrl = selectedButtonId.replace("download_audio_", "");
-  const from = msg.key.remoteJid;
-  const quoted = msg;
-
-  try {
-    const processingMsg = await conn.sendMessage(from, { text: "⏳ Processing download…" }, { quoted });
-
-    const data = await ytmp3(videoUrl);
-    if (!data?.url) return conn.sendMessage(from, { text: "❌ *MP3 download failed!* 😕 Try again." }, { quoted });
-
-    await conn.sendMessage(from, { audio: { url: data.url }, mimetype: "audio/mpeg" }, { quoted });
-    await conn.sendMessage(from, { text: "✅ *MP3 Download Successful!* 🎶", edit: processingMsg.key });
-  } catch (err) {
-    console.error(err);
-    await conn.sendMessage(from, { text: "⚠️ *Error occurred while downloading song!* 😢" }, { quoted });
-  }
-});
