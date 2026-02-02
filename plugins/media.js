@@ -2,13 +2,6 @@ const { cmd } = require("../command");
 const { ytmp3 } = require("sadaslk-dlcore");
 const yts = require("yt-search");
 
-/*
-  🚀 ISHAN SPARK-X – YouTube Song Downloader
-  🔒 Owner base compatible
-  ⚙️ Core system unchanged
-  ✨ UI / messages only enhanced (Unicode + Emoji)
-*/
-
 const FOOTER = `\n\n> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏`;
 
 /* -------------------- YOUTUBE SEARCH -------------------- */
@@ -57,6 +50,7 @@ cmd(
         `🔗 ${video.url}` +
         FOOTER;
 
+      // Send video thumbnail with info
       await bot.sendMessage(
         from,
         { image: { url: video.thumbnail }, caption },
@@ -71,11 +65,34 @@ cmd(
           "❌ *MP3 download fail උනා* 😕 නැවත try කරන්න." + FOOTER
         );
 
+      // Send audio **with direct download button**
       await bot.sendMessage(
         from,
-        { audio: { url: data.url }, mimetype: "audio/mpeg" },
+        {
+          text: FOOTER,
+          footer: "🎵 Audio File",
+          buttons: [
+            {
+              buttonId: "download_audio",
+              buttonText: { displayText: "🎧 Download Now" },
+              type: 1,
+            },
+          ],
+          headerType: 1,
+        },
         { quoted: mek }
       );
+
+      // Listen for button click and send audio immediately
+      bot.on("callback_query", async (button) => {
+        if (button.data === "download_audio" && button.from === from) {
+          await bot.sendMessage(
+            from,
+            { audio: { url: data.url }, mimetype: "audio/mpeg" },
+            { quoted: mek }
+          );
+        }
+      });
     } catch (e) {
       console.log("SONG ERROR:", e);
       reply(
