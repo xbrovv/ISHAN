@@ -1,122 +1,104 @@
-const { cmd } = require("../command");
+
+const { cmd, commands } = require("../command");
 const yts = require("yt-search");
 const { ytmp3 } = require("sadaslk-dlcore");
-
-const pendingSong = {};
 
 cmd(
   {
     pattern: "song",
-    react: "🎵",
-    desc: "Download Song (Reply System)",
+    react: "🎶",
+    desc: "Download Song",
     category: "download",
     filename: __filename,
   },
-  async (conn, mek, m, { from, q, reply }) => {
+  async (
+    ishan,
+    mek,
+    m,
+    {
+      from,
+      quoted,
+      body,
+      isCmd,
+      command,
+      args,
+      q,
+      isGroup,
+      sender,
+      senderNumber,
+      botNumber2,
+      botNumber,
+      pushname,
+      isMe,
+      isOwner,
+      groupMetadata,
+      groupName,
+      participants,
+      groupAdmins,
+      isBotAdmins,
+      isAdmins,
+      reply,
+    }
+  ) => {
     try {
-      if (!q) return reply("❌ *Please provide a song name or YouTube link!*");
+      if (!q) return reply("❌ *Please provide a song name or YouTube link*");
 
       const search = await yts(q);
-      if (!search.videos.length) return reply("❌ *No results found!*");
-
       const data = search.videos[0];
+      const url = data.url;
 
-      let info = `🍄 *SONG DOWNLOADER* 🍄
-
-🎵 *Title:* ${data.title}
-⏳ *Duration:* ${data.timestamp}
-👀 *Views:* ${data.views.toLocaleString()}
+      let desc = `
+Song downloader
+🎬 *Title:* ${data.title}
+⏱️ *Duration:* ${data.timestamp}
 📅 *Uploaded:* ${data.ago}
-👤 *Author:* ${data.author.name}
-
-🔽 *Reply with your choice*
-> 1️⃣  *Audio (MP3)* 🎧
+👀 *Views:* ${data.views.toLocaleString()}
+🔗 *Watch Here:* ${data.url}
 `;
 
-      const sent = await conn.sendMessage(
+      await ishan.sendMessage(
         from,
-        { image: { url: data.thumbnail }, caption: info },
+        { image: { url: data.thumbnail }, caption: desc },
         { quoted: mek }
       );
 
-      pendingSong[from] = {
-        url: data.url,
-        msgId: sent.key.id,
-        timestamp: data.timestamp,
-        title: data.title,
-      };
+      const quality = "192";
+      const songData = await ytmp3(url, quality);
 
-      await conn.sendMessage(from, {
-        react: { text: "🎶", key: sent.key },
-      });
+      let durationParts = data.timestamp.split(":").map(Number);
+      let totalSeconds =
+        durationParts.length === 3
+          ? durationParts[0] * 3600 + durationParts[1] * 60 + durationParts[2]
+          : durationParts[0] * 60 + durationParts[1];
 
-      // 🔥 LISTENER (ONE TIME)
-      conn.ev.on("messages.upsert", async (chatUpdate) => {
-        try {
-          const msg = chatUpdate.messages[0];
-          if (!msg?.message) return;
+      if (totalSeconds > 1800) {
+        return reply("⏳ *Sorry, audio files longer than 30 minutes are not supported.*");
+      }
 
-          const text =
-            msg.message.conversation ||
-            msg.message.extendedTextMessage?.text;
+      await ishan.sendMessage(
+        from,
+        {
+          audio: { url: songData.download.url },
+          mimetype: "audio/mpeg",
+        },
+        { quoted: mek }
+      );
 
-          const isReply =
-            msg.message.extendedTextMessage?.contextInfo?.stanzaId ===
-            pendingSong[from]?.msgId;
+      await ishan.sendMessage(
+        from,
+        {
+          document: { url: songData.download.url },
+          mimetype: "audio/mpeg",
+          fileName: `${data.title}.mp3`,
+          caption: "🎶 *Your song is ready to be played!*",
+        },
+        { quoted: mek }
+      );
 
-          if (!isReply) return;
-
-          if (text.trim() !== "1") {
-            return reply("❌ *Invalid choice!* Reply with **1** 🎧");
-          }
-
-          // ✅ react to user's reply
-          await conn.sendMessage(from, {
-            react: { text: "✔️", key: msg.key },
-          });
-
-          // duration limit
-          let parts = pendingSong[from].timestamp.split(":").map(Number);
-          let seconds =
-            parts.length === 3
-              ? parts[0] * 3600 + parts[1] * 60 + parts[2]
-              : parts[0] * 60 + parts[1];
-
-          if (seconds > 1800) {
-            delete pendingSong[from];
-            return reply("⛔ *Audio longer than 30 minutes not supported!*");
-          }
-
-          const wait = await reply("⏳ *Downloading audio...*");
-
-          const song = await ytmp3(pendingSong[from].url, "192");
-          if (!song?.download?.url) {
-            delete pendingSong[from];
-            return reply("❌ *Download failed!*");
-          }
-
-          await conn.sendMessage(
-            from,
-            {
-              audio: { url: song.download.url },
-              mimetype: "audio/mpeg",
-            },
-            { quoted: msg }
-          );
-
-          await conn.sendMessage(from, {
-            text: "✅ *Audio Download Successful!* 🎶",
-            edit: wait.key,
-          });
-
-          delete pendingSong[from];
-        } catch (e) {
-          console.log(e);
-        }
-      });
+      return reply("✅ Thank you");
     } catch (e) {
-      console.error(e);
-      reply(`❌ *Error:* ${e.message}`);
+      console.log(e);
+      reply(`❌ *Error:* ${e.message} 😞`);
     }
   }
 );
