@@ -44,7 +44,7 @@ cmd({
   `*┃➤ 👀 Views    :* ${video.views.toLocaleString()}\n` +
   `*┃➤ 🔗 Link     :* ${video.url}\n` +
   `*┗━━━━━━━━━━━━━━━━❖*\n\n\n` +   // 👈 මෙතන හිස් තැන
-  `🔽 *Reply 1 to download Audio* 🎵` +
+  `❤️‍🩹 *Reply 1 to download Audio* 🎵` +
   FOOTER;
 
     const sentMsg = await bot.sendMessage(
