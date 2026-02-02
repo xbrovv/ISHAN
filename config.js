@@ -61,17 +61,18 @@ ALIVE_MSG: `
 *╰─────────────●●►*
 
 *╭─「  ꜱᴛᴀᴛᴜꜱ ᴅᴇᴛᴀɪʟꜱ  」*
-*┃* 👩‍💼 *\`User\`* : *USER*
+*┃* 👩‍💼 *\`User\`* : *${m.pushName || "User"}*
 *┃* ✒️ *\`Prefix\`* : *(.)*
 *┃* 🧬 *\`Version\`* : *ᴠ3.0 ᴜʟᴛʀᴀ*
 *┃* 🖥️ *\`Platform\`* : *ʟɪɴᴜx*
 *┃* 📡 *\`Host\`* : *ɪꜱʜᴀɴ-x ᴠᴘꜱ*
-*┃* 📟 *\`Uptime\`* : {UPTIME}
-*┃* 📂 *\`Memory\`* : {RAM}
+*┃* 📟 *\`Uptime\`* : *{UPTIME}*
+*┃* 📂 *\`Memory\`* : *{RAM}*
 *╰─────────────●●►*
 
 *╭─「 ɪꜱʜᴀɴ-x ᴍᴅ ᴜᴘᴅᴀᴛᴇ & ᴅᴇᴘʟᴏʏ 」*
- │  ᴊᴏɴɪɴ ɴᴇᴡ ÷ https://whatsapp.com/channel/0029Vb7eEOGLY6dBNzl2IH0O
+ │  *ᴊᴏɴɪɴ ɴᴇᴡ ÷* https://whatsapp.com/channel/0029Vb7eEOGLY6dBNzl2IH0O
+ │
 *╰──────────●●►*
 
 > ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏
