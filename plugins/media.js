@@ -37,13 +37,15 @@ cmd({
 
     // Show video info with only "1. Audio" instruction
     const caption =
-      `🎵 *${video.title}*\n\n` +
-      `👤 Channel : ${video.author?.name || "Unknown"}\n` +
-      `⏱ Duration : ${video.timestamp}\n` +
-      `👀 Views    : ${video.views.toLocaleString()}\n` +
-      `🔗 ${video.url}\n\n` +
-      `🔽 *Reply with 1 to download Audio* 🎵` +
-      FOOTER;
+  `*┎━━━━━━━━━━━━━━━━❖*\n` +
+  `*┃➤ 🎵 Title    :* ${video.title}\n` +
+  `*┃➤ 👤 Channel  :* ${video.author?.name || "Unknown"}\n` +
+  `*┃➤ ⏱ Duration :* ${video.timestamp}\n` +
+  `*┃➤ 👀 Views    :* ${video.views.toLocaleString()}\n` +
+  `*┃➤ 🔗 Link     :* ${video.url}\n` +
+  `*┃➤ 🔽 Reply 1 to download Audio*\n` +
+  `*┗━━━━━━━━━━━━━━━━❖*` +
+  FOOTER;
 
     const sentMsg = await bot.sendMessage(
       from,
