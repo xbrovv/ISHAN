@@ -73,17 +73,17 @@ cmd({
 *Reply Below Number 🔢*
 
 ╭──────────●●►
-│📖 *LIST MENU*
-│   ───────
-│ _❶_ 🧑‍💻 *OWNER*
-│ _❷_ 🛡️ *MAIN*
-│ _❸_ 🎞️ *MOVIE*
-│ _❹_ 📥 *DOWNLOAD*
-│ _❺_ 🔍 *SEARCH*
-│ _❻_ ✨ *AI*
-│ _❼_ 🎭 *GROUP*
-│ _❽_ 🛠️ *MATHTOOL*
-│ _❾_ 🎨 *LOGO*   
+┃📖 *LIST MENU*
+┃   ───────
+┃➤ _❶_ 🧑‍💻 *OWNER*
+┃➤ _❷_ 🛡️ *MAIN*
+┃➤ _❸_ 🎞️ *MOVIE*
+┃➤ _❹_ 📥 *DOWNLOAD*
+┃➤ _❺_ 🔍 *SEARCH*
+┃➤ _❻_ ✨ *AI*
+┃➤ _❼_ 🎭 *GROUP*
+┃➤ _❽_ 🛠️ *MATHTOOL*
+┃➤ _❾_ 🎨 *LOGO*   
 ╰───────────●●►
 
 ${FOOTER}
