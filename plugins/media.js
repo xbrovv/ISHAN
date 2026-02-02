@@ -43,7 +43,7 @@ cmd({
   `*┃➤ ⏱ Duration :* ${video.timestamp}\n` +
   `*┃➤ 👀 Views    :* ${video.views.toLocaleString()}\n` +
   `*┃➤ 🔗 Link     :* ${video.url}\n` +
-  `*┗━━━━━━━━━━━━━━━━❖*\n\n` +
+  `*┗━━━━━━━━━━━━━━━━❖*\n\n\n` +   // 👈 මෙතන හිස් තැන
   `🔽 *Reply 1 to download Audio* 🎵` +
   FOOTER;
 
