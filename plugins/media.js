@@ -43,8 +43,8 @@ cmd({
   `*┃➤ ⏱ Duration :* ${video.timestamp}\n` +
   `*┃➤ 👀 Views    :* ${video.views.toLocaleString()}\n` +
   `*┃➤ 🔗 Link     :* ${video.url}\n` +
-  `*┃➤ 🔽 Reply 1 to download Audio*\n` +
-  `*┗━━━━━━━━━━━━━━━━❖*` +
+  `*┗━━━━━━━━━━━━━━━━❖*\n\n` +
+  `🔽 *Reply 1 to download Audio* 🎵` +
   FOOTER;
 
     const sentMsg = await bot.sendMessage(
