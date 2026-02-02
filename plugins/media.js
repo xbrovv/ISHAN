@@ -22,7 +22,7 @@ async function getYoutube(query) {
 cmd({
   pattern: "song",
   alias: ["ytmp3", "mp3"],
-  desc: "Download YouTube song (MP3 or Document)",
+  desc: "Download YouTube song (MP3)",
   category: "download",
   filename: __filename,
 }, async (bot, mek, m, { from, q, reply }) => {
@@ -35,16 +35,14 @@ cmd({
     if (!video)
       return reply("❌ *Result එකක් හම්බුනේ නෑ* 😔 වෙන එකක් try කරන්න." + FOOTER);
 
-    // Show video info with options
+    // Show video info with only "1. Audio" instruction
     const caption =
       `🎵 *${video.title}*\n\n` +
       `👤 Channel : ${video.author?.name || "Unknown"}\n` +
       `⏱ Duration : ${video.timestamp}\n` +
       `👀 Views    : ${video.views.toLocaleString()}\n` +
       `🔗 ${video.url}\n\n` +
-      `🔽 *Reply with your choice:*\n` +
-      `> 1 *Audio Type* 🎵\n` +
-      `> 2 *Document Type* 📁` +
+      `🔽 *Reply with 1 to download Audio* 🎵` +
       FOOTER;
 
     const sentMsg = await bot.sendMessage(
@@ -53,11 +51,11 @@ cmd({
       { quoted: mek }
     );
 
-    const messageID = sentMsg.key.id;
-
     await bot.sendMessage(from, { react: { text: "🎶", key: sentMsg.key } });
 
-    // Listen for user reply once
+    const messageID = sentMsg.key.id;
+
+    // Listen for reply
     const listener = async (update) => {
       try {
         const mekInfo = update?.messages[0];
@@ -74,29 +72,25 @@ cmd({
         if (!isReplyToSentMsg) return;
 
         const userReply = messageType.trim();
-        let type;
-        let processMsg = await bot.sendMessage(from, { text: "⏳ Processing..." }, { quoted: mek });
 
+        if (userReply !== "1") return; // only process if "1" is replied
+
+        const processMsg = await bot.sendMessage(from, { text: "⏳ Processing..." }, { quoted: mek });
         const data = await ytmp3(video.url);
-        if (!data?.url) return reply("❌ Download link not found!" + FOOTER);
+        if (!data?.url) return reply("❌ MP3 download fail උනා 😕 නැවත try කරන්න." + FOOTER);
 
-        if (userReply === "1") {
-          // Audio
-          type = { audio: { url: data.url }, mimetype: "audio/mpeg" };
-        } else if (userReply === "2") {
-          // Document
-          type = {
-            document: { url: data.url, fileName: `${video.title}.mp3`, mimetype: "audio/mpeg", caption: video.title },
-          };
-        } else {
-          return reply("❌ Invalid choice! Reply with 1 or 2.");
-        }
+        // Send Audio
+        await bot.sendMessage(
+          from,
+          { audio: { url: data.url }, mimetype: "audio/mpeg" },
+          { quoted: mek }
+        );
 
-        await bot.sendMessage(from, type, { quoted: mek });
         await bot.sendMessage(from, { text: "✅ Media Upload Successful ✅", edit: processMsg.key });
 
-        // Remove listener after first reply
+        // Remove listener after first valid reply
         bot.ev.off("messages.upsert", listener);
+
       } catch (err) {
         console.error(err);
         reply(`❌ *An error occurred while processing:* ${err.message || "Error!"}`);
