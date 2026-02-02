@@ -53,6 +53,27 @@ module.exports = {
   // Alive Message Template
 // Used in alive.js plugin
 ALIVE_MSG: `
+👋 𝐇𝐈, *WΞLCΩMΞ TΩ USΞR* 𝐈❜𝐀𝐌 𝐀𝐋𝐈𝐕𝐄 𝐍𝐎𝐖 👾
 
+*╭─「  ᴅᴀᴛᴇ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ  」*
+*┃* 📅 *\`Date\`* : {DATE}
+*┃* ⏰ *\`Time\`* : {TIME}
+*╰─────────────●●►*
+
+*╭─「  ꜱᴛᴀᴛᴜꜱ ᴅᴇᴛᴀɪʟꜱ  」*
+*┃* 👤 *\`User\`* : {USER}
+*┃* ✒️ *\`Prefix\`* : {PREFIX}
+*┃* 🧬 *\`Version\`* : {VERSION}
+*┃* 🎈 *\`Platform\`* : Linux
+*┃* 📡 *\`Host\`* : {HOST}
+*┃* 📟 *\`Uptime\`* : {UPTIME}
+*┃* 📂 *\`Memory\`* : {RAM}
+*╰─────────────●●►*
+
+*╭─「 ᴅᴇᴘʟᴏʏ ᴠɪᴅᴇᴏꜱ & ᴏᴛʜᴇʀ ɪɴꜰᴏ 」*
+{EXTRA}
+*╰──────────●●►*
+
+> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏
 `
 };
