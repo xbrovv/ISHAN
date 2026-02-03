@@ -14,7 +14,7 @@ cmd({
 }, async (bot, mek, m, { from, q, reply }) => {
   try {
     if (!q) return reply(
-      "📘 *Facebook video download කිරීමට valid link එකක් දාන්න!*\n" +
+      "🎬 *Your Facebook video download valid link*\n" +
       "✨ *Example:* `fb https://www.facebook.com/...`" +
       FOOTER
     );
@@ -22,7 +22,7 @@ cmd({
     const fbRegex = /(https?:\/\/)?(www\.)?(facebook|fb)\.com\/.+/;
     if (!fbRegex.test(q)) return reply(
       "❌ *Invalid Facebook URL!*\n" +
-      "👉 *කරුණාකර හරි link එකක් check කරලා නැවත try කරන්න*" +
+      "👉 *check Your link Please try again*" +
       FOOTER
     );
 
@@ -30,8 +30,8 @@ cmd({
 
     const result = await getFbVideoInfo(q);
     if (!result || (!result.sd && !result.hd)) return reply(
-      "❌ *Video download කරන්න බැරි වුණා!*\n" +
-      "🔁 *කරුණාකර ටික වෙලාවකට පස්සේ නැවත try කරන්න*" +
+      "❌ *Video download failed *\n" +
+      "🔁 *Please try again*" +
       FOOTER
     );
 
@@ -42,11 +42,11 @@ cmd({
     const caption =
 `*┎━━━━━━━━━━━━━━━━❖●►*
 *┃➤ 🎬 Title   :* ${title || "Unknown"}
-*┃➤ 🎥 Quality :* ${qualityText}
+*┃➤ 💎 Quality :* ${qualityText}
 *┃➤ 🔗 Source  :* Facebook
 *┗━━━━━━━━━━━━━━━━❖●►*\n\n\n
 ╭━━━━━━━❖◆►
-┃➤ 🔮 𝗥𝗘𝗣𝗟𝗬 ❶ 𝗧𝗢 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗 💻
+┃➤ 🔮 𝗥𝗘𝗣𝗟𝗬 1️⃣ 𝗧𝗢 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗 💃
 ╰━━━━━━━❖◆►` +
 FOOTER;
 
@@ -56,7 +56,7 @@ FOOTER;
       { quoted: mek }
     );
 
-    await bot.sendMessage(from, { react: { text: "📘", key: sentMsg.key } });
+    await bot.sendMessage(from, { react: { text: "🎬", key: sentMsg.key } });
 
     const messageID = sentMsg.key.id;
 
@@ -79,7 +79,7 @@ FOOTER;
         const userReply = messageType.trim();
         if (userReply !== "1") return; // only proceed if user replies "1"
 
-        const processMsg = await bot.sendMessage(from, { text: "*⏳ LOADING...*" }, { quoted: mek });
+        const processMsg = await bot.sendMessage(from, { text: "*LOADING...*" }, { quoted: mek });
 
         await bot.sendMessage(
           from,
