@@ -1,32 +1,40 @@
 const { cmd } = require("../command");
 const axios = require("axios");
-const fetch = require("node-fetch");
-const {
-  generateWAMessageContent,
-  generateWAMessageFromContent
-} = require("@whiskeysockets/baileys");
 
 cmd(
   {
     pattern: "image",
-    alias: ["wallpaper"],
+    alias: ["wallpapers"],
     react: "🖼️",
     desc: "Download HD Wallpapers",
     category: "download",
     filename: __filename,
   },
-  async (conn, mek, m, { from, q, reply }) => {
+  async (
+    conn,
+    mek,
+    m,
+    {
+      from,
+      q,
+      reply,
+    }
+  ) => {
     try {
       if (!q) {
         return reply(
           "🖼️ *HD Wallpaper Downloader*\n\n" +
-          "Wallpaper search keyword එකක් type කරන්න.\n\n" +
+          "*type wallpaper search keyword*\n\n" +
           "_Example:_ `.wall anime`\n\n" +
           "> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏"
         );
       }
 
-      await reply("🔍 *Searching HD Wallpapers...* ⏳");
+      await reply(
+        "🔍 *Searching HD Wallpapers...*\n" +
+        "Please wait a moment ⏳\n\n" +
+        "> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏"
+      );
 
       const res = await axios.get(
         `https://wallhaven.cc/api/v1/search?q=${encodeURIComponent(
@@ -35,100 +43,55 @@ cmd(
       );
 
       const wallpapers = res.data.data;
+
       if (!wallpapers || wallpapers.length === 0) {
-        return reply("❌ *No wallpapers found!*");
+        return reply(
+          "❌ *No HD wallpapers found!*\n\n" +
+          "Try a different keyword.\n\n" +
+          "> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏"
+        );
       }
 
-      const selected = wallpapers.slice(0, 6);
-      const cards = [];
+      const selected = wallpapers.slice(0, 5);
 
-      for (const [i, wall] of selected.entries()) {
-        try {
-          const imgRes = await fetch(wall.path);
-          const buffer = Buffer.from(await imgRes.arrayBuffer());
-
-          const media = await generateWAMessageContent(
-            { image: buffer },
-            { upload: conn.waUploadToServer }
-          );
-
-          if (!media.imageMessage) continue;
-
-          cards.push({
-            header: {
-              title: `Wallpaper ${i + 1}`,
-              hasMediaAttachment: true,
-              imageMessage: media.imageMessage
-            },
-            body: {
-              text: `📐 ${wall.resolution}`
-            },
-            nativeFlowMessage: {
-              buttons: [
-                {
-                  name: "cta_url",
-                  buttonParamsJson: JSON.stringify({
-                    display_text: "Open Wallpaper",
-                    url: wall.url
-                  })
-                },
-                {
-                  name: "cta_copy",
-                  buttonParamsJson: JSON.stringify({
-                    display_text: "Copy Image URL",
-                    copy_code: wall.path
-                  })
-                }
-              ]
-            }
-          });
-
-          await new Promise(r => setTimeout(r, 700));
-        } catch (e) {
-          console.log("Wallpaper skip:", e.message);
-        }
-      }
-
-      if (cards.length === 0) {
-        return reply("❌ *Failed to load wallpapers!*");
-      }
-
-      const msg = generateWAMessageFromContent(
+      await conn.sendMessage(
         from,
         {
-          viewOnceMessage: {
-            message: {
-              messageContextInfo: {
-                deviceListMetadata: {},
-                deviceListMetadataVersion: 2
-              },
-              interactiveMessage: {
-                header: {
-                  title: `🖼️ HD Wallpapers for "${q}"`
-                },
-                body: {
-                  text: ""
-                },
-                footer: {
-                  text: "©🄿🄾🅆🄴🅁🄴🄳 🄱🅈 🄸🅂🄷🄰🄽-🅇"
-                },
-                carouselMessage: {
-                  cards
-                }
-              }
-            }
-          }
+          image: {
+            url: "https://files.catbox.moe/h1xuqv.jpg",
+          },
+          caption:
+            "🖼️ *ISHAN SPARK-X – WALLPAPER DOWNLOADER*\n\n" +
+            `🔎 Keyword: *${q}*\n` +
+            `📂 Results: *${selected.length} HD Wallpapers*\n\n` +
+            "> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏",
         },
         { quoted: mek }
       );
 
-      await conn.relayMessage(from, msg.message, {
-        messageId: msg.key.id
-      });
+      for (const wallpaper of selected) {
+        const caption =
+          "🖼️ *HD Wallpaper*\n\n" +
+          `📐 Resolution: *${wallpaper.resolution}*\n` +
+          `🔗 Source: ${wallpaper.url}\n\n` +
+          "> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏";
 
+        await conn.sendMessage(
+          from,
+          {
+            image: { url: wallpaper.path },
+            caption,
+          },
+          { quoted: mek }
+        );
+      }
     } catch (e) {
       console.error(e);
-      reply("❌ *Wallpaper search failed!*");
+      reply(
+        "❌ *Wallpaper download failed!*\n\n" +
+        "Please try again later.\n\n" +
+        "> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏"
+      );
     }
   }
 );
