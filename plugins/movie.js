@@ -111,13 +111,13 @@ async function getPixeldrainLinks(movieUrl) {
 cmd({
   pattern: "movie",
   alias: ["sinhalasub","films","mv"],
-  react: "🎥",
+  react: "🎞️",
   desc: "Search and Download movies from Sinhalasub.lk",
   category: "MOVIE",
   filename: __filename
 }, async (ishan, mek, m, { from, q, sender, reply }) => {
   if (!q) return reply(`*🎥 Movie Search Plugin*\nUsage: movie_name\nExample: movie avengers`);
-  reply("🎥 *Movies හොයමින් තියෙනවා…* ⏳ කරුණාකර ටිකක් ඉවසන්න 😊");
+  reply("🔍 *𝚂𝙴𝙰𝚁𝙲𝙷𝙸𝙽𝙶  𝚈𝙾𝚄𝚁 𝙼𝙾𝚅𝙸𝙴*");
   const searchResults = await searchMovies(q);
   if (!searchResults.length) return reply("*❌ No movies found!*");
   pendingSearch[sender] = { results: searchResults, timestamp: Date.now() };
@@ -137,7 +137,7 @@ cmd({
   const selected = pendingSearch[sender].results[index];
   delete pendingSearch[sender];
   const metadata = await getMovieMetadata(selected.movieUrl);
-  let msg = `*🎬 ${metadata.title}*\n`;
+  let msg = `*🎞️ ${metadata.title}*\n`;
   msg += `*📝 Language:* ${metadata.language}\n*⏱️ Duration:* ${metadata.duration}\n*⭐ IMDb:* ${metadata.imdb}\n`;
   msg += `*🎭 Genres:* ${metadata.genres.join(", ")}\n*🎥 Directors:* ${metadata.directors.join(", ")}\n*🌟 Stars:* ${metadata.stars.slice(0,5).join(", ")}${metadata.stars.length>5?"...":""}\n\n`;
   msg += "*🔗 Fetching download links, please wait...*";
@@ -173,10 +173,10 @@ cmd({
       document: { url: directUrl },
       mimetype: "video/mp4",
       fileName: `${movie.metadata.title.substring(0,50)} - ${selectedLink.quality}.mp4`.replace(/[^\w\s.-]/gi,''),
-      caption: `🎬 *${movie.metadata.title}*\n\n` +
+      caption: `🎞️ *${movie.metadata.title}*\n\n` +
   `📊 *Quality* : ${selectedLink.quality}\n` +
   `💾 *Size*    : ${selectedLink.size}\n\n` +
-  `🍿 Movie එක enjoy කරන්න! Happy watching 😄\n\n` +
+  `🍿 enjoy your Movies\n\n` +
   `> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏`
     }, { quoted: mek });
   } catch (error) {
