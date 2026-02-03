@@ -175,7 +175,7 @@ for (const [effectName, effectInfo] of Object.entries(effects)) {
             }
             
             const text = args.join(" ");
-            await reply(`⏳ Creating ${effectName} logo...`);
+            await reply(`✨ Creating ${effectName} logo...`);
             
             const result = await createLogo(effectInfo.url, text);
             
