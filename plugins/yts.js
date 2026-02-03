@@ -27,7 +27,7 @@ cmd(
       // ❌ No search query
       if (!q) {
         return reply(
-          "🔎 *YouTube සෙවීමට keyword එකක් දාන්න!*\n" +
+          "🔎 *YouTube Search keyword Send*\n" +
           "✨ *Example:* `yts Alan Walker`" +
           FOOTER
         );
@@ -35,8 +35,8 @@ cmd(
 
       // ⌛ Searching message
       await reply(
-        "🔍 *YouTube එකේ හොයමින්…*\n" +
-        "⏳ *ඔයාට හොඳම results ටික අරගෙන එනවා*" +
+        "🔍 *𝚂𝙴𝙰𝚁𝙲𝙷𝙸𝙽𝙶 𝙾𝙽 𝚈𝙾𝚄𝚃𝚄𝙱𝙴*\n" +
+        "⏳ *𝙻𝙾𝙰𝙳𝙸𝙽𝙶...*" +
         FOOTER
       );
 
@@ -45,8 +45,8 @@ cmd(
       // ❌ No results
       if (!search || !search.all || search.all.length === 0) {
         return reply(
-          "😕 *YouTube එකේ results හමු වුණේ නැහැ!*\n" +
-          "👉 *වෙන keyword එකක් try කරලා බලන්න*" +
+          "😕 * No YouTube results *\n" +
+          "👉 *Please try again*" +
           FOOTER
         );
       }
@@ -85,8 +85,8 @@ ${FOOTER}
     } catch (err) {
       console.error(err);
       reply(
-        "❌ *YouTube search එකේ දෝෂයක් ඇතිවුණා!*\n" +
-        "🔁 *කරුණාකර ටික වෙලාවකට පස්සේ නැවත try කරන්න*" +
+        "❌ *YouTube search failed*\n" +
+        "🔁 *Please try again*" +
         FOOTER
       );
     }
