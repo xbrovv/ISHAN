@@ -52,7 +52,7 @@ cmd(
         );
       }
 
-      const selected = wallpapers.slice(0, 5);
+      const selected = wallpapers.slice(0, 10);
 
       await conn.sendMessage(
         from,
