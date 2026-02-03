@@ -134,10 +134,10 @@ cmd({
   } else {
     cmds.forEach(c => {
       text += `
-*╭──────────❖●►*
+*╭──────────●●►*
 ┃ *ヤ Command* : ${c.pattern}
 ┃ *ヤ Use* : ${config.PREFIX || "."}${c.pattern} ${c.use || ""}
-*╰──────────❖●►*
+*╰──────────●●►*
 `;
     });
   }
