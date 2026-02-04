@@ -1,49 +1,127 @@
+const { cmd } = require("../command");
+import axios from "axios";
+import crypto from "crypto";
 
-// Ig dl
+const FOOTER = `\n\n> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏`;
 
-import axios from 'axios';
-import crypto from 'crypto';
-
+/* -------------------- IG DOWNLOADER -------------------- */
 async function igdl(url) {
-    try {
-        const encUrl = (text) => {
-            try {
-                const key = Buffer.from('qwertyuioplkjhgf', 'utf-8');
-                const cipher = crypto.createCipheriv('aes-128-ecb', key, null);
-                cipher.setAutoPadding(true);
-                let encrypted = cipher.update(text, 'utf-8', 'hex');
-                encrypted += cipher.final('hex');
-                return encrypted;
-            } catch (err) {
-                throw new Error("Encrypt failed: " + err.message);
-            }
-        };
+  const key = Buffer.from("qwertyuioplkjhgf", "utf-8");
 
-        const encLink = encUrl(url);
-        const config = {
-            method: 'get',
-            url: 'https://api.videodropper.app/allinone',
-            headers: {
-                'accept': '*/*',
-                'accept-language': 'en-US,en;q=0.9',
-                'origin': 'https://fastvideosave.net',
-                'referer': 'https://fastvideosave.net/',
-                'sec-fetch-dest': 'empty',
-                'sec-fetch-mode': 'cors',
-                'sec-fetch-site': 'cross-site',
-                'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-                'url': encLink
-            }
-        };
-        const response = await axios(config);
-        return response.data;
-    } catch (error) {
-        if (error.response) {
-            return { status: false, code: error.response.status, msg: error.response.data };
-        }
-        return { status: false, msg: error.message };
-    }
+  const cipher = crypto.createCipheriv("aes-128-ecb", key, null);
+  cipher.setAutoPadding(true);
+  let encrypted = cipher.update(url, "utf8", "hex");
+  encrypted += cipher.final("hex");
+
+  const res = await axios.get("https://api.videodropper.app/allinone", {
+    headers: {
+      "user-agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120",
+      url: encrypted,
+    },
+  });
+
+  return res.data;
 }
 
-// useage
-igdl("https://www.instagram.com/reel/DTxDKrSE9vN/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==").then(res => console.log(JSON.stringify(res, null, 2)));
+/* ==================== INSTAGRAM ==================== */
+cmd(
+  {
+    pattern: "instagram",
+    alias: ["ig", "insta"],
+    desc: "Download Instagram video / reel",
+    category: "download",
+    filename: __filename,
+  },
+  async (bot, mek, m, { from, q, reply }) => {
+    try {
+      if (!q)
+        return reply("📸 *Instagram link send*" + FOOTER);
+
+      const infoMsg = await reply(
+        "🔎 *𝙵𝙴𝚃𝙲𝙷𝙸𝙽𝙶  𝙸𝙽𝚂𝚃𝙰𝙶𝚁𝙰𝙼  𝙿𝙾𝚂𝚃*"
+      );
+
+      const data = await igdl(q);
+      if (!data?.status || !data?.data?.length)
+        return reply("❌ *No media found, try again*" + FOOTER);
+
+      const media = data.data[0];
+
+      const caption =
+        `*┎━━━━━━━━━━━━━━━━❖●►*\n` +
+        `*┃➤ 📸 Platform :* Instagram\n` +
+        `*┃➤ 🎞 Type     :* ${media.type || "Video"}\n` +
+        `*┃➤ 🔗 Link     :* ${q}\n` +
+        `*┗━━━━━━━━━━━━━━━━❖●►*\n\n\n` +
+        `╭━━━━━━━❖✦►\n` +
+        `┃➤ 🔮 𝗥𝗘𝗣𝗟𝗬 1️⃣ 𝗧𝗢 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗 📥\n` +
+        `╰━━━━━━━❖✦►` +
+        FOOTER;
+
+      const sentMsg = await bot.sendMessage(
+        from,
+        {
+          image: { url: media.thumbnail || media.url },
+          caption,
+        },
+        { quoted: mek }
+      );
+
+      await bot.sendMessage(from, {
+        react: { text: "📸", key: sentMsg.key },
+      });
+
+      const messageID = sentMsg.key.id;
+
+      /* -------- LISTENER -------- */
+      const listener = async (update) => {
+        try {
+          const msg = update?.messages[0];
+          if (!msg?.message) return;
+
+          const text =
+            msg.message.conversation ||
+            msg.message.extendedTextMessage?.text;
+
+          const isReply =
+            msg.message.extendedTextMessage?.contextInfo?.stanzaId ===
+            messageID;
+
+          if (!isReply) return;
+          if (text.trim() !== "1") return;
+
+          const loading = await bot.sendMessage(
+            from,
+            { text: "*𝙻𝙾𝙰𝙳𝙸𝙽𝙶...*" },
+            { quoted: mek }
+          );
+
+          await bot.sendMessage(
+            from,
+            {
+              video: { url: media.url },
+              mimetype: "video/mp4",
+            },
+            { quoted: mek }
+          );
+
+          await bot.sendMessage(from, {
+            text: "𝗖𝗢𝗠𝗣𝗟𝗘𝗧𝗘𝗗 ✅",
+            edit: loading.key,
+          });
+
+          bot.ev.off("messages.upsert", listener);
+        } catch (err) {
+          console.error(err);
+          bot.ev.off("messages.upsert", listener);
+        }
+      };
+
+      bot.ev.on("messages.upsert", listener);
+    } catch (e) {
+      console.error("IG ERROR:", e);
+      reply("⚠️ *Instagram download failed*" + FOOTER);
+    }
+  }
+);
