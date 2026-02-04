@@ -9,7 +9,7 @@ cmd({
     category: "owner",
     use: '.settings',
     filename: __filename
-}, async (conn, mek, m, {
+}, async (ishan, mek, m, {
     from,
     quoted,
     body,
@@ -47,15 +47,15 @@ cmd({
 ┃ 📌 *➤ Prefix*: *[ ${config.PREFIX} ]*
 ┃ ⚙️ *➤ Mode*: *${config.MODE}*
 ┃ 📞 *➤ Bot owner*: *${config.BOT_OWNER}*
-┃ 👑 *➤ owner name*: *${config.OWNER_NAME}*
 ┃ 🤖 *➤ Bot Name*: *${config.BOT_NAME}*
+┃ 👑 *➤ owner name*: *${config.OWNER_NAME}*
 *╰─────────────────────❖●►*
 
 *🌟DEVELOPED BY ISHAN-X MD🌟*
 `;
 
         // Send the settings message with the updated format
-        await conn.sendMessage(from, {
+        await ishan.sendMessage(from, {
             image: { url: config.ALIVE_IMG },
             caption: madeSetting
         }, { quoted: mek });
