@@ -9,7 +9,7 @@ cmd({
     category: "owner",
     use: '.settings',
     filename: __filename
-}, async (conn, mek, m, {
+}, async (ishan, mek, m, {
     from,
     quoted,
     body,
@@ -41,19 +41,14 @@ cmd({
         // Create the settings message with the updated format
         let madeSetting = `╭───⚙️ *${config.BOT_NAME} Settings* ⚙️───╮
 │
-│ 🟢 *➤ Auto Read Status*: ${statusIcon(config.AUTO_READ_STATUS)}
+│ 🟢 *➤ Auto Status seen*: ${statusIcon(config.AUTO_STATUS_SEEN)}
+│   *➤ Auto status react*: ${config.AUTO_STATUS_REACT}*
+│   *➤ Auto status forward*: ${config.AUTO_STATUS_FORWARD}}*
 │ ⚙️ *➤ Mode*: *${config.MODE}*
-│ 🎙️ *➤ Auto Voice*: ${statusIcon(config.AUTO_VOICE)}
-│ 🖼️ *➤ Auto Sticker*: ${statusIcon(config.AUTO_STICKER)}
-│ 💬 *➤ Auto Reply*: ${statusIcon(config.AUTO_REPLY)}
-│ ✉️ *➤ Alive Message*: *${config.ALIVE_MSG}*
-│ 🔗 *➤ Anti Link*: ${statusIcon(config.ANTI_LINK)}
-│ 🚫 *➤ Anti Bad*: ${statusIcon(config.ANTI_BAD)}
 │ ⌨️ *➤ Prefix*: *[ ${config.PREFIX} ]*
-│ 🎥 *➤ Fake Recording*: ${statusIcon(config.FAKE_RECORDING)}
-│ 😀 *➤ Auto React*: ${statusIcon(config.AUTO_REACT)}
-│ ❤️ *➤ Heart React*: ${statusIcon(config.HEART_REACT)}
-│ 👑 *➤ Owner React*: ${statusIcon(config.OWNER_REACT)}
+│    *➤ Anti Delete*: ${config.ANTI_DELETE}*
+│    *➤ Bot number*: ${config.BOT_NUMBER}*
+│    *➤ owner name*: ${config.OWNER_NAME}*
 │ 🤖 *➤ Bot Name*: *${config.BOT_NAME}*
 │
 ╰──────────────────────────╯
@@ -62,7 +57,7 @@ cmd({
 `;
 
         // Send the settings message with the updated format
-        await conn.sendMessage(from, {
+        await ishan.sendMessage(from, {
             image: { url: config.ALIVE_IMG },
             caption: madeSetting
         }, { quoted: mek });
