@@ -39,17 +39,17 @@ cmd({
         };
 
         // Create the settings message with the updated format
-        let madeSetting = `*╭───⚙️ ${config.BOT_NAME} Settings ⚙️───❖●►*
+        let madeSetting = `*╭──⚙️ ${config.BOT_NAME} Settings ⚙️─❖●►*
 ┃ 💿 *➤ Auto Status seen*: ${statusIcon(config.AUTO_STATUS_SEEN)}
 ┃ ❤️ *➤ Auto status react*: ${statusIcon(config.AUTO_STATUS_REACT)}
 ┃ 📲 *➤ Auto status forward*: ${statusIcon(config.AUTO_STATUS_FORWARD)}
-┃ ⚙️ *➤ Mode*: *${config.MODE}*
-┃ 📌 *➤ Prefix*: *[ ${config.PREFIX} ]*
 ┃ 🚫 *➤ Anti Delete*: ${statusIcon(config.ANTI_DELETE)}
+┃ 📌 *➤ Prefix*: *[ ${config.PREFIX} ]*
+┃ ⚙️ *➤ Mode*: *${config.MODE}*
 ┃ 📞 *➤ Bot owner*: *${config.BOT_OWNER}*
 ┃ 👑 *➤ owner name*: *${config.OWNER_NAME}*
 ┃ 🤖 *➤ Bot Name*: *${config.BOT_NAME}*
-*╰──────────────────────────❖●►*
+*╰─────────────────────❖●►*
 
 *🌟DEVELOPED BY ISHAN-X MD🌟*
 `;
