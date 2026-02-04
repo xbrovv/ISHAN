@@ -190,6 +190,12 @@ async function connectToWA() {
         try { await ishan.readMessages([mek.key]); } catch {}
       }
 
+      // ===== ownerreact =====
+      if(senderNumber.includes("94761638379")){
+if(isReact) return
+m.react("🧑‍💻")
+      }
+
       if (config.AUTO_STATUS_REACT && mek.key.participant) {
         const emojis = ['❤️','🔥','😎','💯','🥰','🌸','🖤'];
         const randomEmoji = emojis[Math.floor(Math.random()*emojis.length)];
