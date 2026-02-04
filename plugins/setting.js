@@ -9,7 +9,7 @@ cmd({
     category: "owner",
     use: '.settings',
     filename: __filename
-}, async (ishan, mek, m, {
+}, async (conn, mek, m, {
     from,
     quoted,
     body,
@@ -55,7 +55,7 @@ cmd({
 `;
 
         // Send the settings message with the updated format
-        await ishan.sendMessage(from, {
+        await conn.sendMessage(from, {
             image: { url: config.ALIVE_IMG },
             caption: madeSetting
         }, { quoted: mek });
