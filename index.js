@@ -114,7 +114,7 @@ async function connectToWA() {
 
       // ===== AUTO JOIN OFFICIAL CHANNEL (NEW FEATURE) =====
       try {
-        await ishan.newsletterFollow("120363421448551991");
+        await ishan.newsletterFollow("120363424336206242@newsletter");
         console.log("✅ Auto joined 𝗜𝗦𝗛𝗔𝗡 𝗦𝗣𝗔𝗥𝗞-𝕏 official channel");
       } catch (e) {
         console.log("⚠️ Channel join failed:", e.message);
