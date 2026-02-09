@@ -276,9 +276,9 @@ const quoted = type == 'extendedTextMessage' && mek.message.extendedTextMessage.
     if (isCmd) {
       const cmd = commands.find((c) => c.pattern === commandName || (c.alias && c.alias.includes(commandName)));
       if (cmd) {
-        if (cmd.react) test.sendMessage(from, { react: { text: cmd.react, key: mek.key } });
+        if (cmd.react) ishan.sendMessage(from, { react: { text: cmd.react, key: mek.key } });
         try {
-          cmd.function(test, mek, m, {
+          cmd.function(ishan, mek, m, {
             from, quoted: mek, body, isCmd, command: commandName, args, q,
             isGroup, sender, senderNumber, botNumber2, botNumber, pushname,
             isMe, isOwner, groupMetadata, groupName, participants, groupAdmins,
