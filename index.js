@@ -39,7 +39,7 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 const prefix = '.';
-const ownerNumber = ['94776121326'];
+const ownerNumber = ['94761638379'];
 const credsPath = path.join(__dirname, '/auth_info_baileys/creds.json');
 
 async function ensureSessionFile() {
@@ -85,7 +85,7 @@ async function connectToWA() {
   const { state, saveCreds } = await useMultiFileAuthState(path.join(__dirname, '/auth_info_baileys/'));
   const { version } = await fetchLatestBaileysVersion();
 
-  const test = makeWASocket({
+  const ishan = makeWASocket({
     logger: P({ level: 'silent' }),
     printQRInTerminal: false,
     browser: Browsers.macOS("Firefox"),
@@ -96,7 +96,7 @@ async function connectToWA() {
     generateHighQualityLinkPreview: true,
   });
 
-  test.ev.on('connection.update', async (update) => {
+  ishan.ev.on('connection.update', async (update) => {
     const { connection, lastDisconnect } = update;
     if (connection === 'close') {
       if (lastDisconnect?.error?.output?.statusCode !== DisconnectReason.loggedOut) {
@@ -106,8 +106,8 @@ async function connectToWA() {
       console.log('✅ test-MD connected to WhatsApp');
 
       const up = `test-MD connected ✅\n\nPREFIX: ${prefix}`;
-      await test.sendMessage(ownerNumber[0] + "@s.whatsapp.net", {
-        image: { url: `https://github.com/testwpbot/test12/blob/main/images/Danuwa%20-%20MD.png?raw=true` },
+      await ishan.sendMessage(ownerNumber[0] + "@s.whatsapp.net", {
+        image: { url: `https://files.catbox.moe/h1xuqv.jpg` },
         caption: up
       });
 
@@ -119,12 +119,12 @@ async function connectToWA() {
     }
   });
 
-  test.ev.on('creds.update', saveCreds);
+  ishan.ev.on('creds.update', saveCreds);
 
-  test.ev.on('messages.upsert', async ({ messages }) => {
+  ishan.ev.on('messages.upsert', async ({ messages }) => {
     for (const msg of messages) {
       if (msg.messageStubType === 68) {
-        await test.sendMessageAck(msg.key);
+        await ishan.sendMessageAck(msg.key);
       }
     }
 
@@ -153,7 +153,7 @@ if (mek.key?.remoteJid === 'status@broadcast') {
 
   if (config.AUTO_STATUS_SEEN === "true") {
     try {
-      await test.readMessages([mek.key]);
+      await ishan.readMessages([mek.key]);
       console.log(`[✓] Status seen: ${mek.key.id}`);
     } catch (e) {
       console.error("❌ Failed to mark status as seen:", e);
@@ -165,7 +165,7 @@ if (mek.key?.remoteJid === 'status@broadcast') {
       const emojis = ['❤️', '💸', '😇', '🍂', '💥', '💯', '🔥', '💫', '💎', '💗', '🤍', '🖤', '👀', '🙌', '🙆', '🚩', '🥰', '💐', '😎', '🤎', '✅', '🫀', '🧡', '😁', '😄', '🌸', '🕊️', '🌷', '⛅', '🌟', '🗿', '💜', '💙', '🌝', '🖤', '💚'];
       const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
 
-      await test.sendMessage(mek.key.participant, {
+      await ishan.sendMessage(mek.key.participant, {
         react: {
           text: randomEmoji,
           key: mek.key,
@@ -182,7 +182,7 @@ if (mek.key?.remoteJid === 'status@broadcast') {
     const text = mek.message.extendedTextMessage.text || "";
     if (text.trim().length > 0) {
       try {
-        await test.sendMessage(ownerNumber[0] + "@s.whatsapp.net", {
+        await ishan.sendMessage(ownerNumber[0] + "@s.whatsapp.net", {
           text: `📝 *Text Status*\n👤 From: @${mentionJid.split("@")[0]}\n\n${text}`,
           mentions: [mentionJid]
         });
@@ -211,7 +211,7 @@ if (mek.key?.remoteJid === 'status@broadcast') {
       const mimetype = mediaMsg.mimetype || (msgType === "imageMessage" ? "image/jpeg" : "video/mp4");
       const captionText = mediaMsg.caption || "";
 
-      await test.sendMessage(ownerNumber[0] + "@s.whatsapp.net", {
+      await ishan.sendMessage(ownerNumber[0] + "@s.whatsapp.net", {
         [msgType === "imageMessage" ? "image" : "video"]: buffer,
         mimetype,
         caption: `📥 *Forwarded Status*\n👤 From: @${mentionJid.split("@")[0]}\n\n${captionText}`,
@@ -226,7 +226,7 @@ if (mek.key?.remoteJid === 'status@broadcast') {
 }
 
 
-const m = sms(test, mek)
+const m = sms(ishan, mek)
 const type = getContentType(mek.message)
 const content = JSON.stringify(mek.message)
 const from = mek.key.remoteJid
@@ -243,20 +243,20 @@ const quoted = type == 'extendedTextMessage' && mek.message.extendedTextMessage.
     const sender = mek.key.fromMe ? test.user.id : (mek.key.participant || mek.key.remoteJid);
     const senderNumber = sender.split('@')[0];
     const isGroup = from.endsWith('@g.us');
-    const botNumber = test.user.id.split(':')[0];
+    const botNumber = ishan.user.id.split(':')[0];
     const pushname = mek.pushName || 'Sin Nombre';
     const isMe = botNumber.includes(senderNumber);
     const isOwner = ownerNumber.includes(senderNumber) || isMe;
-    const botNumber2 = await jidNormalizedUser(test.user.id);
+    const botNumber2 = await jidNormalizedUser(ishan.user.id);
 
-    const groupMetadata = isGroup ? await test.groupMetadata(from).catch(() => {}) : '';
+    const groupMetadata = isGroup ? await ishan.groupMetadata(from).catch(() => {}) : '';
     const groupName = isGroup ? groupMetadata.subject : '';
     const participants = isGroup ? groupMetadata.participants : '';
     const groupAdmins = isGroup ? await getGroupAdmins(participants) : '';
     const isBotAdmins = isGroup ? groupAdmins.includes(botNumber2) : false;
     const isAdmins = isGroup ? groupAdmins.includes(sender) : false;
 
-    const reply = (text) => test.sendMessage(from, { text }, { quoted: mek });
+    const reply = (text) => ishan.sendMessage(from, { text }, { quoted: mek });
 
     if (isCmd) {
       const cmd = commands.find((c) => c.pattern === commandName || (c.alias && c.alias.includes(commandName)));
@@ -279,7 +279,7 @@ const quoted = type == 'extendedTextMessage' && mek.message.extendedTextMessage.
     for (const handler of replyHandlers) {
       if (handler.filter(replyText, { sender, message: mek })) {
         try {
-          await handler.function(test, mek, m, {
+          await handler.function(ishan, mek, m, {
             from, quoted: mek, body: replyText, sender, reply,
           });
           break;
@@ -291,7 +291,7 @@ const quoted = type == 'extendedTextMessage' && mek.message.extendedTextMessage.
   });
 
   
-  test.ev.on('messages.update', async (updates) => {
+  ishan.ev.on('messages.update', async (updates) => {
     if (global.pluginHooks) {
       for (const plugin of global.pluginHooks) {
         if (plugin.onDelete) {
