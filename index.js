@@ -100,10 +100,10 @@ async function connectToWA() {
       await ishan.sendMessage(ownerNumber[0] + "@s.whatsapp.net", {
         image: { url: "https://files.catbox.moe/h1xuqv.jpg" },
         caption: `┎━━━━━━━━━━━━━━━━❖
-┃➤ 🤖 𝗔𝗖𝗧𝗜𝗩𝗘 𝗡𝗢𝗪 🚀
-┃➤ 🟢 STATUS : ONLINE ✅
-┃➤ ━━━━━━━━━━━━━━
-┃➤  ✒️ PREFIX: ${prefix}
+┃❖ 🤖 𝗔𝗖𝗧𝗜𝗩𝗘 𝗡𝗢𝗪 🚀
+┃❖ 🟢 STATUS : ONLINE ✅
+┃ ◄❖ ━━━━━━━━━━━━❖►
+┃➤  ✒️ PREFIX: [${prefix}]
 ┃➤ ⚙️ MODE : Stable
 ┃➤ 🚀 BUILD : Production
 ┃➤ 🧬 VERSION : V3.0 ultra
