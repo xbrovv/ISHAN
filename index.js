@@ -105,7 +105,22 @@ async function connectToWA() {
     } else if (connection === 'open') {
       console.log('✅ test-MD connected to WhatsApp');
 
-      const up = `test-MD connected ✅\n\nPREFIX: ${prefix}`;
+      const up = `┎━━━━━━━━━━━━━━━━❖
+┃❖ 🤖 𝗔𝗖𝗧𝗜𝗩𝗘 𝗡𝗢𝗪 🚀
+┃❖ 🟢 STATUS : ONLINE ✅
+┃  ◄❖ ━━━━━━━━━━━━❖►
+┃➤  ✒️ *PREFIX* : [${prefix}]
+┃➤ ⚙️ *MODE* : Stable
+┃➤ 🚀 *BUILD* : Production
+┃➤ 🧬 *VERSION* : V3.0 ultra
+┃➤ ⏱ *UPTIME* : 24h 15m
+┃➤ 💡 *TYPE* : .menu to command 
+┃➤ 🔐 *Secure & Private* 
+┃➤   *JOIN UPDATED =* https://whatsapp.com/channel/0029Vb7eEOGLY6dBNzl2IH0O
+┃➤  *JOIN GROUP =* https://chat.whatsapp.com/C5jE3Tk7U0RBGcR6kwRSUi
+┗━━━━━━━━━━━━━━━━❖
+
+> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏`;
       await ishan.sendMessage(ownerNumber[0] + "@s.whatsapp.net", {
         image: { url: `https://files.catbox.moe/h1xuqv.jpg` },
         caption: up
