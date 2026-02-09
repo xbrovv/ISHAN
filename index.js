@@ -97,6 +97,12 @@ async function connectToWA() {
     } else if (connection === 'open') {
       console.log('✅ ISHAN-MD connected');
 
+      const up = `𝗜𝗦𝗛𝗔𝗡-MD 🚀 ONLINE ✅
+⚙️ Stable Mode
+🚀 Production
+
+> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏`;
+
       await ishan.sendMessage(ownerNumber[0] + "@s.whatsapp.net", {
         image: { url: "https://files.catbox.moe/h1xuqv.jpg" },
         caption: `ISHAN-MD connected ✅\n\nPREFIX: ${prefix}`
