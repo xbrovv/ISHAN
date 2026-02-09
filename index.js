@@ -326,7 +326,7 @@ const quoted = type == 'extendedTextMessage' && mek.message.extendedTextMessage.
 ensureSessionFile();
 
 app.get("/", (req, res) => {
-  res.send("Hey, ISHAN--MD started✅");
+  res.send("Hey,ISHAN--MD started✅");
 });
 
 app.listen(port, () => console.log(`Server listening on http://localhost:${port}`));
