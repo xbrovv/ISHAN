@@ -10,20 +10,20 @@ cmd(
     category: "download",
     filename: __filename,
   },
-  async (test, mek, m, { q, reply, from }) => {
+  async (ishan, mek, m, { q, reply, from }) => {
     try {
       if (!q) {
         return reply(
           "📱 *APK Downloader*\n\n" +
-          "❗ App name එකක් දාන්න ඔනේ.\n" +
-          "උදාහරණයක්:\n" +
+          "❗ your App name.\n" +
+          "Example:\n" +
           "`.apk WhatsApp`\n\n" +
           "> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏"
         );
       }
 
-      await test.sendMessage(from, {
-        react: { text: "⏳", key: mek.key },
+      await ishan.sendMessage(from, {
+        react: { text: "🔍", key: mek.key },
       });
 
       const apiUrl = `http://ws75.aptoide.com/api/7/apps/search/query=${encodeURIComponent(
@@ -35,8 +35,8 @@ cmd(
       if (!data?.datalist?.list?.length) {
         return reply(
           "⚠️ *APK not found*\n\n" +
-          "ඔයා search කරපු app එක හමු නොවුණා.\n" +
-          "නම වෙනස් කරලා try කරන්න.\n\n" +
+          "no searching results.\n" +
+          "Please try again.\n\n" +
           "> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏"
         );
       }
@@ -54,7 +54,7 @@ cmd(
         "📥 *Downloading APK...*\n\n" +
         "> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏";
 
-      await test.sendMessage(
+      await ishan.sendMessage(
         from,
         {
           image: { url: app.icon },
@@ -63,7 +63,7 @@ cmd(
         { quoted: mek }
       );
 
-      await test.sendMessage(
+      await ishan.sendMessage(
         from,
         {
           document: { url: app.file.path_alt },
@@ -73,15 +73,15 @@ cmd(
         { quoted: mek }
       );
 
-      await test.sendMessage(from, {
+      await ishan.sendMessage(from, {
         react: { text: "✅", key: mek.key },
       });
     } catch (err) {
       console.error("❌ APK Downloader Error:", err);
       reply(
         "❌ *APK download failed*\n\n" +
-        "Server issue එකක් හෝ temporary error එකක්.\n" +
-        "පස්සේ try කරන්න.\n\n" +
+        "Server issue & temporary erro.\n" +
+        "Please try again.\n\n" +
         "> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏"
       );
     }
