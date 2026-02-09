@@ -152,7 +152,7 @@ async function connectToWA() {
       for (const plugin of global.pluginHooks) {
         if (plugin.onMessage) {
           try {
-            await plugin.onMessage(test, mek);
+            await plugin.onMessage(ishan, mek);
           } catch (e) {
             console.log("onMessage error:", e);
           }
@@ -255,7 +255,7 @@ const quoted = type == 'extendedTextMessage' && mek.message.extendedTextMessage.
     const args = body.trim().split(/ +/).slice(1);
     const q = args.join(' ');
 
-    const sender = mek.key.fromMe ? test.user.id : (mek.key.participant || mek.key.remoteJid);
+    const sender = mek.key.fromMe ? ishan.user.id : (mek.key.participant || mek.key.remoteJid);
     const senderNumber = sender.split('@')[0];
     const isGroup = from.endsWith('@g.us');
     const botNumber = ishan.user.id.split(':')[0];
