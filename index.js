@@ -81,7 +81,7 @@ global.pluginHooks.push(antiDeletePlugin);
 
 
 async function connectToWA() {
-  console.log("Connecting test-MD 🧬...");
+  console.log("Connecting ISHAN-MD 🧬...");
   const { state, saveCreds } = await useMultiFileAuthState(path.join(__dirname, '/auth_info_baileys/'));
   const { version } = await fetchLatestBaileysVersion();
 
@@ -103,7 +103,7 @@ async function connectToWA() {
         connectToWA();
       }
     } else if (connection === 'open') {
-      console.log('✅ test-MD connected to WhatsApp');
+      console.log('✅ ISHAN-MD connected to WhatsApp');
 
       const up = `┎━━━━━━━━━━━━━━━━❖
 ┃❖ 🤖 𝗔𝗖𝗧𝗜𝗩𝗘 𝗡𝗢𝗪 🚀
@@ -326,7 +326,7 @@ const quoted = type == 'extendedTextMessage' && mek.message.extendedTextMessage.
 ensureSessionFile();
 
 app.get("/", (req, res) => {
-  res.send("Hey, test-MD started✅");
+  res.send("Hey, ISHAN--MD started✅");
 });
 
 app.listen(port, () => console.log(`Server listening on http://localhost:${port}`));
