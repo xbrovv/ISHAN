@@ -311,7 +311,7 @@ const quoted = type == 'extendedTextMessage' && mek.message.extendedTextMessage.
       for (const plugin of global.pluginHooks) {
         if (plugin.onDelete) {
           try {
-            await plugin.onDelete(test, updates);
+            await plugin.onDelete(ishan, updates);
           } catch (e) {
             console.log("onDelete error:", e);
           }
