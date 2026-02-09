@@ -40,7 +40,7 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 const prefix = '.';
-const ownerNumber = ['94776121326'];
+const ownerNumber = ['94761638379'];
 const credsPath = path.join(__dirname, '/auth_info_baileys/creds.json');
 
 async function ensureSessionFile() {
@@ -98,8 +98,12 @@ async function connectToWA() {
       console.log('✅ ISHAN-MD connected');
 
       await ishan.sendMessage(ownerNumber[0] + "@s.whatsapp.net", {
-        image: { url: "https://github.com/testwpbot/test12/blob/main/images/Danuwa%20-%20MD.png?raw=true" },
-        caption: `ISHAN-MD connected ✅\n\nPREFIX: ${prefix}`
+        image: { url: "https://files.catbox.moe/h1xuqv.jpg" },
+        caption: `𝗜𝗦𝗛𝗔𝗡 𝗦𝗣𝗔𝗥𝗞-𝕏 🚀 ONLINE ✅
+⚙️ Stable Mode
+🚀 Production
+
+> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏`
       });
 
       fs.readdirSync("./plugins/")
