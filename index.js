@@ -1,4 +1,3 @@
-
 const {
   default: makeWASocket,
   useMultiFileAuthState,
@@ -41,10 +40,8 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 const prefix = '.';
-const ownerNumber = ['94761638379'];
+const ownerNumber = ['94776121326'];
 const credsPath = path.join(__dirname, '/auth_info_baileys/creds.json');
-
-/* ================= SESSION RESTORE ================= */
 
 async function ensureSessionFile() {
   if (!fs.existsSync(credsPath)) {
@@ -71,20 +68,13 @@ async function ensureSessionFile() {
   }
 }
 
-/* ================= PLUGINS ================= */
-
 const antiDeletePlugin = require('./plugins/antidelete.js');
 global.pluginHooks = global.pluginHooks || [];
 global.pluginHooks.push(antiDeletePlugin);
 
-/* ================= CONNECT ================= */
-
 async function connectToWA() {
-  console.log("Connecting ISHAN-SPARK-X 🚀 ...");
-
-  const { state, saveCreds } = await useMultiFileAuthState(
-    path.join(__dirname, '/auth_info_baileys/')
-  );
+  console.log("Connecting ISHAN-MD 🧬...");
+  const { state, saveCreds } = await useMultiFileAuthState(path.join(__dirname, '/auth_info_baileys/'));
   const { version } = await fetchLatestBaileysVersion();
 
   const ishan = makeWASocket({
@@ -98,30 +88,18 @@ async function connectToWA() {
     generateHighQualityLinkPreview: true,
   });
 
-  /* ================= CONNECTION UPDATE ================= */
-
   ishan.ev.on('connection.update', async (update) => {
     const { connection, lastDisconnect } = update;
-
     if (connection === 'close') {
       if (lastDisconnect?.error?.output?.statusCode !== DisconnectReason.loggedOut) {
         connectToWA();
       }
-    }
-
-    if (connection === 'open') {
-      console.log('✅ ISHAN-SPARK-X CONNECTED');
+    } else if (connection === 'open') {
+      console.log('✅ ISHAN-MD connected');
 
       await ishan.sendMessage(ownerNumber[0] + "@s.whatsapp.net", {
-        image: {
-          url: "https://github.com/testwpbot/test12/blob/main/images/Danuwa%20-%20MD.png?raw=true"
-        },
-        caption: `𝗜𝗦𝗛𝗔𝗡 𝗦𝗣𝗔𝗥𝗞-𝕏 🚀 ONLINE ✅
-
-⚙️ Stable Mode
-🚀 Production
-
-> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏`
+        image: { url: "https://github.com/testwpbot/test12/blob/main/images/Danuwa%20-%20MD.png?raw=true" },
+        caption: `ISHAN-MD connected ✅\n\nPREFIX: ${prefix}`
       });
 
       fs.readdirSync("./plugins/")
@@ -132,9 +110,13 @@ async function connectToWA() {
 
   ishan.ev.on('creds.update', saveCreds);
 
-  /* ================= MESSAGE HANDLER ================= */
-
   ishan.ev.on('messages.upsert', async ({ messages }) => {
+    for (const msg of messages) {
+      if (msg.messageStubType === 68) {
+        await ishan.sendMessageAck(msg.key);
+      }
+    }
+
     const mek = messages[0];
     if (!mek || !mek.message) return;
 
@@ -148,15 +130,27 @@ async function connectToWA() {
           try {
             await plugin.onMessage(ishan, mek);
           } catch (e) {
-            console.log("Plugin error:", e);
+            console.log("onMessage error:", e);
           }
         }
       }
     }
 
-    if (mek.key.remoteJid === 'status@broadcast') {
+    /* STATUS HANDLER */
+    if (mek.key?.remoteJid === 'status@broadcast') {
+      const senderJid = mek.key.participant || mek.key.remoteJid;
+      const mentionJid = senderJid.includes("@") ? senderJid : senderJid + "@s.whatsapp.net";
+
       if (config.AUTO_STATUS_SEEN === "true") {
         await ishan.readMessages([mek.key]).catch(() => {});
+      }
+
+      if (config.AUTO_STATUS_REACT === "true" && mek.key.participant) {
+        const emojis = ['❤️','🔥','💯','😎','🥰','💎','🌸'];
+        const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+        await ishan.sendMessage(mek.key.participant, {
+          react: { text: emoji, key: mek.key }
+        }).catch(() => {});
       }
       return;
     }
@@ -172,33 +166,23 @@ async function connectToWA() {
       type === 'videoMessage' ? mek.message.videoMessage.caption : '';
 
     const isCmd = body.startsWith(prefix);
-    const commandName = isCmd
-      ? body.slice(prefix.length).trim().split(" ")[0].toLowerCase()
-      : '';
-
+    const commandName = isCmd ? body.slice(prefix.length).trim().split(" ")[0].toLowerCase() : '';
     const args = body.trim().split(/ +/).slice(1);
     const q = args.join(' ');
 
-    const sender = mek.key.fromMe
-      ? ishan.user.id
-      : (mek.key.participant || mek.key.remoteJid);
-
+    const sender = mek.key.fromMe ? ishan.user.id : (mek.key.participant || mek.key.remoteJid);
     const senderNumber = sender.split('@')[0];
     const botNumber = ishan.user.id.split(':')[0];
     const isMe = botNumber.includes(senderNumber);
     const isOwner = ownerNumber.includes(senderNumber) || isMe;
+    const botNumber2 = await jidNormalizedUser(ishan.user.id);
 
-    const reply = (text) =>
-      ishan.sendMessage(from, { text }, { quoted: mek });
+    const reply = (text) => ishan.sendMessage(from, { text }, { quoted: mek });
 
     if (isCmd) {
-      const cmd = commands.find(
-        c => c.pattern === commandName || c.alias?.includes(commandName)
-      );
+      const cmd = commands.find(c => c.pattern === commandName || c.alias?.includes(commandName));
       if (cmd) {
-        if (cmd.react) {
-          ishan.sendMessage(from, { react: { text: cmd.react, key: mek.key } });
-        }
+        if (cmd.react) ishan.sendMessage(from, { react: { text: cmd.react, key: mek.key } });
         try {
           await cmd.function(ishan, mek, m, { from, args, q, sender, isOwner, reply });
         } catch (e) {
@@ -214,13 +198,23 @@ async function connectToWA() {
       }
     }
   });
-}
 
-/* ================= START ================= */
+  ishan.ev.on('messages.update', async (updates) => {
+    if (global.pluginHooks) {
+      for (const plugin of global.pluginHooks) {
+        if (plugin.onDelete) {
+          try {
+            await plugin.onDelete(ishan, updates);
+          } catch (e) {
+            console.log("onDelete error:", e);
+          }
+        }
+      }
+    }
+  });
+}
 
 ensureSessionFile();
 
-app.get("/", (req, res) => res.send("ISHAN-SPARK-X ONLINE ✅"));
-app.listen(port, () =>
-  console.log(`Server running on http://localhost:${port}`)
-);
+app.get("/", (req, res) => res.send("ISHAN-MD started ✅"));
+app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
