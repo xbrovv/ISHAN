@@ -6,7 +6,7 @@ cmd(
     alias: ["b64"],
     react: "🔤",
     desc: "Encode text to Base64 or decode Base64 to text",
-    category: "mathtools",
+    category: "MATHTOOL",
     filename: __filename,
   },
   async (dilshan, mek, m, { q, reply }) => {
