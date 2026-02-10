@@ -22,10 +22,10 @@ cmd(
     alias: ["dr"],
     react: "🔥",
     desc: "Play dare challenge",
-    category: "fun",
+    category: "MATHTOOL",
     filename: __filename,
   },
-  async (danuwa, mek, m, { reply }) => {
+  async (ishan, mek, m, { reply }) => {
     const challenge = dares[Math.floor(Math.random() * dares.length)];
     reply(`🔥 *Dare Challenge:*\n\n${challenge}`);
   }
