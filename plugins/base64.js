@@ -6,13 +6,13 @@ cmd(
     alias: ["b64"],
     react: "🔤",
     desc: "Encode text to Base64 or decode Base64 to text",
-    category: "tools",
+    category: "mathtools",
     filename: __filename,
   },
   async (dilshan, mek, m, { q, reply }) => {
     if (!q) return reply("📝 *Please provide text or Base64 string.*");
 
-    const isBase64 = /^[A-Za-z0-9+/=]+$/.test(q.replace(/\s/g, ''));
+    const isBase64 = /^[A-Za-z0-9+/=]+$/.ishan(q.replace(/\s/g, ''));
 
     try {
       if (isBase64) {
