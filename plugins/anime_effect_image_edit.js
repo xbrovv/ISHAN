@@ -9,7 +9,7 @@ cmd({
   pattern: "animestyle",
   react: "👾",
   desc: "Apply anime style effect to an image",
-  category: "edit",
+  category: "MATHTOOL",
   filename: __filename,
 }, async (ishan, mek, m, { from, sender, quoted, reply }) => {
   try {
