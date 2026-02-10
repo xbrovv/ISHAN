@@ -99,9 +99,20 @@ async function connectToWA() {
     } else if (connection === 'open') {
       console.log('✅ 𝗜𝗦𝗛𝗔𝗡 𝗦𝗣𝗔𝗥𝗞-𝕏 🚀 connected to WhatsApp');
 
-      const up = `𝗜𝗦𝗛𝗔𝗡 𝗦𝗣𝗔𝗥𝗞-𝕏 🚀 ONLINE ✅
-⚙️ Stable Mode
-🚀 Production
+      const up = `┎━━━━━━━━━━━━━━━━❖
+┃❖ 🤖 𝗔𝗖𝗧𝗜𝗩𝗘 𝗡𝗢𝗪 🚀
+┃❖ 🟢 STATUS : ONLINE ✅
+┃  ◄❖ ━━━━━━━━━━━━❖►
+┃➤  ✒️ *PREFIX* : [${prefix}]
+┃➤ ⚙️ *MODE* : Stable
+┃➤ 🚀 *BUILD* : Production
+┃➤ 🧬 *VERSION* : V3.0 ultra
+┃➤ ⏱ *UPTIME* : 24h 15m
+┃➤ 💡 *TYPE* : .menu to command 
+┃➤ 🔐 *Secure & Private* 
+┃➤   *JOIN UPDATED =* https://whatsapp.com/channel/0029Vb7eEOGLY6dBNzl2IH0O
+┃➤  *JOIN GROUP =* https://chat.whatsapp.com/C5jE3Tk7U0RBGcR6kwRSUi
+┗━━━━━━━━━━━━━━━━❖
 
 > ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏`;
 
