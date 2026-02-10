@@ -81,7 +81,7 @@ global.pluginHooks.push(antiDeletePlugin);
 
 
 async function connectToWA() {
-  console.log("Connecting ISHAN-MD 🧬...");
+  console.log("Connecting ISHAN-MD...");
   const { state, saveCreds } = await useMultiFileAuthState(path.join(__dirname, '/auth_info_baileys/'));
   const { version } = await fetchLatestBaileysVersion();
 
