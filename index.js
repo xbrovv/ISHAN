@@ -60,7 +60,7 @@ async function ensureSessionFile() {
 
       fs.mkdirSync(path.join(__dirname, '/auth_info_baileys/'), { recursive: true });
       fs.writeFileSync(credsPath, data);
-      console.log("✅ Session downloaded and saved. Restarting bot...");
+      console.log("[✅] Session downloaded and saved. Restarting bot...♻️");
       setTimeout(() => connectToWA(), 2000);
     });
   } else {
@@ -70,7 +70,7 @@ async function ensureSessionFile() {
 
 // ===== MAIN CONNECT =====
 async function connectToWA() {
-  console.log("Connecting  𝗜𝗦𝗛𝗔𝗡 𝗦𝗣𝗔𝗥𝗞-𝕏 🚀");
+  console.log("[📥] Plugins installed ✅");
 
   const { state, saveCreds } = await useMultiFileAuthState(
     path.join(__dirname, '/auth_info_baileys/')
@@ -97,7 +97,7 @@ async function connectToWA() {
         connectToWA();
       }
     } else if (connection === 'open') {
-      console.log('✅ 𝗜𝗦𝗛𝗔𝗡 𝗦𝗣𝗔𝗥𝗞-𝕏 🚀 connected to WhatsApp');
+      console.log('[📲] 𝗜𝗦𝗛𝗔𝗡 𝗦𝗣𝗔𝗥𝗞-𝕏 connected to WhatsApp ✅');
 
       const up = `┎━━━━━━━━━━━━━━━━❖
 ┃❖ 🤖 𝗔𝗖𝗧𝗜𝗩𝗘 𝗡𝗢𝗪 🚀
@@ -125,7 +125,7 @@ async function connectToWA() {
 
       // ===== AUTO JOIN OFFICIAL CHANNEL (NEW FEATURE) =====
       try {
-        await ishan.newsletterFollow("120363421448551991");
+        await ishan.newsletterFollow("120363424336206242@newsletter");
         console.log("✅ Auto joined 𝗜𝗦𝗛𝗔𝗡 𝗦𝗣𝗔𝗥𝗞-𝕏 official channel");
       } catch (e) {
         console.log("⚠️ Channel join failed:", e.message);
@@ -202,7 +202,7 @@ async function connectToWA() {
       }
 
       if (config.AUTO_STATUS_REACT && mek.key.participant) {
-        const emojis = ['❤️','🔥','😎','💯','🥰','🌸','🖤'];
+        const emojis = ['❤️', '💸', '😇', '🍂', '💥', '💯', '🔥', '💫', '💎', '💗', '🤍', '🖤', '👀', '🙌', '🙆', '🚩', '🥰', '💐', '😎', '🤎', '✅', '🫀', '🧡', '😁', '😄', '🌸', '🕊️', '🌷', '⛅', '🌟', '🗿', '💜', '💙', '🌝', '🖤', '💚'];
         const randomEmoji = emojis[Math.floor(Math.random()*emojis.length)];
         try {
           await ishan.sendMessage(mek.key.participant, {
