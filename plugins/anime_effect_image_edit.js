@@ -6,22 +6,22 @@ const sharp = require("sharp");
 const path = require("path");
 
 cmd({
-  pattern: "animefy",
+  pattern: "animestyle",
   react: "👾",
   desc: "Apply anime style effect to an image",
   category: "edit",
   filename: __filename,
-}, async (danuwa, mek, m, { from, sender, quoted, reply }) => {
+}, async (ishan, mek, m, { from, sender, quoted, reply }) => {
   try {
     const isQuotedImage = quoted && quoted.type === "imageMessage";
     const isImage = m.type === "imageMessage";
     const imageMessage = isQuotedImage ? quoted : isImage ? m : null;
 
     if (!imageMessage) {
-      return reply("🖼️ *Reply to an image or send an image with `.animefy`*");
+      return reply("🖼️ *Reply to an image or send an image with `.animestyle`*");
     }
 
-    const buffer = await downloadMediaMessage(imageMessage, "buffer", {}, danuwa);
+    const buffer = await downloadMediaMessage(imageMessage, "buffer", {}, ishan);
     if (!buffer) return reply("❌ *Failed to download image.*");
 
     const tempFolder = path.join(__dirname, "temp");
@@ -38,7 +38,7 @@ cmd({
       .sharpen() 
       .toFile(output);
 
-    await danuwa.sendMessage(from, {
+    await ishan.sendMessage(from, {
       image: { url: output },
       caption: `customize the caption for you want`,
     }, { quoted: mek });
