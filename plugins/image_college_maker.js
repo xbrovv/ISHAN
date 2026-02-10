@@ -35,10 +35,10 @@ cmd({
   pattern: "collage",
   react: "🖼️",
   desc: "Create collage from multiple images",
-  category: "edit",
+  category: "MATHTOOL",
   use: ".collage <Reply/send 2-6 images>",
   filename: __filename,
-}, async (danuwa, mek, m, { from, reply, quoted }) => {
+}, async (ishan, mek, m, { from, reply, quoted }) => {
   try {
     const imgs = [];
 
@@ -60,7 +60,7 @@ cmd({
       const album = m.message.extendedTextMessage.contextInfo.quotedMessage.albumMessage;
       for (const item of album) {
         if (item.imageMessage) {
-          const buff = await danuwa.downloadMediaMessage(item);
+          const buff = await ishan.downloadMediaMessage(item);
           imgs.push(buff);
         }
       }
@@ -76,9 +76,9 @@ cmd({
 
     await makeCollage(imgs, cols, rows, outFile);
 
-    await danuwa.sendMessage(
+    await ishan.sendMessage(
       from,
-      { image: fs.readFileSync(outFile), caption: "🖼️ Collage created by *danuwa-MD*" },
+      { image: fs.readFileSync(outFile), caption: "🖼️ *Collage created by ISHAN-X MD*" },
       { quoted: mek }
     );
 
