@@ -3,14 +3,14 @@ const axios = require("axios");
 
 cmd(
   {
-    pattern: "waifu",
-    alias: ["animegirl"],
+    pattern: "animegirl",
+    alias: ["waifu"],
     react: "💖",
     desc: "Sends a random waifu",
     category: "anime",
     filename: __filename,
   },
-  async (danuwa, mek, m, { from, reply }) => {
+  async (ishan, mek, m, { from, reply }) => {
     try {
       const res = await axios.get("https://nekos.best/api/v2/waifu");
       const image = res.data.results?.[0]?.url;
@@ -21,7 +21,7 @@ cmd(
 ╭━━❰ 💘 *RANDOM WAIFU*  ❱━━╮
 ╰━━━━━━━━━━━━━━━━━━━━╯`;
 
-      await danuwa.sendMessage(
+      await ishan.sendMessage(
         from,
         {
           image: { url: image },
