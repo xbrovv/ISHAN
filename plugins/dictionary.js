@@ -7,11 +7,11 @@ cmd(
     alias: ["meaning", "def"],
     react: "📖",
     desc: "Get word definition",
-    category: "tools",
+    category: "MATHTOOL",
     filename: __filename,
   },
   async (
-    danuwa,
+    ishan,
     mek,
     m,
     {
