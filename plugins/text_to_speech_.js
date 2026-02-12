@@ -7,11 +7,11 @@ cmd(
     alias: ["speak", "say"],
     react: "🗣️",
     desc: "Convert text to Sinhala voice",
-    category: "tools",
+    category: "MATHTOOL",
     filename: __filename,
   },
   async (
-    danuwa,
+    ishan,
     mek,
     m,
     {
@@ -43,7 +43,7 @@ cmd(
         },
       });
 
-      await danuwa.sendMessage(
+      await ishan.sendMessage(
         from,
         {
           audio: Buffer.from(response.data),
