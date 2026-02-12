@@ -33,10 +33,10 @@ cmd(
     alias: ["currency", "cur"],
     react: "💱",
     desc: "Convert one currency to another or get current rate",
-    category: "tools",
+    category: "MATHTOOL",
     filename: __filename,
   },
-  async (danuwa, mek, m, { args, reply }) => {
+  async (ishan, mek, m, { args, reply }) => {
     try {
       if (!args.length || args[0] === "help") {
         return reply(
