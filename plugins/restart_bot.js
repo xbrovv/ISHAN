@@ -6,7 +6,7 @@ cmd({
   pattern: "restart",
   react: '♻️',
   desc: "Restart the bot",
-  category: "main",
+  category: "OWNER",
   filename: __filename
 }, async (
   conn, mek, m, {
