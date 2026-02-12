@@ -92,7 +92,7 @@ cmd(
     use: ".sticker <reply to image/sticker | text> [--circle|--rounded|--square] [--radius=80]",
     filename: __filename,
   },
-  async (danuwa, mek, m, { from, quoted, q, reply, pushname }) => {
+  async (ishan, mek, m, { from, quoted, q, reply, pushname }) => {
     try {
       const qType = quoted?.mtype || quoted?.type;
       const isQuotedImage =
@@ -137,7 +137,7 @@ cmd(
         });
 
         const buf = await st.toBuffer();
-        await danuwa.sendMessage(from, { sticker: buf }, { quoted: mek });
+        await ishan.sendMessage(from, { sticker: buf }, { quoted: mek });
         return reply("✅ Sticker rounded!");
       }
 
@@ -155,7 +155,7 @@ cmd(
         });
 
         const buf = await st.toBuffer();
-        await danuwa.sendMessage(from, { sticker: buf }, { quoted: mek });
+        await ishan.sendMessage(from, { sticker: buf }, { quoted: mek });
         return reply("✅ Sinhala/Text sticker created!");
       }
 
