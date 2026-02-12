@@ -7,10 +7,10 @@ cmd(
     alias: ["funny"],
     react: "😂",
     desc: "Send a random joke",
-    category: "fun",
+    category: "MATHTOOL",
     filename: __filename,
   },
-  async (danuwa, mek, m, { reply }) => {
+  async (ishan, mek, m, { reply }) => {
     try {
       const res = await axios.get("https://official-joke-api.appspot.com/random_joke");
       const { setup, punchline } = res.data;
