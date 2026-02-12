@@ -11,14 +11,14 @@ cmd(
     category: "ai",
     filename: __filename,
   },
-  async (danuwa, mek, m, { from, q, reply }) => {
+  async (ishan, mek, m, { from, q, reply }) => {
     if (!q) return reply("❌ Provide a query or prompt.");
 
     try {
       const payload = { query: q };
       const res = await axios.post(`${API_BASE}/gemini`, payload);
 
-      await danuwa.sendMessage(
+      await ishan.sendMessage(
         from,
         { text: res.data.answer || "❌ No response" },
         { quoted: mek }
