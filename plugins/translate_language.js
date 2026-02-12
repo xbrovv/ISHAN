@@ -3,15 +3,15 @@ const translate = require("@vitalets/google-translate-api");
 
 cmd(
   {
-    pattern: "tr",
-    alias: ["translate"],
+    pattern: "translate",
+    alias: ["tr"],
     react: "🌐",
     desc: "Translate text to target language",
-    category: "tools",
+    category: "MATHTOOL",
     filename: __filename,
   },
   async (
-    danuwa,
+    ishan,
     mek,
     m,
     {
@@ -38,7 +38,7 @@ cmd(
 
       const response = `
 🌐 *TRANSLATION RESULT* 🌐
-────────────────────
+*◄❖────────────────────❖►*
 📤 *Original*: ${text}
 📥 *Translated (${lang})*: ${result.text}
 🔄 *Detected Lang*: ${result.from.language.iso}
