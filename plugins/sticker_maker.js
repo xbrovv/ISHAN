@@ -88,11 +88,11 @@ cmd(
     alias: ["s", "ss", "stic"],
     react: "🤹‍♀️",
     desc: "Convert photo/sticker/text into a rounded sticker (Sinhala supported).",
-    category: "tools",
+    category: "MATHTOOL",
     use: ".sticker <reply to image/sticker | text> [--circle|--rounded|--square] [--radius=80]",
     filename: __filename,
   },
-  async (danuwa, mek, m, { from, quoted, q, reply, pushname }) => {
+  async (ishan, mek, m, { from, quoted, q, reply, pushname }) => {
     try {
       const qType = quoted?.mtype || quoted?.type;
       const isQuotedImage =
@@ -109,15 +109,15 @@ cmd(
         const roundedPng = await makeRoundedPng(imageBuffer, opts);
 
         const st = new Sticker(roundedPng, {
-          pack: pushname || "danuwa-MD",
-          author: "danuka dissnayake",
+          pack: pushname || "ISHAN-MD",
+          author: "ISHAN Madusanke",
           type: StickerTypes.FULL,
           quality: 100,
           background: "transparent",
         });
 
         const buf = await st.toBuffer();
-        await danuwa.sendMessage(from, { sticker: buf }, { quoted: mek });
+        await ishan.sendMessage(from, { sticker: buf }, { quoted: mek });
         return reply("✅ Rounded sticker created!");
       }
 
@@ -129,15 +129,15 @@ cmd(
         const roundedPng = await makeRoundedPng(png, opts);
 
         const st = new Sticker(roundedPng, {
-          pack: pushname || "danuwa-MD",
-          author: "danuwa Chanushka",
+          pack: pushname || "ISHAN-MD",
+          author: "ISHAN Madusanke",
           type: StickerTypes.FULL,
           quality: 100,
           background: "transparent",
         });
 
         const buf = await st.toBuffer();
-        await danuwa.sendMessage(from, { sticker: buf }, { quoted: mek });
+        await ishan.sendMessage(from, { sticker: buf }, { quoted: mek });
         return reply("✅ Sticker rounded!");
       }
 
@@ -147,21 +147,21 @@ cmd(
         const roundedPng = await makeRoundedPng(pngText, opts);
 
         const st = new Sticker(roundedPng, {
-          pack: pushname || "danuwa-MD",
-          author: "danuwa Chanushka",
+          pack: pushname || "ISHAN-MD",
+          author: "ISHAN Madusanke",
           type: StickerTypes.FULL,
           quality: 100,
           background: "transparent",
         });
 
         const buf = await st.toBuffer();
-        await danuwa.sendMessage(from, { sticker: buf }, { quoted: mek });
+        await ishan.sendMessage(from, { sticker: buf }, { quoted: mek });
         return reply("✅ Sinhala/Text sticker created!");
       }
 
       return reply("⚠️ Reply to *image/sticker* or type Sinhala/English text after `.sticker`.\nOptions: `--circle` | `--rounded` | `--square` | `--radius=80`");
     } catch (e) {
-      console.error("❌ danuwa-MD Sticker Error:", e);
+      console.error("❌ ISHAN-MD Sticker Error:", e);
       return reply("❌ Failed to generate sticker. Check logs.");
     }
   }
