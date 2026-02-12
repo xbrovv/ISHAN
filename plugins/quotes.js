@@ -4,7 +4,7 @@ const { commands } = require('../command');
 commands.push({
   pattern: 'quote',
   desc: 'Get a random quote from ZenQuotes',
-  category: "fun",
+  category: "MATHTOOL",
   react: '📜',
   function: async (sock, m, msg, { reply }) => {
     try {
