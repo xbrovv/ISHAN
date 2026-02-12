@@ -3,14 +3,14 @@ const axios = require("axios");
 
 cmd(
   {
-    pattern: "meme",
-    alias: ["memes"],
+    pattern: "memes",
+    alias: ["meme"],
     react: "🤣",
     desc: "Sends a random meme from Reddit",
-    category: "fun",
+    category: "MATHTOOL",
     filename: __filename,
   },
-  async (danuwa, mek, m, { from, reply }) => {
+  async (ishan, mek, m, { from, reply }) => {
     try {
       const res = await axios.get("https://meme-api.com/gimme/dankmemes");
       const { title, url, author, subreddit, ups } = res.data;
@@ -20,7 +20,7 @@ cmd(
 👍 ${ups} | 👤 ${author} | 🧵 r/${subreddit}
 `.trim();
 
-      await danuwa.sendMessage(
+      await ishan.sendMessage(
         from,
         { image: { url }, caption },
         { quoted: mek }
