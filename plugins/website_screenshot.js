@@ -8,10 +8,10 @@ cmd({
   pattern: "ss",
   react: "❤️",
   desc: "Take website screenshot",
-  category: "tools",
+  category: "MATHTOOL",
   use: ".screenshot <url>",
   filename: __filename,
-}, async (danuwa, mek, m, { from, q, reply }) => {
+}, async (ishan, mek, m, { from, q, reply }) => {
   if (!q) return reply("🖼️ *Please provide a website URL.*\nExample: `.screenshot https://example.com`");
 
   let url = q.trim();
@@ -47,7 +47,7 @@ cmd({
     await browser.close();
 
     const buffer = fs.readFileSync(screenshotPath);
-    await danuwa.sendMessage(from, {
+    await ishan.sendMessage(from, {
       image: buffer,
       caption: `╭〔 *📷 Website Screenshot* 〕─⬣
 ┃ 🌐 URL: ${url}
