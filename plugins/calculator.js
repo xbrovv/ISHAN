@@ -7,10 +7,10 @@ cmd(
     alias: ["calculate", "math"],
     react: "🧮",
     desc: "Evaluate math expressions (supports sin, sqrt, log, etc.)",
-    category: "tools",
+    category: "MATHTOOL",
     filename: __filename,
   },
-  async (danuwa, mek, m, { q, reply }) => {
+  async (ishan, mek, m, { q, reply }) => {
     try {
       if (!q) {
         return reply(
