@@ -10,12 +10,12 @@ cmd(
     pattern: "rps",
     react: "✊",
     desc: "Play Rock Paper Scissors",
-    category: "fun",
+    category: "MATHTOOL",
     filename: __filename,
   },
-  async (danuwa, mek, m, { from, sender }) => {
+  async (ishan, mek, m, { from, sender }) => {
     pendingGame[sender] = { type: "rps" };
-    await danuwa.sendMessage(
+    await ishan.sendMessage(
       from,
       { text: `✊ *Rock Paper Scissors*\n\nReply with one:\n- rock\n- paper\n- scissors` },
       { quoted: mek }
@@ -29,17 +29,17 @@ cmd(
     pattern: "quiz",
     react: "🧮",
     desc: "Answer a random math quiz",
-    category: "fun",
+    category: "MATHTOOL",
     filename: __filename,
   },
-  async (danuwa, mek, m, { from, sender }) => {
+  async (ishan, mek, m, { from, sender }) => {
     const num1 = Math.floor(Math.random() * 20) + 1;
     const num2 = Math.floor(Math.random() * 20) + 1;
     const answer = num1 + num2;
 
     pendingGame[sender] = { type: "quiz", answer };
 
-    await danuwa.sendMessage(
+    await ishan.sendMessage(
       from,
       { text: `🧮 *Math Quiz*\n\nWhat is: ${num1} + ${num2} ?\nReply with your answer.` },
       { quoted: mek }
@@ -48,22 +48,22 @@ cmd(
 );
 
 // ──────────────── Hangman ────────────────
-const words = ["apple", "banana", "dragon", "whatsapp", "danuwa", "coding", "plugin"];
+const words = ["apple", "banana", "dragon", "whatsapp", "ishan", "coding", "plugin"];
 
 cmd(
   {
     pattern: "hangman",
     react: "🎯",
     desc: "Guess the hidden word",
-    category: "fun",
+    category: "MATHTOOL",
     filename: __filename,
   },
-  async (danuwa, mek, m, { from, sender }) => {
+  async (ishan, mek, m, { from, sender }) => {
     const word = words[Math.floor(Math.random() * words.length)];
     const hidden = word.replace(/./g, "_ ");
     pendingGame[sender] = { type: "hangman", word, progress: Array(word.length).fill("_"), attempts: 6 };
 
-    await danuwa.sendMessage(
+    await ishan.sendMessage(
       from,
       { text: `🎯 *Hangman Game Started!*\nWord: ${hidden}\n\nYou have 6 attempts.\nReply with one letter.` },
       { quoted: mek }
@@ -77,10 +77,10 @@ cmd(
     pattern: "trivia",
     react: "📚",
     desc: "Answer a random trivia question",
-    category: "fun",
+    category: "MATHTOOL",
     filename: __filename,
   },
-  async (danuwa, mek, m, { from, sender, reply }) => {
+  async (ishan, mek, m, { from, sender, reply }) => {
     try {
       const res = await fetch("https://opentdb.com/api.php?amount=1&type=multiple");
       const data = await res.json();
@@ -93,7 +93,7 @@ cmd(
       options.forEach((o, i) => (text += `${i + 1}. ${o}\n`));
       text += `\nReply with the correct option or answer.`;
 
-      await danuwa.sendMessage(from, { text }, { quoted: mek });
+      await ishan.sendMessage(from, { text }, { quoted: mek });
     } catch {
       reply("❌ Trivia API error.");
     }
@@ -106,16 +106,16 @@ cmd(
     pattern: "fast",
     react: "⌨️",
     desc: "Typing speed challenge",
-    category: "fun",
+    category: "MATHTOOL",
     filename: __filename,
   },
-  async (danuwa, mek, m, { from, sender }) => {
+  async (ishan, mek, m, { from, sender }) => {
     const words = ["whatsapp", "danuwa", "coding", "banana", "developer", "friendship"];
     const word = words[Math.floor(Math.random() * words.length)];
 
     pendingGame[sender] = { type: "fast", word, start: Date.now() };
 
-    await danuwa.sendMessage(
+    await ishan.sendMessage(
       from,
       { text: `⌨️ *Fast Typing Challenge!*\n\nType this word within 15s:\n👉 ${word}` },
       { quoted: mek }
@@ -136,14 +136,14 @@ cmd(
     pattern: "whoami",
     react: "🕵️",
     desc: "Guess the person/character",
-    category: "fun",
+    category: "MATHTOOL",
     filename: __filename,
   },
-  async (danuwa, mek, m, { from, sender }) => {
+  async (ishan, mek, m, { from, sender }) => {
     const item = whoamiList[Math.floor(Math.random() * whoamiList.length)];
     pendingGame[sender] = { type: "whoami", answer: item.answer };
 
-    await danuwa.sendMessage(
+    await ishan.sendMessage(
       from,
       { text: `🕵️ *Who Am I?*\n\nClue: ${item.clue}\nReply with your guess.` },
       { quoted: mek }
@@ -164,14 +164,14 @@ cmd(
     pattern: "emojiquiz",
     react: "🤔",
     desc: "Guess movie/song from emojis",
-    category: "fun",
+    category: "MATHTOOL",
     filename: __filename,
   },
-  async (danuwa, mek, m, { from, sender }) => {
+  async (ishan, mek, m, { from, sender }) => {
     const item = emojiQuiz[Math.floor(Math.random() * emojiQuiz.length)];
     pendingGame[sender] = { type: "emojiquiz", answer: item.answer };
 
-    await danuwa.sendMessage(
+    await ishan.sendMessage(
       from,
       { text: `🤔 *Emoji Quiz*\n\nClue: ${item.clue}\nReply with your guess.` },
       { quoted: mek }
@@ -188,10 +188,10 @@ cmd(
     pattern: "ttt",
     react: "❌",
     desc: "Play Tic Tac Toe with danuwa",
-    category: "fun",
+    category: "MATHTOOL",
     filename: __filename,
   },
-  async (danuwa, mek, m, { from, sender }) => {
+  async (ishan, mek, m, { from, sender }) => {
     const board = [
       ["", "", ""],
       ["", "", ""],
@@ -199,7 +199,7 @@ cmd(
     ];
     pendingGame[sender] = { type: "ttt", board };
 
-    await danuwa.sendMessage(
+    await ishan.sendMessage(
       from,
       { text: `❌⭕ *Tic Tac Toe*\n\nYou are X. Reply with row,col (1-3).\n\n${renderBoard(board)}` },
       { quoted: mek }
@@ -212,7 +212,7 @@ cmd(
   {
     on: "text",
   },
-  async (danuwa, mek, m, { from, sender, body, reply }) => {
+  async (ishan, mek, m, { from, sender, body, reply }) => {
     if (!pendingGame[sender]) return;
     const game = pendingGame[sender];
     const input = body.trim().toLowerCase();
@@ -221,20 +221,20 @@ cmd(
     if (game.type === "rps") {
       const choices = ["rock", "paper", "scissors"];
       if (!choices.includes(input)) return;
-      const danuwaChoice = choices[Math.floor(Math.random() * choices.length)];
+      const ishanChoice = choices[Math.floor(Math.random() * choices.length)];
 
       let result = "🤝 It's a draw!";
       if (
-        (input === "rock" && danuwaChoice === "scissors") ||
-        (input === "paper" && danuwaChoice === "rock") ||
-        (input === "scissors" && danuwaChoice === "paper")
+        (input === "rock" && ishanChoice === "scissors") ||
+        (input === "paper" && ishanChoice === "rock") ||
+        (input === "scissors" && ishanChoice === "paper")
       ) {
         result = "🎉 You win!";
-      } else if (input !== danuwaChoice) {
+      } else if (input !== ishanChoice) {
         result = "😢 You lose!";
       }
 
-      await danuwa.sendMessage(from, { text: `✊ You: ${input}\n🤖 danuwa: ${danuwaChoice}\n\n${result}` }, { quoted: mek });
+      await ishan.sendMessage(from, { text: `✊ You: ${input}\n🤖 danuwa: ${danuwaChoice}\n\n${result}` }, { quoted: mek });
       delete pendingGame[sender];
     }
 
@@ -243,9 +243,9 @@ cmd(
       const guess = parseInt(input);
       if (isNaN(guess)) return reply("❌ Please reply with a number.");
       if (guess === game.answer) {
-        await danuwa.sendMessage(from, { text: `🎉 Correct! The answer was ${game.answer}` }, { quoted: mek });
+        await ishan.sendMessage(from, { text: `🎉 Correct! The answer was ${game.answer}` }, { quoted: mek });
       } else {
-        await danuwa.sendMessage(from, { text: `😢 Wrong! The correct answer was ${game.answer}` }, { quoted: mek });
+        await ishan.sendMessage(from, { text: `😢 Wrong! The correct answer was ${game.answer}` }, { quoted: mek });
       }
       delete pendingGame[sender];
     }
@@ -265,13 +265,13 @@ cmd(
       if (!found) game.attempts--;
 
       if (!game.progress.includes("_")) {
-        await danuwa.sendMessage(from, { text: `🎉 You guessed it! Word: ${game.word}` }, { quoted: mek });
+        await ishan.sendMessage(from, { text: `🎉 You guessed it! Word: ${game.word}` }, { quoted: mek });
         delete pendingGame[sender];
       } else if (game.attempts <= 0) {
-        await danuwa.sendMessage(from, { text: `💀 Game over! The word was: ${game.word}` }, { quoted: mek });
+        await ishan.sendMessage(from, { text: `💀 Game over! The word was: ${game.word}` }, { quoted: mek });
         delete pendingGame[sender];
       } else {
-        await danuwa.sendMessage(
+        await ishan.sendMessage(
           from,
           { text: `🎯 Word: ${game.progress.join(" ")}\n❤️ Attempts left: ${game.attempts}` },
           { quoted: mek }
@@ -282,9 +282,9 @@ cmd(
     // Trivia
     else if (game.type === "trivia") {
       if (input.includes(game.answer.toLowerCase())) {
-        await danuwa.sendMessage(from, { text: `✅ Correct! Answer: ${game.answer}` }, { quoted: mek });
+        await ishan.sendMessage(from, { text: `✅ Correct! Answer: ${game.answer}` }, { quoted: mek });
       } else {
-        await danuwa.sendMessage(from, { text: `❌ Wrong! Correct answer: ${game.answer}` }, { quoted: mek });
+        await ishan.sendMessage(from, { text: `❌ Wrong! Correct answer: ${game.answer}` }, { quoted: mek });
       }
       delete pendingGame[sender];
     }
@@ -295,12 +295,12 @@ cmd(
       const diff = (now - game.start) / 1000;
       if (input === game.word) {
         if (diff <= 15) {
-          await danuwa.sendMessage(from, { text: `⚡ Fast! You typed correctly in ${diff.toFixed(1)}s` }, { quoted: mek });
+          await ishan.sendMessage(from, { text: `⚡ Fast! You typed correctly in ${diff.toFixed(1)}s` }, { quoted: mek });
         } else {
-          await danuwa.sendMessage(from, { text: `⏱️ Too late! You took ${diff.toFixed(1)}s` }, { quoted: mek });
+          await ishan.sendMessage(from, { text: `⏱️ Too late! You took ${diff.toFixed(1)}s` }, { quoted: mek });
         }
       } else {
-        await danuwa.sendMessage(from, { text: `❌ Wrong word. The correct word was: ${game.word}` }, { quoted: mek });
+        await ishan.sendMessage(from, { text: `❌ Wrong word. The correct word was: ${game.word}` }, { quoted: mek });
       }
       delete pendingGame[sender];
     }
@@ -308,9 +308,9 @@ cmd(
     // Who Am I
     else if (game.type === "whoami") {
       if (input.includes(game.answer)) {
-        await danuwa.sendMessage(from, { text: `🎉 Correct! I am ${game.answer}` }, { quoted: mek });
+        await ishan.sendMessage(from, { text: `🎉 Correct! I am ${game.answer}` }, { quoted: mek });
       } else {
-        await danuwa.sendMessage(from, { text: `❌ Wrong! The answer was: ${game.answer}` }, { quoted: mek });
+        await ishan.sendMessage(from, { text: `❌ Wrong! The answer was: ${game.answer}` }, { quoted: mek });
       }
       delete pendingGame[sender];
     }
@@ -318,9 +318,9 @@ cmd(
     // Emoji Quiz
     else if (game.type === "emojiquiz") {
       if (input.includes(game.answer)) {
-        await danuwa.sendMessage(from, { text: `🎬 Correct! It was *${game.answer}*` }, { quoted: mek });
+        await ishan.sendMessage(from, { text: `🎬 Correct! It was *${game.answer}*` }, { quoted: mek });
       } else {
-        await danuwa.sendMessage(from, { text: `❌ Wrong! Correct answer: *${game.answer}*` }, { quoted: mek });
+        await ishan.sendMessage(from, { text: `❌ Wrong! Correct answer: *${game.answer}*` }, { quoted: mek });
       }
       delete pendingGame[sender];
     }
@@ -345,7 +345,7 @@ cmd(
         game.board[br][bc] = "O";
       }
 
-      await danuwa.sendMessage(from, { text: `❌⭕ *Tic Tac Toe*\n\n${renderBoard(game.board)}` }, { quoted: mek });
+      await ishan.sendMessage(from, { text: `❌⭕ *Tic Tac Toe*\n\n${renderBoard(game.board)}` }, { quoted: mek });
     }
   }
 );
