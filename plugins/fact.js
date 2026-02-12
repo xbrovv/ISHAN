@@ -7,10 +7,10 @@ cmd(
     alias: ["didyouknow"],
     react: "🧠",
     desc: "Get a random fun fact",
-    category: "fun",
+    category: "MATHTOOL",
     filename: __filename,
   },
-  async (danuwa, mek, m, { reply }) => {
+  async (ishan, mek, m, { reply }) => {
     try {
       const res = await axios.get("https://uselessfacts.jsph.pl/random.json?language=en");
       reply(`💡 *Did you know?*\n\n${res.data.text}`);
