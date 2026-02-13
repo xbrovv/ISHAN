@@ -5,7 +5,7 @@ lite({
     pattern: "ai",
     alias: ["bot", "dj", "gpt", "gpt4", "bing"],
     desc: "Chat with an AI model",
-    category: "ai",
+    category: "AI",
     react: "🤖",
     filename: __filename
 },
@@ -34,7 +34,7 @@ lite({
     pattern: "openai",
     alias: ["chatgpt", "gpt3", "open-gpt"],
     desc: "Chat with OpenAI",
-    category: "ai",
+    category: "AI",
     react: "🧠",
     filename: __filename
 },
@@ -63,7 +63,7 @@ lite({
     pattern: "deepseek",
     alias: ["deep", "seekai"],
     desc: "Chat with DeepSeek AI",
-    category: "ai",
+    category: "AI",
     react: "🧠",
     filename: __filename
 },
