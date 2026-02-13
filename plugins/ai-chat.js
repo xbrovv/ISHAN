@@ -1,11 +1,11 @@
-const { lite } = require('../lite');
+const { cmd } = require('../command');
 const axios = require('axios');
 
 lite({
     pattern: "ai",
     alias: ["bot", "dj", "gpt", "gpt4", "bing"],
     desc: "Chat with an AI model",
-    category: "AI",
+    category: "ai",
     react: "🤖",
     filename: __filename
 },
@@ -34,7 +34,7 @@ lite({
     pattern: "openai",
     alias: ["chatgpt", "gpt3", "open-gpt"],
     desc: "Chat with OpenAI",
-    category: "AI",
+    category: "ai",
     react: "🧠",
     filename: __filename
 },
@@ -63,7 +63,7 @@ lite({
     pattern: "deepseek",
     alias: ["deep", "seekai"],
     desc: "Chat with DeepSeek AI",
-    category: "AI",
+    category: "ai",
     react: "🧠",
     filename: __filename
 },
