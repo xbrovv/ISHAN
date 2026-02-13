@@ -22,10 +22,10 @@ cmd(
     alias: ["tr"],
     react: "❓",
     desc: "Play truth question",
-    category: "fun",
+    category: "MATHTOOL",
     filename: __filename,
   },
-  async (danuwa, mek, m, { reply }) => {
+  async (ishan, mek, m, { reply }) => {
     const question = truths[Math.floor(Math.random() * truths.length)];
     reply(`🧠 *Truth Question:*\n\n${question}`);
   }
