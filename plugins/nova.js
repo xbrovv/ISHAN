@@ -20,7 +20,7 @@ cmd(
         params: {
           message: q,
           botname: "NOVACORE✟",
-          ownername: "Dev Sung & Kelvin Tech",
+          ownername: "Dev ISHAN",
           user: from,
         },
       });
