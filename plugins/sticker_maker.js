@@ -88,7 +88,7 @@ cmd(
     alias: ["s", "ss", "stic"],
     react: "🤹‍♀️",
     desc: "Convert photo/sticker/text into a rounded sticker (Sinhala supported).",
-    category: "tools",
+    category: "MATHTOOL",
     use: ".sticker <reply to image/sticker | text> [--circle|--rounded|--square] [--radius=80]",
     filename: __filename,
   },
@@ -109,8 +109,8 @@ cmd(
         const roundedPng = await makeRoundedPng(imageBuffer, opts);
 
         const st = new Sticker(roundedPng, {
-          pack: pushname || "danuwa-MD",
-          author: "danuka dissnayake",
+          pack: pushname || "ishan-MD",
+          author: "ishan madusanke",
           type: StickerTypes.FULL,
           quality: 100,
           background: "transparent",
@@ -129,8 +129,8 @@ cmd(
         const roundedPng = await makeRoundedPng(png, opts);
 
         const st = new Sticker(roundedPng, {
-          pack: pushname || "danuwa-MD",
-          author: "danuwa Chanushka",
+          pack: pushname || "ishan-MD",
+          author: "ishan madusanke",
           type: StickerTypes.FULL,
           quality: 100,
           background: "transparent",
@@ -147,8 +147,8 @@ cmd(
         const roundedPng = await makeRoundedPng(pngText, opts);
 
         const st = new Sticker(roundedPng, {
-          pack: pushname || "danuwa-MD",
-          author: "danuwa Chanushka",
+          pack: pushname || "ishan-MD",
+          author: "ishan madusanke",
           type: StickerTypes.FULL,
           quality: 100,
           background: "transparent",
@@ -161,7 +161,7 @@ cmd(
 
       return reply("⚠️ Reply to *image/sticker* or type Sinhala/English text after `.sticker`.\nOptions: `--circle` | `--rounded` | `--square` | `--radius=80`");
     } catch (e) {
-      console.error("❌ danuwa-MD Sticker Error:", e);
+      console.error("❌ ishan-MD Sticker Error:", e);
       return reply("❌ Failed to generate sticker. Check logs.");
     }
   }
