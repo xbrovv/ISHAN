@@ -58,16 +58,16 @@ cmd({
 🫟 *WΞLCΩMΞ TΩ ISHAN-X MD* 🫟
 
 *╭─「 STATUS DETAILS 」────❖◆►*
-┃➤ 🧑‍💻 *Owner* : Ishan
-┃➤ 📌 *Prefix* : ${config.PREFIX || "."}
-┃➤ 🎲 *Mode* : [${config.MODE || "public"}]
-┃➤ 💻 *Platform* : ${platform}
-┃➤ 📞 *Owner Number* : 94761638379
-┃➤ 💾 *RAM* : ${usedRAM} MB / ${totalRAM} MB
-┃➤ ⏱️ *Uptime* : ${upH}h ${upM}m ${upS}s
-┃➤ ⏰ *Time* : ${new Date().toLocaleTimeString()}
-┃➤ 📅 *Date* : ${new Date().toISOString().split("T")[0]}
-┃➤ 📂 *Categories* : ${categories.length}
+┃➤ 🧑‍💻 𝙾𝚆𝙽𝙴𝚁 : Ishan
+┃➤ 📌 𝙿𝚁𝙴𝙵𝙸𝚇 : ${config.PREFIX || "."}
+┃➤ 🎲 𝙼𝙾𝙳𝙴 : [${config.MODE || "public"}]
+┃➤ 💻 𝙿𝙻𝙰𝚃𝙵𝙾𝚁𝙼 : ${platform}
+┃➤ 📞 𝙾𝚆𝙽𝙴𝚁 𝙽𝚄𝙼𝙱𝙴𝚁 : 94761638379
+┃➤ 💾 𝚁𝙰𝙼 : ${usedRAM} MB / ${totalRAM} MB
+┃➤ ⏱️ 𝚄𝙿𝚃𝙸𝙼𝙴 : ${upH}h ${upM}m ${upS}s
+┃➤ ⏰ 𝚃𝙸𝙼𝙴 : ${new Date().toLocaleTimeString()}
+┃➤ 📅 𝙳𝙰𝚃𝙴 : ${new Date().toISOString().split("T")[0]}
+┃➤ 📂 𝙲𝙰𝚃𝙴𝙶𝙾𝚁𝙸𝙴𝚂 : ${categories.length}
 *╰───────────────❖◆►*
 
 *Reply Below Number 🔢*
@@ -135,7 +135,7 @@ cmd({
     cmds.forEach(c => {
       text += `
 *╭──────────●●►*
-┃ *ヤ Command* : [${c.pattern}]
+┃ *ヤ Command* : *[${c.pattern}]*
 ┃ *ヤ Use* : ${config.PREFIX || "."}${c.pattern} ${c.use || ""}
 *╰──────────●●►*
 `;
