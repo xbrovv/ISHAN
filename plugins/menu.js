@@ -58,16 +58,16 @@ cmd({
 🫟 *WΞLCΩMΞ TΩ ISHAN-X MD* 🫟
 
 *╭─「 STATUS DETAILS 」────❖◆►*
-┃➤ 🧑‍💻 *𝙾𝚆𝙽𝙴𝚁* : Ishan
-┃➤ 📌 *𝙿𝚁𝙴𝙵𝙸𝚇* : ${config.PREFIX || "."}
+┃➤ 🧑‍💻 *𝙾𝚆𝙽𝙴𝚁* : [Ishan]
+┃➤ 📌 *𝙿𝚁𝙴𝙵𝙸𝚇* : [${config.PREFIX || "."}]
 ┃➤ 🎲 *𝙼𝙾𝙳𝙴* : [${config.MODE || "public"}]
-┃➤ 💻 *𝙿𝙻𝙰𝚃𝙵𝙾𝚁𝙼* : ${platform}
-┃➤ 📞 *𝙾𝚆𝙽𝙴𝚁 𝙽𝚄𝙼𝙱𝙴𝚁* : 94761638379
-┃➤ 💾 *𝚁𝙰𝙼* : ${usedRAM} MB / ${totalRAM} MB
-┃➤ ⏱️ *𝚄𝙿𝚃𝙸𝙼𝙴* : ${upH}h ${upM}m ${upS}s
-┃➤ ⏰ *𝚃𝙸𝙼𝙴* : ${new Date().toLocaleTimeString()}
-┃➤ 📅 *𝙳𝙰𝚃𝙴* : ${new Date().toISOString().split("T")[0]}
-┃➤ 📂 *𝙲𝙰𝚃𝙴𝙶𝙾𝚁𝙸𝙴𝚂* : ${categories.length}
+┃➤ 💻 *𝙿𝙻𝙰𝚃𝙵𝙾𝚁𝙼* : [${platform}]
+┃➤ 📞 *𝙾𝚆𝙽𝙴𝚁 𝙽𝚄𝙼𝙱𝙴𝚁* : [94761638379]
+┃➤ 💾 *𝚁𝙰𝙼* : [${usedRAM} MB / ${totalRAM} MB]
+┃➤ ⏱️ *𝚄𝙿𝚃𝙸𝙼𝙴* : [${upH}h ${upM}m ${upS}s]
+┃➤ ⏰ *𝚃𝙸𝙼𝙴* : [${new Date().toLocaleTimeString()}]
+┃➤ 📅 *𝙳𝙰𝚃𝙴* : [${new Date().toISOString().split("T")[0]}]
+┃➤ 📂 *𝙲𝙰𝚃𝙴𝙶𝙾𝚁𝙸𝙴𝚂* : [${categories.length}]
 *╰───────────────❖◆►*
 
 *Reply Below Number 🔢*
