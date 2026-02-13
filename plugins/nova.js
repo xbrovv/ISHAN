@@ -10,7 +10,7 @@ cmd(
     category: "ai",
     filename: __filename,
   },
-  async (malvin, mek, m, { from, args, reply }) => {
+  async (ishan, mek, m, { from, args, reply }) => {
     try {
       const q = args.join(" ");
       if (!q) return reply("❌ Please provide a question. Example: `.nova who created you?`");
@@ -27,7 +27,7 @@ cmd(
 
       const answer = res.data.message;
 
-      await malvin.sendMessage(
+      await ishan.sendMessage(
         from,
         {
           text: `🤖 *NOVACORE✟ AI*\n\n${answer}`,
