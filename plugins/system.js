@@ -15,7 +15,7 @@ cmd({
   // Initial ping message
   await ishan.sendMessage(
     from,
-    { text: "⚡ Fetching system info..." },
+    { text: "💻 system info..." },
     { quoted: mek }
   );
 
@@ -65,7 +65,7 @@ _𝗜𝗦𝗛𝗔𝗡-𝕏 Instance • Real-Time Monitor_
 ┃ ✦ *Version*        : V3 ULTRA
 *⟮────────────────────────────⟯*
 
-🅂🄿🄰🅁🄺-🅇🄼🄳
+*🅂🄿🄰🅁🄺-🅇🄼🄳*
 `.trim();
 
   await ishan.sendMessage(from, {
