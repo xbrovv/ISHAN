@@ -1,48 +1,76 @@
 const { cmd } = require("../command");
 const os = require("os");
+const moment = require("moment");
 
 cmd({
-    pattern: "system",
-    alias: ["sys","status","botinfo"],
-    desc: "Check bot system status",
-    category: "main",
-    react: "🖥️",
-    filename: __filename
-},
-async (conn, mek, m, { reply }) => {
+  pattern: "system",
+  react: "🖥️",
+  desc: "Show full bot system status",
+  category: "main",
+  filename: __filename
+}, async (ishan, mek, m, { from }) => {
 
-try {
+  const start = Date.now();
 
-    // Uptime
-    const uptime = process.uptime();
-    const hours = Math.floor(uptime / 3600);
-    const minutes = Math.floor((uptime % 3600) / 60);
-    const seconds = Math.floor(uptime % 60);
+  // Initial ping message
+  await ishan.sendMessage(
+    from,
+    { text: "⚡ Fetching system info..." },
+    { quoted: mek }
+  );
 
-    // RAM Usage
-    const totalMem = (os.totalmem() / 1024 / 1024).toFixed(2);
-    const freeMem = (os.freemem() / 1024 / 1024).toFixed(2);
-    const usedMem = (totalMem - freeMem).toFixed(2);
+  const latency = Date.now() - start;
 
-    const systemInfo = `
-╭━━〔 🤖 ISHAN SPARK-X SYSTEM 〕━━⬣
-┃ ⚙️ Mode      : Public
-┃ 🚀 Platform  : ${os.platform()}
-┃ 🧠 RAM Used  : ${usedMem} MB
-┃ 💾 Total RAM : ${totalMem} MB
-┃ ⏳ Uptime    : ${hours}h ${minutes}m ${seconds}s
-┃ 🕒 Time      : ${moment().format("HH:mm:ss")}
-┃ 📅 Date      : ${moment().format("YYYY-MM-DD")}
-╰━━━━━━━━━━━━━━━━━━⬣
+  // Runtime
+  const up = process.uptime();
+  const h = Math.floor(up / 3600);
+  const mi = Math.floor((up % 3600) / 60);
+  const s = Math.floor(up % 60);
+  const runtime = `${h}h ${mi}m ${s}s`;
 
-> © Developer by ISHAN-X
-`;
+  // CPU usage
+  const cores = os.cpus().length || 1;
+  const load = os.loadavg()[0] || 0;
+  const cpuUsage = Math.min(99, Math.max(1, Math.round((load / cores) * 100)));
 
-    reply(systemInfo);
+  // RAM / Memory usage
+  const totalRam = os.totalmem() / 1024 / 1024; // MB
+  const freeRam = os.freemem() / 1024 / 1024;   // MB
+  const usedRam = totalRam - freeRam;
 
-} catch (e) {
-    console.log(e);
-    reply("❌ System Error Occurred !");
-}
+  const botMemory = process.memoryUsage().rss / 1024 / 1024; // MB
+
+  // Bot & System Info
+  const platform = os.platform();
+  const arch = os.arch();
+  const cpuModel = os.cpus()[0]?.model || "Unknown";
+  const coresCount = os.cpus().length;
+
+  const DASHBOARD_IMAGE = "https://files.catbox.moe/66txio.JPG";
+
+  const caption = `
+🧬 𝗦𝗣𝗔𝗥𝗞 -𝗫 𝗦𝗬𝗦𝗧𝗘𝗠 𝗗𝗔𝗦𝗛𝗕𝗢𝗔𝗥𝗗
+_𝗜𝗦𝗛𝗔𝗡-𝕏 Instance • Real-Time Monitor_
+
+*Bot Status* ⬡
+*⟮────────────────────────────⟯*
+┃ ✦ *Runtime*        : ${runtime}
+┃ ✦ *Respond Speed*  : ${latency} ms
+┃ ✦ *CPU Usage*      : ${cpuUsage}%
+┃ ✦ *CPU Model*      : ${cpuModel} (${coresCount} cores)
+┃ ✦ *Platform*       : ${platform} ${arch}
+┃ ✦ *RAM Usage*      : ${usedRam.toFixed(1)} / ${totalRam.toFixed(1)} MB
+┃ ✦ *Bot Memory*     : ${botMemory.toFixed(1)} MB
+┃ ✦ *Date & Time*    : ${moment().format("YYYY-MM-DD HH:mm:ss")}
+┃ ✦ *Version*        : V3 ULTRA
+*⟮────────────────────────────⟯*
+
+🅂🄿🄰🅁🄺-🅇🄼🄳
+`.trim();
+
+  await ishan.sendMessage(from, {
+    image: { url: DASHBOARD_IMAGE },
+    caption
+  }, { quoted: mek });
 
 });
