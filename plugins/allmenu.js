@@ -33,11 +33,11 @@ cmd(
       // Menu text
       let menuText = `💠 ISHAN-MD ALL MENU 💠
 
-👤 User    : [${user}]
-👑 Owner   : [${owner}]
-🕒 Uptime  : [${uptime}]
-💾 Memory  : [${usedRam} / ${totalRam}]
-📌 Prefix  : [${config.PREFIX}]
+👤 *User*    : [${user}]
+👑 *Owner*   : [${owner}]
+🕒 *Uptime*  : [${uptime}]
+💾 *Memory*  : [${usedRam} / ${totalRam}]
+📌 *Prefix*  : [${config.PREFIX}]
 
 ◄❖━━━━━━━━━━━━━━━━━━━━━━❖►
 `;
