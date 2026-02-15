@@ -7,7 +7,7 @@
 module.exports = {
 
   // 🔐 WhatsApp Session ID (MEGA or base64)
-  SESSION_ID: process.env.SESSION_ID || "K9ZiDBBQ#r_IR3IUG_UBIORsh43iEf_2nZ5F7akSMUXLi-N77aQk",
+  SESSION_ID: process.env.SESSION_ID || "GkZW3IzB#ca2e0CQXelFHED9seYSRiJMF3lHxeuc5-E18mHG9lCQ",
 
 
   // ===============================
