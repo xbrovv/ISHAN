@@ -1,6 +1,5 @@
 const { cmd } = require("../command");
 const os = require("os");
-const moment = require("moment");
 
 cmd({
     pattern: "system",
