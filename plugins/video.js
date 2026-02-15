@@ -25,7 +25,7 @@ cmd({
   desc: "Download YouTube video (MP4)",
   category: "download",
   filename: __filename,
-}, async (bot, mek, m, { from, q, reply }) => {
+}, async (ishan, mek, m, { from, q, reply }) => {
   try {
     if (!q) return reply("🎬 *video name or link send*" + FOOTER);
 
@@ -49,13 +49,13 @@ cmd({
 ╰━━━━━━━❖✦►`
 + FOOTER;
 
-    const sentMsg = await bot.sendMessage(
+    const sentMsg = await ishan.sendMessage(
       from,
       { image: { url: video.thumbnail }, caption },
       { quoted: mek }
     );
 
-    await bot.sendMessage(from, {
+    await ishan.sendMessage(from, {
       react: { text: "🎥", key: sentMsg.key }
     });
 
@@ -78,7 +78,7 @@ cmd({
         if (!isReply) return;
         if (text.trim() !== "1") return;
 
-        const loadingMsg = await bot.sendMessage(
+        const loadingMsg = await ishan.sendMessage(
           from,
           { text: "*𝙻𝙾𝙰𝙳𝙸𝙽𝙶...*" },
           { quoted: mek }
@@ -92,7 +92,7 @@ cmd({
         if (!data?.url)
           return reply("❌ *Video download failed*" + FOOTER);
 
-        await bot.sendMessage(
+        await ishan.sendMessage(
           from,
           {
             video: { url: data.url },
@@ -102,12 +102,12 @@ cmd({
           { quoted: mek }
         );
 
-        await bot.sendMessage(from, {
+        await ishan.sendMessage(from, {
           text: "𝗖𝗢𝗠𝗣𝗟𝗘𝗧𝗘𝗗 ✅",
           edit: loadingMsg.key,
         });
 
-        bot.ev.off("messages.upsert", listener);
+        ishan.ev.off("messages.upsert", listener);
 
       } catch (err) {
         console.error(err);
@@ -116,7 +116,7 @@ cmd({
       }
     };
 
-    bot.ev.on("messages.upsert", listener);
+    ishan.ev.on("messages.upsert", listener);
 
   } catch (e) {
     console.log("VIDEO ERROR:", e);
