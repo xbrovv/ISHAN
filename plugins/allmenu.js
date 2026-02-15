@@ -63,7 +63,7 @@ cmd(
         cmds.forEach((cmdName, i) => {
           menuText += `  └ ${i + 1}. ${config.PREFIX}${cmdName}\n`;
         });
-        menuText += "◄●◆━━━━━━━━━━━━━━━━━━━━━━◆●►\n";
+        menuText += "◄●◆━━━━━━━━━━━━━━━━━━━◆●►\n";
       }
 
       menuText += `⚡ Powered by ISHAN-X ⚡`;
