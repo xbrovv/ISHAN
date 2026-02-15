@@ -5,8 +5,8 @@ const FOOTER = `\n\n> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂�
 
 /* ==================== INSTAGRAM DOWNLOAD ==================== */
 cmd({
-  pattern: "ig",
-  alias: ["instagram", "igdl"],
+  pattern: "Instagram",
+  alias: ["ig", "igdl"],
   desc: "Download Instagram Video/Reel",
   category: "download",
   filename: __filename,
