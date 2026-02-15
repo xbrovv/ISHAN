@@ -1,5 +1,5 @@
 const { cmd } = require("../command");
-const { ytmp4 } = require("api-dylux");
+const { ytmp4 } = require("sadaslk-dlcore");
 const yts = require("yt-search");
 
 const FOOTER = `\n\n> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏`;
