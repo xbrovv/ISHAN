@@ -18,7 +18,7 @@ cmd(
       const uptime = moment.duration(process.uptime() * 1000).humanize();
       const totalRam = (os.totalmem() / 1024 / 1024 / 1024).toFixed(2) + " GB";
       const usedRam = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2) + " MB";
-      const owner = config.OWNER_NUMBER || "Unknown";
+      const owner = config.OWNER_NUMBER || "ISHAN MADUSANKE";
       const user = pushname || sender.split("@")[0];
 
       // Group commands by category dynamically
@@ -31,15 +31,15 @@ cmd(
       });
 
       // Menu text
-      let menuText = `💠 SUHO-MD V2✟ ALL MENU 💠
+      let menuText = `💠 ISHAN-MD ALL MENU 💠
 
-👤 User    : ${user}
-👑 Owner   : ${owner}
-🕒 Uptime  : ${uptime}
-💾 Memory  : ${usedRam} / ${totalRam}
-🛎️ Prefix  : ${config.PREFIX}
+👤 User    : [${user}]
+👑 Owner   : [${owner}]
+🕒 Uptime  : [${uptime}]
+💾 Memory  : [${usedRam} / ${totalRam}]
+📌 Prefix  : [${config.PREFIX}]
 
-━━━━━━━━━━━━━━━━━━━━━━
+◄❖━━━━━━━━━━━━━━━━━━━━━━❖►
 `;
 
       // Optional emojis for categories
@@ -51,7 +51,7 @@ cmd(
         logo: "🎨",
         search: "🔍",
         mathtool: "🛠️",
-        movie: "💰",
+        movie: "🎞️",
         ai: "🤖",
       };
 
@@ -63,10 +63,10 @@ cmd(
         cmds.forEach((cmdName, i) => {
           menuText += `  └ ${i + 1}. ${config.PREFIX}${cmdName}\n`;
         });
-        menuText += "━━━━━━━━━━━━━━━━━━━━━━\n";
+        menuText += "◄●◆━━━━━━━━━━━━━━━━━━━━━━◆●►\n";
       }
 
-      menuText += `⚡ Powered by lord sung✟ ⚡`;
+      menuText += `⚡ Powered by ISHAN-X ⚡`;
 
       // Send menu as a single image + caption
       await ishan.sendMessage(
