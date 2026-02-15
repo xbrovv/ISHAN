@@ -1,125 +1,121 @@
-const { cmd } = require("../command");
-const { ytmp4 } = require("sadaslk-dlcore");
-const yts = require("yt-search");
+const { cmd } = require('../command')
+const fg = require('api-dylux')
+const yts = require('yt-search')
 
-const FOOTER = `\n\n> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏`;
+//==================== Video downloader =========================
 
-/* -------- YOUTUBE SEARCH -------- */
-async function getYoutube(query) {
-  const isUrl = /(youtube\.com|youtu\.be)/i.test(query);
-  if (isUrl) {
-    const id = query.includes("v=")
-      ? query.split("v=")[1].split("&")[0]
-      : query.split("/").pop();
-    const result = await yts({ videoId: id });
-    return result?.videos ? result.videos[0] : null;
-  }
-  const search = await yts(query);
-  return search.videos && search.videos.length ? search.videos[0] : null;
-}
-
-/* ==================== VIDEO / MP4 ==================== */
 cmd({
-  pattern: "video",
-  alias: ["ytmp4", "mp4"],
-  desc: "Download YouTube video (MP4)",
-  category: "download",
-  filename: __filename,
-}, async (bot, mek, m, { from, q, reply }) => {
-  try {
-    if (!q) return reply("🎬 *video name or link send*" + FOOTER);
+    pattern: 'video',
+    alias: ["v","mp4","videofile","vd"],
+    desc: 'download videos',
+    react: "📽",
+    category: 'download',
+    filename: __filename
+},
+async (conn, mek, m, { from, q, reply }) => {
+    try {
 
-    await reply("🔎 *𝚂𝙴𝙰𝚁𝙲𝙷𝙸𝙽𝙶  𝚈𝙾𝚄𝚁 𝚅𝙸𝙳𝙴𝙾*");
+        const snm = [2025];
 
-    const video = await getYoutube(q);
-    if (!video)
-      return reply("❌ *No result Please try again*" + FOOTER);
+        // Fake quoted order message
+        const qMessage = {
+            key: {
+                fromMe: false,
+                participant: "0@s.whatsapp.net",
+                remoteJid: "status@broadcast"
+            },
+            message: {
+                orderMessage: {
+                    itemCount: snm[Math.floor(Math.random() * snm.length)],
+                    status: 1,
+                    surface: 1,
+                    message: `🎯 VIHAGA MD WHATSAPP BOT BY 🎯-:\nVIHANGA PEHESARA...💗`,
+                    orderTitle: "",
+                    sellerJid: '94704227534@s.whatsapp.net'
+                }
+            }
+        };
 
-    const caption =
-`*┎━━━━━━━━━━━━━━━━❖●►*
-*┃➤ 🎬 Title    :* ${video.title}
-*┃➤ 💃 Channel  :* ${video.author?.name || "Unknown"}
-*┃➤ ⏱ Duration :* ${video.timestamp}
-*┃➤ 👀 Views    :* ${video.views.toLocaleString()}
-*┃➤ 🔗 Link     :* ${video.url}
-*┗━━━━━━━━━━━━━━━━❖●►*
+        if (!q) return reply('*Please enter a query or a url !*');
 
-╭━━━━━━━❖✦►
-┃➤ 𝗥𝗘𝗣𝗟𝗬 1️⃣ 𝗧𝗢 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗 💃
-╰━━━━━━━❖✦►`
-+ FOOTER;
+        const search = await yts(q);
+        if (!search.videos.length) return reply('*No results found ❌*');
 
-    const sentMsg = await bot.sendMessage(
-      from,
-      { image: { url: video.thumbnail }, caption },
-      { quoted: mek }
-    );
+        const data = search.videos[0];
+        const url = data.url;
 
-    await bot.sendMessage(from, {
-      react: { text: "🎥", key: sentMsg.key }
-    });
+        let desc = `*📽Vihaga MD YT VIDEOS DOWNLOADER📽*
+*|__________________________*
+*|-ℹ️ 𝗧𝗶𝘁𝗹𝗲 :* ${data.title}
+*|-🕘 𝗧𝗶𝗺𝗲 :* ${data.timestamp}
+*|-📌 𝗔𝗴𝗼 :* ${data.ago}
+*|-📉 𝗩𝗶𝗲𝘄𝘀 :* ${data.views}
+*|-🔗 𝗟𝗶𝗻𝗸 :* ${data.url}
+*|__________________________*
 
-    const messageID = sentMsg.key.id;
+> *🔢 Reply Below Number :*
 
-    /* -------- LISTENER -------- */
-    const listener = async (update) => {
-      try {
-        const mekInfo = update?.messages[0];
-        if (!mekInfo?.message) return;
+*1️⃣ Video File📽*
+*2️⃣ Document File📁*
 
-        const text =
-          mekInfo.message.conversation ||
-          mekInfo.message.extendedTextMessage?.text;
+_*CREATE BY VIHANGA PEHESARA*_
+_*POWERED BY MC ERROR OFC*_`;
 
-        const isReply =
-          mekInfo.message.extendedTextMessage?.contextInfo?.stanzaId ===
-          messageID;
-
-        if (!isReply) return;
-        if (text.trim() !== "1") return;
-
-        const loadingMsg = await bot.sendMessage(
-          from,
-          { text: "*𝙻𝙾𝙰𝙳𝙸𝙽𝙶...*" },
-          { quoted: mek }
+        const vv = await conn.sendMessage(
+            from,
+            { image: { url: data.thumbnail }, caption: desc },
+            { quoted: mek }
         );
 
-        const data = await ytmp4(video.url, {
-          format: "mp4",
-          videoQuality: "720",
+        conn.ev.on('messages.upsert', async (msgUpdate) => {
+            const msg = msgUpdate.messages[0];
+            if (!msg.message || !msg.message.extendedTextMessage) return;
+
+            const selectedOption = msg.message.extendedTextMessage.text.trim();
+
+            if (
+                msg.message.extendedTextMessage.contextInfo &&
+                msg.message.extendedTextMessage.contextInfo.stanzaId === vv.key.id
+            ) {
+
+                switch (selectedOption) {
+
+                    case '1':
+                        let downvid = await fg.ytv(url);
+                        await conn.sendMessage(
+                            from,
+                            {
+                                video: { url: downvid.dl_url },
+                                caption: '_*CREATE BY VIHANGA PEHESARA*_\n_*POWERED BY MC ERROR OFC*_',
+                                mimetype: 'video/mp4'
+                            },
+                            { quoted: qMessage }
+                        );
+                        break;
+
+                    case '2':
+                        let downviddoc = await fg.ytv(url);
+                        await conn.sendMessage(
+                            from,
+                            {
+                                document: { url: downviddoc.dl_url },
+                                caption: '_*CREATE BY VIHANGA PEHESARA*_\n_*POWERED BY MC ERROR OFC*_',
+                                mimetype: 'video/mp4',
+                                fileName: data.title + ".mp4"
+                            },
+                            { quoted: qMessage }
+                        );
+                        break;
+
+                    default:
+                        reply("Invalid option. Please select a valid option 🔴");
+                }
+            }
         });
 
-        if (!data?.url)
-          return reply("❌ *Video download failed*" + FOOTER);
-
-        await bot.sendMessage(
-          from,
-          {
-            video: { url: data.url },
-            mimetype: "video/mp4",
-            fileName: data.filename || "youtube_video.mp4",
-          },
-          { quoted: mek }
-        );
-
-        await bot.sendMessage(from, {
-          text: "𝗖𝗢𝗠𝗣𝗟𝗘𝗧𝗘𝗗 ✅",
-          edit: loadingMsg.key,
-        });
-
-        bot.ev.off("messages.upsert", listener);
-
-      } catch (err) {
-        console.error(err);
-        bot.ev.off("messages.upsert", listener);
-        reply("❌ *Error occurred while downloading*" + FOOTER);
-      }
-    };
-
-    bot.ev.on("messages.upsert", listener);
-
-  } catch (e) {
-    console.log("VIDEO ERROR:", e);
-    reply("⚠️ *Video download failed, try again*" + FOOTER);
-  }
+    } catch (e) {
+        console.error(e);
+        await conn.sendMessage(from, { react: { text: '❌', key: mek.key } });
+        reply('An error occurred while processing your request.');
+    }
 });
