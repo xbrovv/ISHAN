@@ -12,7 +12,7 @@ cmd({
     category: 'download',
     filename: __filename
 },
-async (ishan, mek, m, { from, q, reply }) => {
+async (conn, mek, m, { from, q, reply }) => {
     try {
 
         const snm = [2025];
@@ -61,13 +61,13 @@ async (ishan, mek, m, { from, q, reply }) => {
 _*CREATE BY VIHANGA PEHESARA*_
 _*POWERED BY MC ERROR OFC*_`;
 
-        const vv = await ishan.sendMessage(
+        const vv = await conn.sendMessage(
             from,
             { image: { url: data.thumbnail }, caption: desc },
             { quoted: mek }
         );
 
-        ishan.ev.on('messages.upsert', async (msgUpdate) => {
+        conn.ev.on('messages.upsert', async (msgUpdate) => {
             const msg = msgUpdate.messages[0];
             if (!msg.message || !msg.message.extendedTextMessage) return;
 
@@ -82,7 +82,7 @@ _*POWERED BY MC ERROR OFC*_`;
 
                     case '1':
                         let downvid = await fg.ytv(url);
-                        await ishan.sendMessage(
+                        await conn.sendMessage(
                             from,
                             {
                                 video: { url: downvid.dl_url },
@@ -95,7 +95,7 @@ _*POWERED BY MC ERROR OFC*_`;
 
                     case '2':
                         let downviddoc = await fg.ytv(url);
-                        await ishan.sendMessage(
+                        await conn.sendMessage(
                             from,
                             {
                                 document: { url: downviddoc.dl_url },
@@ -115,7 +115,7 @@ _*POWERED BY MC ERROR OFC*_`;
 
     } catch (e) {
         console.error(e);
-        await ishan.sendMessage(from, { react: { text: '❌', key: mek.key } });
+        await conn.sendMessage(from, { react: { text: '❌', key: mek.key } });
         reply('An error occurred while processing your request.');
     }
 });
