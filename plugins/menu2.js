@@ -1,9 +1,9 @@
 const config = require('../config')
 const {cmd , commands} = require('../command')
 cmd({
-    pattern: "allmenu",
+    pattern: "menu2",
     react: "👾",
-    desc: "get allmenu",
+    desc: "get menu2",
     category: "main",
     filename: __filename
 },
@@ -36,7 +36,7 @@ let madeMenu = `*╭─────────────────❒⁠⁠
      *${pushname}*
 
 ┏━━━━━━━━━━━━━━━━━━━━
-   *Welcome to ISHAN-X ALLMENU*
+   *Welcome to ISHAN-X MENU2*
 ┗━━━━━━━━━━━━━━━━━━━━
 
 *Created by ISHAN-X 👨🏻‍💻*
