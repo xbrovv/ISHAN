@@ -118,7 +118,7 @@ ${menu.logo}
 
 `;
 
-await .sendMessage(from,{image:{url:config.MENU_IMG},caption:madeMenu},{quoted:mek})
+await ishan.sendMessage(from,{image:{url:config.MENU_IMG},caption:madeMenu},{quoted:mek})
 
 }catch(e){
 console.log(e)
