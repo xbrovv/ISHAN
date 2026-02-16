@@ -61,7 +61,7 @@ cmd(
         const title = cat.charAt(0).toUpperCase() + cat.slice(1);
         menuText += `${emoji} *${title} Commands*\n`;
         cmds.forEach((cmdName, i) => {
-          menuText += `  └ ${i + 1}. ${config.PREFIX}${cmdName}\n`;
+          menuText += `  └➤ ${i + 1}. ${config.PREFIX}${cmdName}\n`;
         });
         menuText += "◄●◆━━━━━━━━━━━━━━━━━━━◆●►\n";
       }
