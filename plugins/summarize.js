@@ -10,7 +10,7 @@ cmd(
     category: "ai",
     filename: __filename,
   },
-  async (malvin, mek, m, { args, reply }) => {
+  async (ishan, mek, m, { args, reply }) => {
     try {
       const text = args.join(" ");
       if (!text) return reply("⚡ Provide text to summarize.\nExample: `.summarize The quick brown fox jumps over the lazy dog...`");
@@ -23,7 +23,7 @@ cmd(
       if (!res.data.summary) return reply("❌ Could not summarize the text.");
 
       const summary = `
-⚡ *NOVACORE Summarizer* ⚡
+⚡ *ISHAN-X Summarizer* ⚡
 
 📝 *Original Length:* ${text.split(" ").length} words
 📖 *Summary:* ${res.data.summary}
