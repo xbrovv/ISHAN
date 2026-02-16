@@ -7,7 +7,7 @@ const MAX_SIZE = 2 * 1024 * 1024 * 1024; // 2GB
 
 cmd(
   {
-    pattern: "download",
+    pattern: "direct",
     alias: ["downurl", "file"],
     desc: "Direct file downloader (Reply 1 to confirm)",
     category: "download",
