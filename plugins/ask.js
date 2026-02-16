@@ -13,7 +13,7 @@ cmd(
     category: "ai",
     filename: __filename,
   },
-  async (malvin, mek, m, { from, q, reply }) => {
+  async (ishan, mek, m, { from, q, reply }) => {
     try {
       if (!q)
         return reply("❓ Please provide a question.\n\n*Example:* `.ask What is the capital of France?`");
@@ -34,7 +34,7 @@ cmd(
 
       if (!aiReply) return reply("❌ Gemini did not return a valid response.");
 
-      await malvin.sendMessage(from, { text: `🤖 *Gemini says:*\n\n${aiReply}` }, { quoted: mek });
+      await ishan.sendMessage(from, { text: `🤖 *Gemini says:*\n\n${aiReply}` }, { quoted: mek });
     } catch (e) {
       const errMsg = e?.response?.data?.error?.message || e.message || "Unknown error occurred.";
       console.error("Gemini API Error:", errMsg);
