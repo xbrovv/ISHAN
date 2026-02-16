@@ -9,7 +9,7 @@ cmd({
   desc: "Turn an image into an anime-style figure using AI",
   category: "ai",
   filename: __filename
-}, async (conn, m, msg, { reply }) => {
+}, async (ishan, m, msg, { reply }) => {
   try {
     const q = m.quoted ? m.quoted : m;
     const mime = (q.msg || q).mimetype || "";
@@ -41,7 +41,7 @@ cmd({
     const result = res.data?.result;
     if (!result) return reply("⚠️ Failed to generate the figure. Try again later.");
 
-    await conn.sendMessage(
+    await ishan.sendMessage(
       m.chat,
       {
         image: { url: result },
