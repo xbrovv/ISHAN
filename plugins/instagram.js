@@ -1,5 +1,5 @@
 const { cmd } = require("../command");
-const { igdl } = require("sadaslk-dlcore");
+const { igdl } = require("ruhend-scraper");
 
 const FOOTER = `\n\n> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏`;
 
