@@ -7,11 +7,11 @@ cmd(
     pattern: "spotify",
     react: "🎧",
     desc: "Download any Spotify track in high quality",
-    category: "downloader",
+    category: "download",
     filename: __filename,
   },
 
-  async (malvin, mek, m, { from, args, reply }) => {
+  async (ishan, mek, m, { from, args, reply }) => {
     try {
       const query = args.join(" ");
       if (!query)
@@ -28,12 +28,12 @@ cmd(
       const { title, artists, cover, link } = res.data;
 
       // Send track metadata
-      await malvin.sendMessage(
+      await ishan.sendMessage(
         from,
         {
           image: { url: cover },
           caption: `
-┌───〔 🎧 *SUHO MD V2 — SPOTIFY DOWNLOADER* 〕───┐
+*┌───〔 🎧 ISHAN MD — SPOTIFY DOWNLOADER 〕───┐*
 
 🎵 *Title:* ${title}
 👤 *Artist:* ${artists}
@@ -41,15 +41,15 @@ cmd(
 
 Please wait, your audio is being sent...
 
-└─────────────────────────────────────┘
-🔥 Powered by *SUHO MD V2*
+*└─────────────────────────────────────┘*
+🔥 Powered by *ISHAN MD*
           `.trim(),
         },
         { quoted: mek }
       );
 
       // Send MP3 audio
-      await malvin.sendMessage(
+      await ishan.sendMessage(
         from,
         {
           audio: { url: link },
