@@ -57,7 +57,7 @@ module.exports = {
   // ===============================
   // 🤖 OWNER NAME 
   // ===============================
-  OWNER_NAME:'ISAN MADUSANE',
+  OWNER_NAME:'ISHAN MADUSANE',
 
 
   // ===============================
@@ -65,7 +65,7 @@ module.exports = {
   // ===============================
   ALIVE_IMG:
     process.env.ALIVE_IMG ||
-    "https://files.catbox.moe/h1xuqv.jpg",
+    "https://files.catbox.moe/swfoof.png",
 
 
   // Alive Message Template
