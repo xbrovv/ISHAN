@@ -7,7 +7,7 @@ cmd(
   {
     pattern: "nsfwai",
     desc: "Generate NSFW AI image using Nebula API",
-    category: "nsfw",
+    category: "MATHTOOL",
     react: "🖼️",
     filename: __filename
   },
@@ -44,7 +44,7 @@ cmd(
         from,
         {
           image: buffer,
-          caption: `🖼️ *Nebula AI Generated*\n\n📝 Prompt: ${text}\n⚡ SUHO-MD V2`
+          caption: `🖼️ *Nebula AI Generated*\n\n📝 Prompt: ${text}\n⚡ ISHAN-MD V2`
         },
         { quoted: mek }
       );
