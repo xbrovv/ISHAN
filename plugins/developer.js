@@ -14,7 +14,7 @@ cmd({
   const ownerName = "𝐈𝐒𝐇𝐀𝐍-𝐗 𝐌𝐃";
   const ownerNumber = "94761638379";
   const github = "https://github.com";
-  const image = "https://files.catbox.moe/h1xuqv.jpg";
+  const image = "https://files.catbox.moe/ohup36.png";
 
   const runtime = process.uptime();
   const hours = Math.floor(runtime / 3600);
@@ -42,8 +42,8 @@ cmd({
 ┃❖ *ISHAN-X MD*    
 ╰━━━━━━━━━━━━━━━━━━━━
 
-> 🚀 Powered by ISHAN-X MD
-> 👑 Developed with Passion
+> 🚀 © 𝟸𝟶𝟸𝟼 𝙸𝚂𝙷𝙰𝙽-𝚇 𝙼𝙳
+> 👑 Developed with 𝙸𝚂𝙷𝙰𝙽-𝚇
 `.trim();
 
   await ishan.sendMessage(
