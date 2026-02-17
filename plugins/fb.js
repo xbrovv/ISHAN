@@ -52,7 +52,7 @@ FOOTER;
 
     const sentMsg = await bot.sendMessage(
       from,
-      { image: { url: "https://files.catbox.moe/h1xuqv.jpg" }, caption },
+      { image: { url: "https://files.catbox.moe/1664na.png" }, caption },
       { quoted: mek }
     );
 
