@@ -64,7 +64,7 @@ cmd(
         .join("\n\n");
 
       const caption =
-`🚀 *ISHAN SPARK-X — YouTube Search Results*
+`🚀 *ISHAN-X MD — YouTube Search Results*
 ◄✦✦─────────────────────────✦✦►
 🔎 *Search Query:* ${q}
 
@@ -76,7 +76,7 @@ ${FOOTER}
         from,
         {
           image: {
-            url: "https://files.catbox.moe/h1xuqv.jpg",
+            url: "https://files.catbox.moe/hl9y3y.png",
           },
           caption,
         },
