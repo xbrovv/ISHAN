@@ -7,12 +7,12 @@ cmd(
   {
     pattern: "imageurl",
     desc: "Upload image to get its URL",
-    category: "tools",
+    category: "MATHTOOL",
     react: "📸",
     filename: __filename,
     fromMe: false,
   },
-  async (malvin, mek, m, { quoted, reply }) => {
+  async (ishan, mek, m, { quoted, reply }) => {
     try {
       // Check if the user has replied to an image
       if (!quoted || !quoted.message.imageMessage) {
