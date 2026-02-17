@@ -22,7 +22,7 @@ cmd({
   const seconds = Math.floor(runtime % 60);
 
   const caption = `
-╭━━━〔 👑 𝐃𝐄𝐕𝐄𝐋𝐎𝐏𝐄𝐑 𝐏𝐑𝐎𝐅𝐈𝐋𝐄 〕━━━╮
+╭━━━〔 👑 𝐃𝐄𝐕𝐄𝐋𝐎𝐏𝐄𝐑 𝐏𝐑𝐎𝐅𝐈𝐋𝐄 〕
 ┃
 ┃➤ 🧑‍💻 *Owner*   : ${ownerName}
 ┃➤ 📱 *Number*  : wa.me/${ownerNumber}
@@ -31,15 +31,15 @@ cmd({
 ╰━━━━━━━━━━━━━━━━━━━━━━━╯
 
 ╭━━━〔 🤖 𝐁𝐎𝐓 𝐃𝐄𝐓𝐀𝐈𝐋𝐒 〕━━━╮
-┃➤ ⚡ Name      : ISHAN-X MD
-┃➤ 🛠 Version   : V3.0  ULTRA
-┃➤ 💻 Platform  : ${os.platform()}
-┃➤ ⏳ Uptime    : ${hours}h ${minutes}m ${seconds}s
+┃➤ ⚡ *Name*      : ISHAN-X MD
+┃➤ 🛠 *Version*   : V3.0  ULTRA
+┃➤ 💻 *Platform*  : ${os.platform()}
+┃➤ ⏳ *Uptime*    : ${hours}h ${minutes}m ${seconds}s
 ┃
 ╰━━━━━━━━━━━━━━━━━━━━━━━╯
 
 ╭━━━〔 📦 𝐏𝐑𝐎𝐉𝐄𝐂𝐓𝐒 〕━━━╮
-┃❖ ISHAN-X MD    
+┃❖ *ISHAN-X MD*    
 ╰━━━━━━━━━━━━━━━━━━━━
 
 > 🚀 Powered by ISHAN-X MD
