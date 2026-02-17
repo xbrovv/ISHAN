@@ -5,10 +5,10 @@ const config = require("../config");
 const pendingMenu = {};
 const numberEmojis = ["0️⃣","❶","❷","❸","❹","❺","❻","❼","❽","❾"];
 
-const HEADER_IMG = "https://files.catbox.moe/h1xuqv.jpg";
+const HEADER_IMG = "https://files.catbox.moe/1ek4hc.png";
 
 const FOOTER = `
-© 2026 ISHAN-X MD
+© 𝟸𝟶𝟸𝟼 𝙸𝚂𝙷𝙰𝙽-𝚇 𝙼𝙳
 `;
 
 cmd({
@@ -126,7 +126,7 @@ cmd({
   const cmds = data.commandMap[category];
 
   let text = `
-🎲 ＝ ${category} MENU ＝ 🎲
+🎲 ◄❖＝ ${category} MENU ＝❖► 🎲
 `;
 
   if (!cmds.length) {
