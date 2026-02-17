@@ -119,7 +119,7 @@ async function connectToWA() {
       const botJid = ishan.user.id.split(":")[0] + "@s.whatsapp.net";
 
       await ishan.sendMessage(botJid, {
-        image: { url: `https://files.catbox.moe/h1xuqv.jpg` },
+        image: { url: `https://files.catbox.moe/swfoof.png` },
         caption: up
       });
 
