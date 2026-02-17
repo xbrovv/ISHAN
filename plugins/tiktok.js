@@ -35,7 +35,7 @@ cmd(
       const sentMsg = await bot.sendMessage(
         from,
         {
-          image: { url: data.thumbnail || "https://files.catbox.moe/h1xuqv.jpg" },
+          image: { url: data.thumbnail || "https://files.catbox.moe/t0poyt.png" },
           caption,
         },
         { quoted: mek }
