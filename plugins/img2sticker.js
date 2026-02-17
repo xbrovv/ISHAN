@@ -12,7 +12,7 @@ cmd(
     filename: __filename,
   },
   async (
-    malvin,
+    ishan,
     mek,
     m,
     {
@@ -54,14 +54,14 @@ cmd(
 
       // Create the sticker from the media
       const sticker = new Sticker(media, {
-        pack: "𝑵𝑶𝑽𝑨𝑪𝑶𝑹𝑬✟", // Sticker pack name
-        author: "dev sung🪀", // Sticker author name
+        pack: "ISHAN-X MD", // Sticker pack name
+        author: "dev ISHAN🪀", // Sticker author name
         type: StickerTypes.FULL, // Sticker type (FULL or CROPPED)
         quality: 50, // Quality of the output sticker (0–100)
       });
 
       const buffer = await sticker.toBuffer();
-      await malvin.sendMessage(from, { sticker: buffer }, { quoted: mek });
+      await ishan.sendMessage(from, { sticker: buffer }, { quoted: mek });
     } catch (e) {
       console.error(e);
       reply(`Error: ${e.message || e}`);
