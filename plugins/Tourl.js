@@ -6,10 +6,10 @@ cmd(
     pattern: "tourl",
     desc: "Converts media to url",
     react: "💯",
-    category: "url",
+    category: "MATHTOOL",
     filename: __filename,
   },
- async (malvin, mek, m, { from, q, reply }) => {
+ async (ishan, mek, m, { from, q, reply }) => {
     const quoted = m.quoted || m.msg?.quoted;
     const mime = quoted?.mimetype || quoted?.msg?.mimetype;
 
