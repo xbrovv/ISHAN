@@ -11,34 +11,14 @@ cmd({
     filename: __filename
 }, async (ishan, mek, m, {
     from,
-    quoted,
-    body,
-    isCmd,
-    args,
-    q,
-    isGroup,
-    sender,
-    senderNumber,
-    botNumber2,
-    botNumber,
-    pushname,
-    isMe,
-    isOwner,
-    groupMetadata,
-    groupName,
-    participants,
-    groupAdmins,
-    isBotAdmins,
-    isAdmins,
     reply
 }) => {
     try {
-        // Function to return ✅ or ❌ based on the boolean value, considering multiple formats
+
         const statusIcon = (status) => {
             return (status === true || status === 'true' || status === 1) ? "✅" : "❌";
         };
 
-        // Create the settings message with the updated format
         let madeSetting = `*╭──⚙️ ${config.BOT_NAME} Settings ⚙️─❖●►*
 ┃ 💿 *➤ Auto Status seen*: ${statusIcon(config.AUTO_STATUS_SEEN)}
 ┃ ❤️ *➤ Auto status react*: ${statusIcon(config.AUTO_STATUS_REACT)}
@@ -48,15 +28,17 @@ cmd({
 ┃ ⚙️ *➤ Mode*: *${config.MODE}*
 ┃ 📞 *➤ Bot owner*: *${config.BOT_OWNER}*
 ┃ 🤖 *➤ Bot Name*: *${config.BOT_NAME}*
-┃ 👑 *➤ owner name*: *${config.OWNER_NAME}*
+┃ 👑 *➤ Owner name*: *${config.OWNER_NAME}*
 *╰─────────────────────❖●►*
 
-*🌟DEVELOPED BY ISHAN-X MD🌟*
+*🌟 DEVELOPED BY ISHAN-X MD 🌟*
 `;
 
-        // Send the settings message with the updated format
+        // 👉 මෙතන image URL එක direct දාන්න
         await ishan.sendMessage(from, {
-            image: { url: config.ALIVE_IMG },
+            image: { 
+                url: "https://files.catbox.moe/7pipjr.png"  // 🔥 මෙතන ඔයාගේ image link එක දාන්න
+            },
             caption: madeSetting
         }, { quoted: mek });
 
