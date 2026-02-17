@@ -31,7 +31,7 @@ cmd(
       });
 
       // Menu text
-      let menuText = `💠 ISHAN-MD ALL MENU 💠
+      let menuText = `💠 ISHAN-X MD ALL MENU 💠
 
 👤 *User*    : [${user}]
 👑 *Owner*   : [${owner}]
@@ -66,13 +66,13 @@ cmd(
         menuText += "◄●◆━━━━━━━━━━━━━━━━━━━◆●►\n";
       }
 
-      menuText += `⚡ Powered by ISHAN-X ⚡`;
+      menuText += `⚡ © 𝟸𝟶𝟸𝟼 𝙸𝚂𝙷𝙰𝙽-𝚇 𝙼𝙳 ⚡`;
 
       // Send menu as a single image + caption
       await ishan.sendMessage(
         from,
         {
-          image: { url: "https://files.catbox.moe/h1xuqv.jpg" },
+          image: { url: "https://files.catbox.moe/kjoy8q.png" },
           caption: menuText,
         },
         { quoted: mek }
