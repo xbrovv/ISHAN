@@ -26,14 +26,14 @@ cmd(
           "🖼️ *HD Wallpaper Downloader*\n\n" +
           "*type wallpaper search keyword*\n\n" +
           "_Example:_ `.wall anime`\n\n" +
-          "> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏"
+          "> © 𝟸𝟶𝟸𝟼 𝙸𝚂𝙷𝙰𝙽-𝚇 𝙼𝙳"
         );
       }
 
       await reply(
         "🔍 *Searching HD Wallpapers...*\n" +
         "Please wait a moment ⏳\n\n" +
-        "> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏"
+        "> © 𝟸𝟶𝟸𝟼 𝙸𝚂𝙷𝙰𝙽-𝚇 𝙼𝙳"
       );
 
       const res = await axios.get(
@@ -48,7 +48,7 @@ cmd(
         return reply(
           "❌ *No HD wallpapers found!*\n\n" +
           "Try a different keyword.\n\n" +
-          "> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏"
+          "> © 𝟸𝟶𝟸𝟼 𝙸𝚂𝙷𝙰𝙽-𝚇 𝙼𝙳"
         );
       }
 
@@ -58,13 +58,13 @@ cmd(
         from,
         {
           image: {
-            url: "https://files.catbox.moe/h1xuqv.jpg",
+            url: "https://files.catbox.moe/qawlly.png",
           },
           caption:
-            "🖼️ *ISHAN SPARK-X – WALLPAPER DOWNLOADER*\n\n" +
+            "🖼️ *ISHAN-X MD – WALLPAPER DOWNLOADER*\n\n" +
             `🔎 Keyword: *${q}*\n` +
             `📂 Results: *${selected.length} HD Wallpapers*\n\n` +
-            "> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏",
+            "> © 𝟸𝟶𝟸𝟼 𝙸𝚂𝙷𝙰𝙽-𝚇 𝙼𝙳",
         },
         { quoted: mek }
       );
@@ -74,7 +74,7 @@ cmd(
           "🖼️ *HD Wallpaper*\n\n" +
           `📐 Resolution: *${wallpaper.resolution}*\n` +
           `🔗 Source: ${wallpaper.url}\n\n` +
-          "> ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏";
+          "> © 𝟸𝟶𝟸𝟼 𝙸𝚂𝙷𝙰𝙽-𝚇 𝙼𝙳";
 
         await conn.sendMessage(
           from,
