@@ -20,7 +20,7 @@ async function convertWithFfmpeg(input, output, format) {
 
 // ------------------ Sticker ------------------
 cmd(
-  { pattern: "sticker", alias: ["s","st"], desc: "Convert image/video to sticker", category: "convert", filename: __filename },
+  { pattern: "sticker", alias: ["s","st"], desc: "Convert image/video to sticker", category: "MATHTOOL", filename: __filename },
   async (sock, m, msg, { reply }) => {
     try {
       if (!(m.type === "imageMessage" || m.type === "videoMessage")) {
@@ -36,7 +36,7 @@ cmd(
 
 // ------------------ ToImg ------------------
 cmd(
-  { pattern: "toimg", desc: "Convert sticker to image", category: "convert", filename: __filename },
+  { pattern: "toimg", desc: "Convert sticker to image", category: "MATHTOOL", filename: __filename },
   async (sock, m, msg, { reply }) => {
     try {
       if (m.type !== "stickerMessage") return reply("❌ Reply to a sticker with .toimg");
@@ -50,7 +50,7 @@ cmd(
 
 // ------------------ ToMP3 ------------------
 cmd(
-  { pattern: "tomp3", desc: "Convert video/voice to mp3", category: "convert", filename: __filename },
+  { pattern: "tomp3", desc: "Convert video/voice to mp3", category: "MATHTOOL", filename: __filename },
   async (sock, m, msg, { reply }) => {
     try {
       if (!(m.type === "videoMessage" || m.type === "audioMessage")) {
@@ -77,7 +77,7 @@ cmd(
 
 // ------------------ ToVideo ------------------
 cmd(
-  { pattern: "tovideo", desc: "Convert animated sticker to video", category: "convert", filename: __filename },
+  { pattern: "tovideo", desc: "Convert animated sticker to video", category: "MATHTOOL", filename: __filename },
   async (sock, m, msg, { reply }) => {
     try {
       if (m.type !== "stickerMessage") return reply("❌ Reply to an animated sticker with .tovideo");
@@ -91,7 +91,7 @@ cmd(
 
 // ------------------ ToGIF ------------------
 cmd(
-  { pattern: "togif", desc: "Convert animated sticker to gif", category: "convert", filename: __filename },
+  { pattern: "togif", desc: "Convert animated sticker to gif", category: "MATHTOOL", filename: __filename },
   async (sock, m, msg, { reply }) => {
     try {
       if (m.type !== "stickerMessage") return reply("❌ Reply to an animated sticker with .togif");
@@ -105,7 +105,7 @@ cmd(
 
 // ------------------ ToAudio ------------------
 cmd(
-  { pattern: "toaudio", desc: "Convert video to audio", category: "convert", filename: __filename },
+  { pattern: "toaudio", desc: "Convert video to audio", category: "MATHTOOL", filename: __filename },
   async (sock, m, msg, { reply }) => {
     try {
       if (m.type !== "videoMessage") return reply("❌ Reply to a video with .toaudio");
