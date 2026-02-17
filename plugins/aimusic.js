@@ -105,7 +105,7 @@ cmd(
     premium: true
   },
 
-  async (malvin, mek, m, { from, args, reply }) => {
+  async (ishan, mek, m, { from, args, reply }) => {
     const text = args.join(" ").trim();
 
     if (!text) {
@@ -126,7 +126,7 @@ cmd(
 
       const musicUrl = await aimusic(prompt, { tags });
 
-      await malvin.sendMessage(from, {
+      await ishan.sendMessage(from, {
         audio: { url: musicUrl },
         mimetype: "audio/mpeg",
         fileName: `aimusic_${Date.now()}.mp3`,
@@ -134,7 +134,7 @@ cmd(
           `🎶 *AI Music Generated*\n\n` +
           `📝 Prompt: ${prompt}\n` +
           `🏷 Tags: ${tags}\n\n` +
-          `Powered by *SUHO MD V2*`
+          `Powered by *ISHAN MD V2*`
       });
 
     } catch (err) {
