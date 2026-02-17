@@ -105,7 +105,7 @@ cmd(
     premium: true
   },
 
-  async (malvin, mek, m, { from, args, reply }) => {
+  async (ishan, mek, m, { from, args, reply }) => {
     const text = args.join(" ").trim();
 
     if (!text) {
@@ -126,7 +126,7 @@ cmd(
 
       const musicUrl = await aimusic(prompt, { tags });
 
-      await malvin.sendMessage(from, {
+      await ishan.sendMessage(from, {
         audio: { url: musicUrl },
         mimetype: "audio/mpeg",
         fileName: `aimusic_${Date.now()}.mp3`,
