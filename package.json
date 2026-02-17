@@ -1,12 +1,12 @@
 {
-  "name": "ishan spark md",
+  "name": "𝙸𝚂𝙷𝙰𝙽-𝚇 𝙼𝙳",
   "version": "1.0.0",
   "description": "𝗜𝗦𝗛𝗔𝗡 𝗦𝗣𝗔𝗥𝗞-𝕏 🚀 — A powerful, fast & stable WhatsApp automation bot | ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start index.js --deep-monitoring --attach --name ishan-spark-md",
-    "stop": "pm2 stop ishan-spark-md",
-    "restart": "pm2 restart ishan-spark-md"
+    "start": "pm2 start index.js --deep-monitoring --attach --name 𝙸𝚂𝙷𝙰𝙽-𝚇 𝙼𝙳",
+    "stop": "pm2 stop 𝙸𝚂𝙷𝙰𝙽-𝚇 𝙼𝙳",
+    "restart": "pm2 restart 𝙸𝚂𝙷𝙰𝙽-𝚇 𝙼𝙳"
   },
   "dependencies": {
     "@whiskeysockets/baileys": "^7.0.0-rc.9",
