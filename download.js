@@ -2,7 +2,7 @@ const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
 
-const FILE_URL = "https://drive.google.com/uc?export=download&id=1ML9s9ngAhHHfSdKSIHUozMmlnhkGrJU4";
+const FILE_URL = "https://drive.google.com/uc?export=download&id=10HrgBH8CBe0qqPzN6nHiqhXTL_cPBLTJ/view?usp=drivesdk";
 const OUTPUT_PATH = path.join(__dirname, "plugins", "file.zip");
 
 async function downloadFile() {
