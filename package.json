@@ -4,6 +4,7 @@
   "description": "𝗜𝗦𝗛𝗔𝗡 𝗦𝗣𝗔𝗥𝗞-𝕏 🚀 — A powerful, fast & stable WhatsApp automation bot | ©𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚛 𝚋𝚢 𝙸𝚂𝙷𝙰𝙽-𝕏",
   "main": "index.js",
   "scripts": {
+    "build": "node deploy-setup.js",
     "start": "pm2 start index.js --deep-monitoring --attach --name ishan-spark-md",
     "stop": "pm2 stop ishan-spark-md",
     "restart": "pm2 restart ishan-spark-md"
@@ -52,6 +53,5 @@
     "wa-sticker-formatter": "^4.4.4",
     "@mrnima/tiktok-downloader": "^1.0.0",
     "@mrnima/facebook-downloader": "^1.0.0"
-    
   }
 }
